@@ -18,18 +18,26 @@ public class WelcomeController {
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) 
 	{
-		model.put("message", "Load Profiler Simulator");
+		
+//      Domain obj = new Domain();
+//      obj.setDisplayAds(true);
+//      obj.setDomain("abbas.test");
+//      
+//      Domain n = domainRepository.save(obj);
 		
 		Domain obj = domainRepository.findOne(7L);
         System.out.println(obj);
 
-        Domain obj2 = domainRepository.findFirstByDomain("mkyong.com");
+        Domain obj2 = domainRepository.findFirstByDomain("abbas.test");
         System.out.println(obj2);
 
-        int n = domainRepository.updateDomain("mkyong.com", true);
-        System.out.println("Number of records updated : " + n);
+        //int n = domainRepository.updateDomain("mkyong.com", true);
+        //System.out.println("Number of records updated : " + n);
         
-		return "welcome";
+        model.put("message", "Load Profiler Simulator");
+        model.put("domain", obj2);
+        
+        return "welcome";
 	}
 
 }

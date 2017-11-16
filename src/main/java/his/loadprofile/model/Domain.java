@@ -38,6 +38,4 @@ public class Domain {
 	public void setDisplayAds(boolean displayAds) {
 		this.displayAds = displayAds;
 	}
-    
-    
 }

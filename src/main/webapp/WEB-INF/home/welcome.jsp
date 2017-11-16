@@ -38,6 +38,11 @@
 			<h1>Spring Boot Web JSP Example</h1>
 			<h2>Message: ${message}</h2>
 		</div>
+		<div>
+			<h3>${domain.getId()}</h3>
+			<h3>${domain.getDomain()}</h3>
+			<h3>${domain.isDisplayAds()}</h3>
+		</div>
 
 	</div>
 
