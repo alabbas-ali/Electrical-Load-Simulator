@@ -9,11 +9,13 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 public class WebApplication extends SpringBootServletInitializer {
 
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) 
+	{
 		return application.sources(WebApplication.class);
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception 
+	{
 		SpringApplication.run(WebApplication.class, args);
 	}
 
