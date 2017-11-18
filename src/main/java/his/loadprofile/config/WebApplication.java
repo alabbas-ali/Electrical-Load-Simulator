@@ -28,7 +28,7 @@ public class WebApplication extends SpringBootServletInitializer {
 	@Bean
 	public ServletContextTemplateResolver defaultTemplateResolver() {
 		ServletContextTemplateResolver yourTemplateResolver = new ServletContextTemplateResolver();
-		yourTemplateResolver.setPrefix("/WEB-INF/templates/");
+		yourTemplateResolver.setPrefix("/WEB-INF/views/");
 		yourTemplateResolver.setSuffix(".html");
 		yourTemplateResolver.setTemplateMode("HTML5");
 		yourTemplateResolver.setCharacterEncoding("UTF-8");
