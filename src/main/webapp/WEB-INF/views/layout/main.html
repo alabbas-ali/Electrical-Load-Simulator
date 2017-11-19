@@ -31,8 +31,11 @@
 					<li th:classappend="${module == 'home' ? 'active' : ''}">
 						<a href="#" th:href="@{/}">Home</a>
 					</li>
-					<li th:classappend="${module == 'configuration' ? 'active' : ''}">
-						<a href="#" th:href="@{/configuration}">Configuration</a>
+					<li th:classappend="${module == 'availability' ? 'active' : ''}">
+						<a href="#" th:href="@{/availability}">Availabilities</a>
+					</li>
+					<li th:classappend="${module == 'appliance' ? 'active' : ''}">
+						<a href="#" th:href="@{/appliance}">Appliances</a>
 					</li>
 					<li th:classappend="${module == 'sim-history' ? 'active' : ''}">
 						<a href="#" th:href="@{/sim-history}">Saved Simulations</a>

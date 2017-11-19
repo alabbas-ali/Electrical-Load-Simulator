@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/main :: header(title='HIS-LPS::Configuration')"></head>
+<body>
+
+	<div th:replace="layout/main :: menu"></div>
+
+	<!-- end container -->
+	<div class="container">
+
+		<div class="starter-template">
+
+			<h2>
+				<span th:text="'Availabilities And Usabilities'"></span>
+			</h2>
+
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Title</td>
+						<td>Text</td>
+						<td>Data Of</td>
+						<td>Options</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${availabilities.empty}">
+						<td colspan="5">No tasks</td>
+					</tr>
+					<tr th:each="availability : ${availabilities}">
+						<td th:text="${availability.id}">1</td>
+						<td><a href="#" th:href="@{/availability/details/{id}(id=${availability.id})}"
+							th:text="${availability.title}">Title ...</a></td>
+						<td th:text="${availability.text}">Text ...</td>
+						<td th:text="${#calendars.format(availability.date)}">July 11, 2017
+							2:17:16 PM CDT</td>
+						<td>
+						   Options
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+
+	</div>
+	<!-- end container -->
+
+	<div th:replace="layout/main :: footer"></div>
+</body>
+</html>
+
