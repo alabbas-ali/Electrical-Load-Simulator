@@ -1,4 +1,4 @@
-package his.loadprofile.component;
+package his.loadprofile.job;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import his.loadprofile.model.SimConfig;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 
-public class SimulationRunner extends JupRunner{
+public class SimulationRunner extends JobRunner{
 	
 	private SimConfig config;
 	Simulator simulator;

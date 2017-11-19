@@ -1,17 +1,17 @@
-package his.loadprofile.component;
+package his.loadprofile.job;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import his.loadprofile.model.JobProgressMessage;
 
-public abstract class JupRunner implements Runnable {
+public abstract class JobRunner implements Runnable {
 
 	private SimpMessagingTemplate template;
 	public AtomicInteger progress = new AtomicInteger();
 	public String state = "NEW";
 	public String jobName;
 
-	public JupRunner(SimpMessagingTemplate template) {
+	public JobRunner(SimpMessagingTemplate template) {
 		this.template = template;
 	}
 

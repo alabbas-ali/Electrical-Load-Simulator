@@ -1,4 +1,4 @@
-package his.loadprofile.component;
+package his.loadprofile.job;
 
 import java.util.ArrayList;
 import java.util.List;
