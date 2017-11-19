@@ -17,6 +17,13 @@ public class IndexController {
 		        
         return "index";
 	}
+	
+	@RequestMapping("/start-simulation")
+	public String startSimulation(Map<String, Object> model) {
+		
+		
+		return "df";
+	}
 
 }
 

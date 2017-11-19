@@ -15,42 +15,53 @@
 					th:replace="fragments/alert :: alert (type='danger', message='Sign in error. Please try again.')">Alert</div>
 			</th:block>
 			<fieldset>
-				<legend>Please Sign In</legend>
+				<legend>Please Set Your Simulation Configuration </legend>
 				<div class="form-group">
-					<label for="inputEmail" class="col-lg-2 control-label">Email</label>
+					<label for="inputEmail" class="col-lg-2 control-label">Sim Name</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" id="inputEmail"
-							placeholder="Email" name="username" />
+						<input type="text" class="form-control" id="name"
+							placeholder="Name" name="name" />
 					</div>
 				</div>
+				
 				<div class="form-group">
-					<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+					<label for="inputPassword" class="col-lg-2 control-label">Number Of Households</label>
 					<div class="col-lg-10">
-						<input type="password" class="form-control" id="inputPassword"
-							placeholder="Password" name="password" />
+						<input type="number" class="form-control" id="numberOfHouses"
+							placeholder="Number Of Households" name="numberOfHouses" />
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-2 control-label">Minimum Number Of People</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="minNumberOfPeople"
+							placeholder="Minimum Number Of People" name="minNumberOfPeople" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-2 control-label">Maximum Number Of People</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="maxNumberOfPeople"
+							placeholder="Maximum Number Of People" name="maxNumberOfPeople" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-2 control-label">Singles Percentage %</label>
+					<div class="col-lg-10">
+						<input type="number" class="form-control" id="singlesPercentage"
+							placeholder="Singles Percentage %" name="singlesPercentage" />
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<div class="checkbox">
-							<label> <input type="checkbox"
-								name="_spring_security_remember_me" /> Remember me
-							</label>
-						</div>
+						<button type="submit" class="btn btn-default">Start Simulation</button>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-lg-offset-2 col-lg-10">
-						<button type="submit" class="btn btn-default">Sign in</button>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-lg-offset-2 col-lg-10">
-						<p>
-							New here? <a href="signup" th:href="@{/signup}">Sign Up</a>
-						</p>
-					</div>
-				</div>
+				
 			</fieldset>
 		</form>
 

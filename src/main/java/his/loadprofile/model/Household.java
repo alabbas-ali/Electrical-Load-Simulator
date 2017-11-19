@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import his.loadprofile.core.HouseHoldType;
+
 @Document(collection = "household")
 public class Household {
 	
@@ -16,7 +18,7 @@ public class Household {
 	
 	private List<Appliance> appliances;
 	
-	private Household type;
+	private HouseHoldType type;
 
 	public long getId() {
 		return id;
@@ -42,14 +44,12 @@ public class Household {
 		this.appliances = appliances;
 	}
 
-	public Household getType() {
+	public HouseHoldType getType() {
 		return type;
 	}
 
-	public void setType(Household type) {
+	public void setType(HouseHoldType type) {
 		this.type = type;
 	}
 	
-	
-
 }

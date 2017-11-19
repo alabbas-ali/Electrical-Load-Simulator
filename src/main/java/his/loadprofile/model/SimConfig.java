@@ -19,7 +19,7 @@ public class SimConfig {
 	
 	private int maxNumberOfPeople;
 	
-	private int sengelsPrecentage;
+	private int singlesPercentage;
 
 	public long getId() {
 		return id;
@@ -62,13 +62,11 @@ public class SimConfig {
 	}
 
 	public int getSengelsPrecentage() {
-		return sengelsPrecentage;
+		return singlesPercentage;
 	}
 
 	public void setSengelsPrecentage(int sengelsPrecentage) {
-		this.sengelsPrecentage = sengelsPrecentage;
+		this.singlesPercentage = sengelsPrecentage;
 	}
 	
-	
-
 }
