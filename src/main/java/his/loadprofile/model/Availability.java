@@ -3,11 +3,15 @@ package his.loadprofile.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "domain")
-public class Availabily {
+import his.loadprofile.core.AvailabilityType;
+
+@Document(collection = "availability")
+public class Availability {
 	
 	@Id
     private long id;
+	
+	private AvailabilityType type;
 	
 	private String name;
 
@@ -26,6 +30,13 @@ public class Availabily {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public AvailabilityType getType() {
+		return type;
+	}
+
+	public void setType(AvailabilityType type) {
+		this.type = type;
+	}
 	
 }

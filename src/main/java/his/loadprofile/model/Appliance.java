@@ -6,7 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "domain")
+import his.loadprofile.core.ApplianceType;
+
+@Document(collection = "appliance")
 public class Appliance {
 	
 	@Id
@@ -14,6 +16,8 @@ public class Appliance {
 
     @Indexed(unique = true)
     private String name;
+    
+    private ApplianceType type;
     
     private String text;
     
@@ -51,6 +55,13 @@ public class Appliance {
 		this.date = date;
 	}
 
-    
+	public ApplianceType getType() {
+		return type;
+	}
 
+	public void setType(ApplianceType type) {
+		this.type = type;
+	}
+
+    
 }

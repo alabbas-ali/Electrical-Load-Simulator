@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import his.loadprofile.model.Appliance;
-import his.loadprofile.model.Availabily;
+import his.loadprofile.model.Availability;
 import his.loadprofile.repo.ApplianceRepository;
 
 @Controller
@@ -22,7 +22,7 @@ public class ConfigurationController {
 	@RequestMapping("/configuration")
 	public String index(Map<String, Object> model) 
 	{
-		List<Availabily> availabilities = new ArrayList<Availabily>();
+		List<Availability> availabilities = new ArrayList<Availability>();
 		
 		List<Appliance> appliances = applianceRepository.findAll();
 		
