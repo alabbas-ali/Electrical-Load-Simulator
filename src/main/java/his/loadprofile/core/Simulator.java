@@ -16,7 +16,7 @@ public class Simulator {
 	}
 
 	public List<SimResult> simulate() {
-		SimRandomChoser randomchouser = new SimRandomChoser(this.simConfig);
+		SimRandomChooser randomchouser = new SimRandomChooser(this.simConfig);
 		Household household;
 		List<SimResult> simResult = new ArrayList<SimResult>();
 		

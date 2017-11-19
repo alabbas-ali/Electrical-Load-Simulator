@@ -8,11 +8,11 @@ import his.loadprofile.model.Appliance;
 import his.loadprofile.model.Availability;
 import his.loadprofile.model.Household;
 
-public class SimRandomChoser {
+public class SimRandomChooser {
 
 	private SimConfig simConfig;
 
-	public SimRandomChoser(SimConfig config) {
+	public SimRandomChooser(SimConfig config) {
 		this.simConfig = config;
 	}
 
