@@ -19,6 +19,8 @@ public class Household {
 	private List<Appliance> appliances;
 	
 	private HouseHoldType type;
+	
+	private SimResult simulationResult;
 
 	public long getId() {
 		return id;
@@ -51,5 +53,15 @@ public class Household {
 	public void setType(HouseHoldType type) {
 		this.type = type;
 	}
+
+	public SimResult getSimulationResult() {
+		return simulationResult;
+	}
+
+	public void setSimulationResult(SimResult simulationResult) {
+		this.simulationResult = simulationResult;
+	}
+	
+	
 	
 }

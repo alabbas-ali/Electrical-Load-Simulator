@@ -1,9 +1,10 @@
-package his.loadprofile.core;
+package his.loadprofile.component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import his.loadprofile.model.SimConfig;
+import his.loadprofile.core.HouseHoldType;
 import his.loadprofile.model.Appliance;
 import his.loadprofile.model.Availability;
 import his.loadprofile.model.Household;
