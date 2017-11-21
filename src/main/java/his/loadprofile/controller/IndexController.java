@@ -33,18 +33,17 @@ public class IndexController {
 	}
 
 	@RequestMapping("/start-simulation")
-	public String startSimulation(Map<String, Object> model) {
+	public void startSimulation(Map<String, Object> model) {
 		SimConfig config = new SimConfig();
 		
 		// get the configuration from the form and 
 		System.out.println(this + "START startWork");
 		SimulationRunner simRunner = new SimulationRunner(config, template);
+		myJobList.add(simRunner);
 		taskExecutor.execute(simRunner);
-
-		return "/";
 	}
 
-	@RequestMapping(value = "/status")
+	@RequestMapping(value = "/sim-status")
 	@ResponseBody
 	@SubscribeMapping("initial")
 	List<SimulationRunner> fetchStatus() {

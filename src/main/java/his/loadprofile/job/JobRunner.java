@@ -19,7 +19,7 @@ public abstract class JobRunner implements Runnable {
 		JobProgressMessage temp = new JobProgressMessage(jobName);
 		temp.setProgress(progress.get());
 		temp.setState(state);
-		template.convertAndSend("/topic/status", temp);
+		template.convertAndSend("/simulation/sim-status", temp);
 	}
 
 	public int getProgress() {

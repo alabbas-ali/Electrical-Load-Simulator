@@ -6,20 +6,20 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     
 	@Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-        stompEndpointRegistry.addEndpoint("/mystatus").withSockJS();
+        stompEndpointRegistry.addEndpoint("/sim-status").withSockJS();
     }
     
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry)
     {
-        registry.enableSimpleBroker("/topic");
-        registry.setApplicationDestinationPrefixes("/app");
+        registry.enableSimpleBroker("/simulation");
+        registry.setApplicationDestinationPrefixes("/ws");
     }
+    
 }

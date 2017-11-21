@@ -3,7 +3,7 @@ var stompClient = null;
 $(document).ready(function()
 {
     $('#btnAddJobs').click(function(){
-        $.get("/trigger");
+        $.get("/start-simulation");
         
         setTimeout(updateProgress, 10);
     });
@@ -13,19 +13,19 @@ $(document).ready(function()
 }
 
 function connect(){
-    var socket = new SockJS('/mystatus');
+    var socket = new SockJS('/sim-status');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
-        stompClient.subscribe('/app/initial', function (messageOutput){
-            console.log("INITIAL: "+messageOutput);
+        stompClient.subscribe('/initial', function (messageOutput){
+            console.log("INITIAL: " + messageOutput);
             var progressList = $.parseJSON(messageOutput.body);
             $.each(progressList,function(index, element){
                 update(element);
             });
         });
 
-        stompClient.subscribe('/topic/status', function(messageOutput) {
-            console.log("New Message: "+messageOutput);
+        stompClient.subscribe('/simulation/sim-status', function(messageOutput) {
+            console.log("New Message: " + messageOutput);
             var messageObject = $.parseJSON(messageOutput.body);
             update(messageObject);
         });

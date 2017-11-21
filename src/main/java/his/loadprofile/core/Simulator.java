@@ -17,7 +17,12 @@ public class Simulator {
 	public SimResult simulate(Household house) {
 		
 		// calculations go here
-		
+		try {
+			Thread.sleep(40000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return new SimResult();
 	}
 
