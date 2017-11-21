@@ -70,11 +70,11 @@ function connect(){
 
 function update(newMessage)
 {
-	var rows = $('#tableBody').find('#'+element.jobName);
+	var rows = $('#tableBody').find('#'+newMessage.jobName);
 	if(rows.length === 0)
 	{
-		$('#tableBody').append('<div id="'+element.jobName+'">' +
-				'<div>'+element.jobName+'</div>'+
+		$('#tableBody').append('<div id="'+newMessage.jobName+'">' +
+				'<div>'+newMessage.jobName+'</div>'+
 				'<div class="progress">'+
 				'<div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;">0%</div>'+
 				'</div>' +

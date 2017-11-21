@@ -42,7 +42,7 @@ public class IndexController {
 		//@Todo check and validate the Configuration from request
 		SimConfig config = new SimConfig();
 		
-		config.setName("Test Name Simulation");
+		config.setName("Test_Name_Simulation");
 		config.setNumberOfHouses(3);
 		System.out.println(this + "START startWork");
 		SimulationRunner simRunner = new SimulationRunner(config, template);
