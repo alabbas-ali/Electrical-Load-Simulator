@@ -1,18 +1,52 @@
 var stompClient = null;
 
+
+
 $(document).ready(function()
 {
-    $('#btnAddJobs').click(function(){
-        $.get("/start-simulation");
-        
-        setTimeout(updateProgress, 10);
-    });
     
-    connect();
+    $("#simulation").submit(function(event) {
+
+		// Prevent the form from submitting via the browser.
+		event.preventDefault();
+		
+		var data = {}
+		
+		$(this).find(":input").each(function() {
+		    // The selector will match buttons; if you want to filter
+		    // them out, check `this.tagName` and `this.type`; see
+		    // below
+			data[this.name] = $(this).val();
+		});
+		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/start-simulation",
+			data : JSON.stringify(data),
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				//display(data);
+				connect();
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				$('#error').html(e);
+				$('#error').show();
+			}
+		});
+
+	});
     
-}
+});
+
+
 
 function connect(){
+	
+	console.log("Connecting to SockJS");
     var socket = new SockJS('/sim-status');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
@@ -66,3 +100,4 @@ function update(newMessage)
     }
     //end set stuffs
 }
+

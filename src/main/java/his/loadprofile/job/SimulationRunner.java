@@ -20,7 +20,7 @@ public class SimulationRunner extends JobRunner{
 		super(template);
 		this.jobName = config.getName();
 		this.config = config;
-		this.simulator = new Simulator(config);
+		this.simulator = new Simulator();
 		this.randomchouser = new SimRandomChooser(config);
 		sendProgress();
 	}

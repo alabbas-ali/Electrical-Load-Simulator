@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import his.loadprofile.job.SimulationRunner;
+import his.loadprofile.model.AjaxResponseBody;
 import his.loadprofile.model.SimConfig;
 
 @Controller
@@ -31,16 +32,27 @@ public class IndexController {
 
 		return "index";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping("/start-simulation")
-	public void startSimulation(Map<String, Object> model) {
+	public AjaxResponseBody startSimulation(Map<String, Object> model) {
+		
+		AjaxResponseBody result = new AjaxResponseBody();
+		
+		//@Todo check and validate the Configuration from request
 		SimConfig config = new SimConfig();
 		
-		// get the configuration from the form and 
+		config.setName("Test Name Simulation");
+		config.setNumberOfHouses(3);
 		System.out.println(this + "START startWork");
 		SimulationRunner simRunner = new SimulationRunner(config, template);
 		myJobList.add(simRunner);
 		taskExecutor.execute(simRunner);
+		
+		result.setCode("200");
+		result.setMsg("done");
+		
+		return result;
 	}
 
 	@RequestMapping(value = "/sim-status")
