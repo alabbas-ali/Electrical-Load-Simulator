@@ -51,7 +51,6 @@ public class IndexController {
 		
 		result.setCode("200");
 		result.setMsg("done");
-		
 		return result;
 	}
 

@@ -27,12 +27,12 @@ $(document).ready(function()
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {
-				console.log("SUCCESS: ", data);
-				//display(data);
+				//console.log("SUCCESS: ", data);
+				
 				connect();
 			},
 			error : function(e) {
-				console.log("ERROR: ", e);
+				//console.log("ERROR: ", e);
 				$('#error').html(e);
 				$('#error').show();
 			}
@@ -46,12 +46,12 @@ $(document).ready(function()
 
 function connect(){
 	
-	console.log("Connecting to SockJS");
+	//console.log("Connecting to SockJS");
     var socket = new SockJS('/sim-status');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
         stompClient.subscribe('/initial', function (messageOutput){
-            console.log("INITIAL: " + messageOutput);
+            //console.log("INITIAL: " + messageOutput);
             var progressList = $.parseJSON(messageOutput.body);
             $.each(progressList,function(index, element){
                 update(element);
@@ -59,7 +59,7 @@ function connect(){
         });
 
         stompClient.subscribe('/simulation/sim-status', function(messageOutput) {
-            console.log("New Message: " + messageOutput);
+            //console.log("New Message: " + messageOutput);
             var messageObject = $.parseJSON(messageOutput.body);
             update(messageObject);
         });

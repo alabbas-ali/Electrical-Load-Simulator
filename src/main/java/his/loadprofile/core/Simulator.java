@@ -29,7 +29,8 @@ public class Simulator {
 				// + (int) ((currentHouseNumber * i * 100) / (NUMBER_OF_SECOUNDS *
 				// totalNumberOfSimulation)));
 				jobRunner.progress
-						.set((int) ((currentHouseNumber * i * 100) / (NUMBER_OF_SECOUNDS * totalNumberOfSimulation)));
+						.set((int) (((currentHouseNumber * i * 100) / (NUMBER_OF_SECOUNDS * totalNumberOfSimulation))
+								+ ((100 / totalNumberOfSimulation) * (currentHouseNumber-1))));
 				jobRunner.sendProgress();
 			}
 		} catch (InterruptedException e) {
