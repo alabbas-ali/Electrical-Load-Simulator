@@ -16,6 +16,6 @@ public interface ApplianceRepository extends MongoRepository<Appliance, Long> {
 	Appliance findCustomByName(String name);
 
 	@Query("{domain: { $regex: ?0 } })")
-	List<Appliance> findCustomByRegExDomain(String name);
+	List<Appliance> findCustomByRegExName(String name);
 
 }

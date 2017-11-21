@@ -10,7 +10,39 @@
 	<div class="container">
 
 		<div class="starter-template">
-			
+
+			<h2>
+				<span th:text="'Saved Simulations'"></span>
+			</h2>
+
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>Name</td>
+						<td>Run Date</td>
+						<td>Number Of Houses</td>
+						<td>Singles Percentage</td>
+						<td>Options</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${simConfigs.empty}">
+						<td colspan="6">No Saved Simulations</td>
+					</tr>
+					<tr th:each="simConfig : ${simConfigs}">
+						<td th:text="${simConfig.id}">1</td>
+						<td><a href="#" th:href="@{/Simulation/result/{name}(name=${simConfig.name})}"
+							th:text="${simConfig.name}">name ...</a></td>
+						<td th:text="${#calendars.format(availability.date)}">July 11, 2017
+							2:17:16 PM CDT</td>
+						<td th:text="${simConfig.numberOfHouses}">300 ...</td>
+						<td>
+						   Options
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 
 	</div>

@@ -1,5 +1,7 @@
 package his.loadprofile.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,6 +14,8 @@ public class SimConfig {
 
 	@Indexed(unique = true)
 	private String name;
+	
+	private LocalDateTime date;
 	
 	private int numberOfHouses;
 	
@@ -61,12 +65,21 @@ public class SimConfig {
 		this.maxNumberOfPeople = maxNumberOfPeople;
 	}
 
-	public int getSengelsPrecentage() {
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	public int getSinglesPercentage() {
 		return singlesPercentage;
 	}
 
-	public void setSengelsPrecentage(int sengelsPrecentage) {
-		this.singlesPercentage = sengelsPrecentage;
+	public void setSinglesPercentage(int singlesPercentage) {
+		this.singlesPercentage = singlesPercentage;
 	}
+	
 	
 }

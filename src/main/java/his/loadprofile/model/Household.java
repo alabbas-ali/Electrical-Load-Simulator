@@ -14,6 +14,8 @@ public class Household {
 	@Id
     private long id;
 	
+	private String simName;
+	
 	private List<Availability> availabilities;
 	
 	private List<Appliance> appliances;
@@ -60,6 +62,14 @@ public class Household {
 
 	public void setSimulationResult(SimResult simulationResult) {
 		this.simulationResult = simulationResult;
+	}
+
+	public String getSimName() {
+		return simName;
+	}
+
+	public void setSimName(String simName) {
+		this.simName = simName;
 	}
 	
 	
