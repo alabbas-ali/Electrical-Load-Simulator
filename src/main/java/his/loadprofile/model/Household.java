@@ -1,5 +1,6 @@
 package his.loadprofile.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -21,6 +22,8 @@ public class Household {
 	private List<Appliance> appliances;
 	
 	private HouseHoldType type;
+	
+	private LocalDateTime creationDate;
 	
 	private LoadCurve resultLoadCurve;
 
@@ -71,5 +74,15 @@ public class Household {
 	public void setResultLoadCurve(LoadCurve resultLoadCurve) {
 		this.resultLoadCurve = resultLoadCurve;
 	}
+
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
+	}
+	
+	
 	
 }

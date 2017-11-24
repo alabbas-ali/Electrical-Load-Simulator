@@ -20,6 +20,7 @@ public class SimRandomChooser {
 	public Household getRandomHousehold() {
 		
 		Household house = new Household();
+		house.setSimName(simConfig.getName());
 		house.setType(this.gerRandomHouseHoldType());
 		house.setAppliances(this.getRandomAppliancesList());
 		house.setAvailabilities(this.gerRandomAvailabilitiesList());
@@ -51,5 +52,4 @@ public class SimRandomChooser {
 		return new ArrayList<Appliance>();
 	}
 	
-
 }

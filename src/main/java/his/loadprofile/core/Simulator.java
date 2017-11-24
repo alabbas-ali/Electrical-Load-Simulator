@@ -1,8 +1,13 @@
 package his.loadprofile.core;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import his.loadprofile.job.JobRunner;
 import his.loadprofile.model.Household;
 import his.loadprofile.model.LoadCurve;
+import his.loadprofile.model.Measurement;
 
 public class Simulator {
 
@@ -17,17 +22,25 @@ public class Simulator {
 	}
 
 	public LoadCurve simulate(Household house, int currentHouseNumber) {
-
-		// @Todo calculations go here , the calculation should conseder all the
-		// configuration and the house
-
+		
+		List<Measurement> measurements = new ArrayList<Measurement>();
+		Measurement measur;
 		try {
 			for (int i = 1; i <= NUMBER_OF_SECOUNDS; i++) {
 				Thread.sleep(1);
-
-				// System.out.println(" [ Progress in Secand ] " + i + " [ is ] "
-				// + (int) ((currentHouseNumber * i * 100) / (NUMBER_OF_SECOUNDS *
-				// totalNumberOfSimulation)));
+				
+				Float loadValue = (float) Math.sin(i);
+				
+				// @Todo calculations go here , the calculation should consider all the
+				// configuration and the house
+				// assign the value to loadValue 
+				
+				measur = new Measurement();
+				measur.setTime(i);
+				measur.setValue(loadValue);
+				measurements.add(measur);
+				
+				// Send the status to front end
 				jobRunner.progress
 						.set((int) (((currentHouseNumber * i * 100) / (NUMBER_OF_SECOUNDS * totalNumberOfSimulation))
 								+ ((100 / totalNumberOfSimulation) * (currentHouseNumber-1))));
@@ -37,7 +50,17 @@ public class Simulator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new LoadCurve();
+		
+		LoadCurve loadCurve = new LoadCurve();
+		loadCurve.setMeasurements(measurements);
+		loadCurve.setCreationDate(LocalDateTime.now());
+		loadCurve.setName("Sim_" + house.getSimName() + "_" + currentHouseNumber);
+		loadCurve.setDescription("This is auto created curve for simulation " + 
+				house.getSimName() + 
+				"and household number " + 
+				currentHouseNumber
+			);
+		return loadCurve;
 	}
 
 }

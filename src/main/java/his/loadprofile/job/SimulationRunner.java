@@ -1,8 +1,5 @@
 package his.loadprofile.job;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import his.loadprofile.core.Simulator;
 import his.loadprofile.model.Household;
 import his.loadprofile.model.SimConfig;
@@ -41,12 +38,13 @@ public class SimulationRunner extends JobRunner {
 		state = "RUNNING";
 		sendProgress();
 
-		List<Household> households = new ArrayList<Household>();
 		Household household;
+		
 		for (int i = 1; i <= config.getNumberOfHouses(); i++) {
+			
 			household = randomchouser.getRandomHousehold();
 			household.setResultLoadCurve(simulator.simulate(household, i));
-			households.add(household);
+			
 			householdRepository.save(household);
 		}
 		
