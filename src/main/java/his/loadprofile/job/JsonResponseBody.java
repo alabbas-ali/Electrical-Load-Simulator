@@ -1,7 +1,7 @@
 package his.loadprofile.job;
 
 
-public class AjaxResponseBody {
+public class JsonResponseBody {
 	
 	private String status = null;
 	private Object result = null;

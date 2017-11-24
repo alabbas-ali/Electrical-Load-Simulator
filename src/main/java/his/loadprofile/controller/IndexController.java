@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import his.loadprofile.job.AjaxResponseBody;
+import his.loadprofile.job.JsonResponseBody;
 import his.loadprofile.job.SimulationRunner;
 import his.loadprofile.model.SimConfig;
 import his.loadprofile.repo.HouseholdRepository;
@@ -46,12 +46,12 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping(value="/start-simulation", method=RequestMethod.POST)
-	public AjaxResponseBody startSimulation(
+	public JsonResponseBody startSimulation(
 			@ModelAttribute(value="simConfig") SimConfig simConfig,
 			BindingResult validationResult
 	) {
 		
-		AjaxResponseBody response = new AjaxResponseBody();
+		JsonResponseBody response = new JsonResponseBody();
 		
 		System.out.println(this + "START startWork");
 		System.out.println(this + simConfig.getName());
