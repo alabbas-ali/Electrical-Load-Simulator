@@ -6,6 +6,8 @@ import java.util.List;
 import his.loadprofile.core.Simulator;
 import his.loadprofile.model.Household;
 import his.loadprofile.model.SimConfig;
+import his.loadprofile.repo.HouseholdRepository;
+import his.loadprofile.repo.SimConfigReopsitory;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
@@ -14,13 +16,22 @@ public class SimulationRunner extends JobRunner {
 	private SimConfig config;
 	Simulator simulator;
 	SimRandomChooser randomchouser;
+	HouseholdRepository householdRepository;
+	SimConfigReopsitory simConfigReopsitory;
 
-	public SimulationRunner(SimConfig config, SimpMessagingTemplate template) {
+	public SimulationRunner(
+			SimConfig config, 
+			SimpMessagingTemplate template,
+			HouseholdRepository householdRepository,
+			SimConfigReopsitory simConfigReopsitory
+	) {
 		super(template);
 		this.jobName = config.getName();
 		this.config = config;
 		this.simulator = new Simulator(config.getNumberOfHouses(), this);
 		this.randomchouser = new SimRandomChooser(config);
+		this.householdRepository = householdRepository;
+		this.simConfigReopsitory = simConfigReopsitory;
 		sendProgress();
 	}
 
@@ -34,9 +45,12 @@ public class SimulationRunner extends JobRunner {
 		Household household;
 		for (int i = 1; i <= config.getNumberOfHouses(); i++) {
 			household = randomchouser.getRandomHousehold();
-			household.setSimulationResult(simulator.simulate(household, i));
+			household.setResultLoadCurve(simulator.simulate(household, i));
 			households.add(household);
+			householdRepository.save(household);
 		}
+		
+		simConfigReopsitory.save(this.config);
 
 		state = "DONE";
 		sendProgress();

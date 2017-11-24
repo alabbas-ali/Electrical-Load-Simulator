@@ -2,7 +2,6 @@ package his.loadprofile.job;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import his.loadprofile.model.JobProgressMessage;
 
 public abstract class JobRunner implements Runnable {
 

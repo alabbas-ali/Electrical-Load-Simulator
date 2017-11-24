@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import his.loadprofile.job.AjaxResponseBody;
 import his.loadprofile.job.SimulationRunner;
-import his.loadprofile.model.AjaxResponseBody;
 import his.loadprofile.model.SimConfig;
+import his.loadprofile.repo.HouseholdRepository;
+import his.loadprofile.repo.SimConfigReopsitory;
 
 @Controller
 public class IndexController {
@@ -24,6 +26,12 @@ public class IndexController {
 
 	@Autowired
 	private SimpMessagingTemplate template;
+	
+	@Autowired
+	private HouseholdRepository householdRepository;
+	
+	@Autowired
+	SimConfigReopsitory simConfigReopsitory;
 
 	private List<SimulationRunner> myJobList = new ArrayList<SimulationRunner>();
 
@@ -45,7 +53,14 @@ public class IndexController {
 		config.setName("Test_Name_Simulation");
 		config.setNumberOfHouses(3);
 		System.out.println(this + "START startWork");
-		SimulationRunner simRunner = new SimulationRunner(config, template);
+		
+		SimulationRunner simRunner = new SimulationRunner(
+				config, 
+				template,
+				householdRepository,
+				simConfigReopsitory
+		);
+		
 		myJobList.add(simRunner);
 		taskExecutor.execute(simRunner);
 		

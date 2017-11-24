@@ -52,8 +52,6 @@ public class WebApplication extends SpringBootServletInitializer {
         return executor;
     }
 	
-	
-	
 }
 
 

@@ -1,4 +1,4 @@
-package his.loadprofile.model;
+package his.loadprofile.job;
 
 public class JobProgressMessage {
 

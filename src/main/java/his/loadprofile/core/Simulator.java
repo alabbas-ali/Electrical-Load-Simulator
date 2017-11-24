@@ -2,7 +2,7 @@ package his.loadprofile.core;
 
 import his.loadprofile.job.JobRunner;
 import his.loadprofile.model.Household;
-import his.loadprofile.model.SimResult;
+import his.loadprofile.model.LoadCurve;
 
 public class Simulator {
 
@@ -16,7 +16,7 @@ public class Simulator {
 		this.jobRunner = jobRunner;
 	}
 
-	public SimResult simulate(Household house, int currentHouseNumber) {
+	public LoadCurve simulate(Household house, int currentHouseNumber) {
 
 		// @Todo calculations go here , the calculation should conseder all the
 		// configuration and the house
@@ -37,7 +37,7 @@ public class Simulator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new SimResult();
+		return new LoadCurve();
 	}
 
 }

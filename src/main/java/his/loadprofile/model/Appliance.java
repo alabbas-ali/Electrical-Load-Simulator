@@ -1,6 +1,7 @@
 package his.loadprofile.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -19,9 +20,11 @@ public class Appliance {
     
     private ApplianceType type;
     
-    private String text;
+    private String description;
     
-    private Date date;
+    private Date creationDate;
+    
+    protected List<OperationalMode> operationalModes;
 
 	public long getId() {
 		return id;
@@ -39,22 +42,6 @@ public class Appliance {
 		this.name = name;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public ApplianceType getType() {
 		return type;
 	}
@@ -63,5 +50,28 @@ public class Appliance {
 		this.type = type;
 	}
 
-    
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public List<OperationalMode> getOperationalModes() {
+		return operationalModes;
+	}
+
+	public void setOperationalModes(List<OperationalMode> operationalModes) {
+		this.operationalModes = operationalModes;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	    
 }

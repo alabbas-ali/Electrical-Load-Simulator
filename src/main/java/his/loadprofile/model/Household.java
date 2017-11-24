@@ -22,7 +22,7 @@ public class Household {
 	
 	private HouseHoldType type;
 	
-	private SimResult simulationResult;
+	private LoadCurve resultLoadCurve;
 
 	public long getId() {
 		return id;
@@ -56,14 +56,6 @@ public class Household {
 		this.type = type;
 	}
 
-	public SimResult getSimulationResult() {
-		return simulationResult;
-	}
-
-	public void setSimulationResult(SimResult simulationResult) {
-		this.simulationResult = simulationResult;
-	}
-
 	public String getSimName() {
 		return simName;
 	}
@@ -71,7 +63,13 @@ public class Household {
 	public void setSimName(String simName) {
 		this.simName = simName;
 	}
-	
-	
+
+	public LoadCurve getResultLoadCurve() {
+		return resultLoadCurve;
+	}
+
+	public void setResultLoadCurve(LoadCurve resultLoadCurve) {
+		this.resultLoadCurve = resultLoadCurve;
+	}
 	
 }

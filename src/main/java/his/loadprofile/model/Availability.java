@@ -1,5 +1,7 @@
 package his.loadprofile.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,6 +16,8 @@ public class Availability {
 	private AvailabilityType type;
 	
 	private String name;
+	
+	private LocalDateTime creationDate;
 
 	public long getId() {
 		return id;
@@ -38,5 +42,15 @@ public class Availability {
 	public void setType(AvailabilityType type) {
 		this.type = type;
 	}
+
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
+	}
+	
+	
 	
 }
