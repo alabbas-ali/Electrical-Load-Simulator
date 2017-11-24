@@ -1,34 +1,27 @@
 package his.loadprofile.job;
 
-import com.fasterxml.jackson.annotation.JsonView;
 
 public class AjaxResponseBody {
 	
-	@JsonView(Views.Public.class)
-	String msg;
+	private String status = null;
+	private Object result = null;
 
-	@JsonView(Views.Public.class)
-	String code;
-
-	public String getMsg() {
-		return msg;
+	public Object getResult() {
+		return result;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setResult(Object result) {
+		this.result = result;
 	}
 
-	public String getCode() {
-		return code;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	
+
 	
 }
 
-class Views {
-    public static class Public {}
-}

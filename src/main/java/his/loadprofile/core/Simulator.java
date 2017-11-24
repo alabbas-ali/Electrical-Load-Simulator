@@ -1,7 +1,7 @@
 package his.loadprofile.core;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import his.loadprofile.job.JobRunner;
@@ -53,7 +53,7 @@ public class Simulator {
 		
 		LoadCurve loadCurve = new LoadCurve();
 		loadCurve.setMeasurements(measurements);
-		loadCurve.setCreationDate(LocalDateTime.now());
+		loadCurve.setCreationDate(new Date());
 		loadCurve.setName("Sim_" + house.getSimName() + "_" + currentHouseNumber);
 		loadCurve.setDescription("This is auto created curve for simulation " + 
 				house.getSimName() + 

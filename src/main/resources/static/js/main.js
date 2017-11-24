@@ -1,7 +1,5 @@
 var stompClient = null;
 
-
-
 $(document).ready(function()
 {
     
@@ -10,29 +8,39 @@ $(document).ready(function()
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		
-		var data = {}
-		
+		var data = '';
+		prefex = '';
 		$(this).find(":input").each(function() {
 		    // The selector will match buttons; if you want to filter
 		    // them out, check `this.tagName` and `this.type`; see
 		    // below
-			data[this.name] = $(this).val();
+			data += prefex + [this.name] +"="+ $(this).val();
+			prefex = '&';
 		});
 		
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
 			url : "/start-simulation",
-			data : JSON.stringify(data),
+			data : data,
 			dataType : 'json',
 			timeout : 100000,
-			success : function(data) {
+			success : function(response) {
 				//console.log("SUCCESS: ", data);
+				if(response.status == 'SUCCESS'){
+					connect();
+				}else{
+					errorInfo = "";
+					for(i =0 ; i < response.result.length ; i++){
+						errorInfo += "<br>" + (i + 1) +". " + response.result[i].code;
+					}
+					$('#error').html("Please correct following errors: " + errorInfo);
+					$('#error').show('slow');
+				}
 				
-				connect();
 			},
 			error : function(e) {
-				//console.log("ERROR: ", e);
+				console.log("ERROR: ", e);
 				$('#error').html(e);
 				$('#error').show();
 			}

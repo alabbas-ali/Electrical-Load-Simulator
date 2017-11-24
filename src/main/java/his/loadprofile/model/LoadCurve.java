@@ -1,6 +1,6 @@
 package his.loadprofile.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class LoadCurve {
@@ -9,7 +9,7 @@ public class LoadCurve {
    
 	private String description;
 	
-	private LocalDateTime creationDate;
+	private Date creationDate;
     
 	private List<Measurement> measurements;
 
@@ -29,11 +29,11 @@ public class LoadCurve {
 		this.description = description;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 

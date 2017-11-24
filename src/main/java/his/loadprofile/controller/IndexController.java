@@ -9,7 +9,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import his.loadprofile.job.AjaxResponseBody;
@@ -37,25 +41,37 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String index(Map<String, Object> model) {
-
 		return "index";
 	}
 	
 	@ResponseBody
-	@RequestMapping("/start-simulation")
-	public AjaxResponseBody startSimulation(Map<String, Object> model) {
+	@RequestMapping(value="/start-simulation", method=RequestMethod.POST)
+	public AjaxResponseBody startSimulation(
+			@ModelAttribute(value="simConfig") SimConfig simConfig,
+			BindingResult validationResult
+	) {
 		
-		AjaxResponseBody result = new AjaxResponseBody();
+		AjaxResponseBody response = new AjaxResponseBody();
 		
-		//@Todo check and validate the Configuration from request
-		SimConfig config = new SimConfig();
-		
-		config.setName("Test_Name_Simulation");
-		config.setNumberOfHouses(3);
 		System.out.println(this + "START startWork");
+		System.out.println(this + simConfig.getName());
+		System.out.println(this + " " + simConfig.getNumberOfHouses());
+		
+		ValidationUtils.rejectIfEmpty(validationResult, "name", "Name can not be empty.");
+		ValidationUtils.rejectIfEmpty(validationResult, "numberOfHouses", "Number Of Houses can not be empty.");
+		ValidationUtils.rejectIfEmpty(validationResult, "singlesPercentage", "Singles Percentage not be empty.");
+		
+		if(validationResult.hasErrors())
+		{
+			System.out.println(this + "Is not valid");
+			System.out.println(validationResult.getAllErrors() + "errors");
+			response.setStatus(HttpResponceStatus.FAIL);
+			response.setResult(validationResult.getAllErrors());
+			return response;
+		}
 		
 		SimulationRunner simRunner = new SimulationRunner(
-				config, 
+				simConfig, 
 				template,
 				householdRepository,
 				simConfigReopsitory
@@ -64,9 +80,8 @@ public class IndexController {
 		myJobList.add(simRunner);
 		taskExecutor.execute(simRunner);
 		
-		result.setCode("200");
-		result.setMsg("done");
-		return result;
+		response.setStatus(HttpResponceStatus.SUCCESS);
+		return response;
 	}
 
 	@RequestMapping(value = "/sim-status")

@@ -1,9 +1,10 @@
 package his.loadprofile.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import his.loadprofile.core.HouseHoldType;
@@ -13,8 +14,9 @@ public class Household {
 	
 	
 	@Id
-    private long id;
+    private String id;
 	
+	@Indexed(unique = true)
 	private String simName;
 	
 	private List<Availability> availabilities;
@@ -23,15 +25,15 @@ public class Household {
 	
 	private HouseHoldType type;
 	
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	private LoadCurve resultLoadCurve;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -75,11 +77,11 @@ public class Household {
 		this.resultLoadCurve = resultLoadCurve;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	

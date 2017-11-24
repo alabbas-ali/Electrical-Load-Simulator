@@ -1,8 +1,10 @@
 package his.loadprofile.model;
 
-import java.time.LocalDateTime;
+
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import his.loadprofile.core.AvailabilityType;
@@ -11,19 +13,20 @@ import his.loadprofile.core.AvailabilityType;
 public class Availability {
 	
 	@Id
-    private long id;
+    private String id;
+	
+	@Indexed(unique = true)
+	private String name;
 	
 	private AvailabilityType type;
 	
-	private String name;
-	
-	private LocalDateTime creationDate;
+	private Date creationDate;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -43,11 +46,11 @@ public class Availability {
 		this.type = type;
 	}
 
-	public LocalDateTime getCreationDate() {
+	public Date getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDateTime creationDate) {
+	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	

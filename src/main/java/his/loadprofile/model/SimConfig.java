@@ -1,6 +1,10 @@
 package his.loadprofile.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
+//import javax.validation.constraints.Max;
+//import javax.validation.constraints.Min;
+//import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -10,12 +14,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class SimConfig {
 
 	@Id
-	private long id;
-
+	private String id;
+	
 	@Indexed(unique = true)
 	private String name;
 	
-	private LocalDateTime date;
+	private Date date;
 	
 	private int numberOfHouses;
 	
@@ -25,11 +29,11 @@ public class SimConfig {
 	
 	private int singlesPercentage;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -65,11 +69,11 @@ public class SimConfig {
 		this.maxNumberOfPeople = maxNumberOfPeople;
 	}
 
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
