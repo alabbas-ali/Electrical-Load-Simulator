@@ -12,7 +12,7 @@ public class SimulationRunner extends JobRunner {
 
 	private SimConfig config;
 	Simulator simulator;
-	SimRandomChooser randomchouser;
+	RandomHouesCreator randomchouser;
 	HouseholdRepository householdRepository;
 	SimConfigReopsitory simConfigReopsitory;
 
@@ -26,7 +26,7 @@ public class SimulationRunner extends JobRunner {
 		this.jobName = config.getName();
 		this.config = config;
 		this.simulator = new Simulator(config.getNumberOfHouses(), this);
-		this.randomchouser = new SimRandomChooser(config);
+		this.randomchouser = new RandomHouesCreator(config);
 		this.householdRepository = householdRepository;
 		this.simConfigReopsitory = simConfigReopsitory;
 		sendProgress();

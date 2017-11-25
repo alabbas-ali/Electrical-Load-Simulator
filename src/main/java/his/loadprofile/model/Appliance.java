@@ -18,10 +18,12 @@ public class Appliance {
 	@Id
     private String id;
 
-	@NotEmpty @Indexed(unique = true)
+	@NotEmpty(message = "Name can't empty!")
+	@Indexed(unique = true)
     private String name;
     
-    @Field @NotEmpty
+    @Field 
+    @NotEmpty(message = "Appliance Type should be defined!")
     private ApplianceType type;
     
     private String description;

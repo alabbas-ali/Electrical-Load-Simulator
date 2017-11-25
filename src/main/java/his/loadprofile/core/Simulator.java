@@ -26,6 +26,36 @@ public class Simulator {
 		List<Measurement> measurements = new ArrayList<Measurement>();
 		Measurement measur;
 		try {
+			
+			
+//			Matrix powerMatrix = new Matrix(new double[Input.MAX_TIME_INTERVAL_COUNT][appList.size() + 3]);
+//
+//			Lighting light = new Lighting(occupancyValues);
+//			light.setHouseNumber(bulbConfig);
+//			int[] lightValues = light.getLightingValues();
+//
+//			int occupancy = 0;
+//			int lightSum = 0;
+//			int powerSum = 0;
+//			int i = 0;
+//			while (Appliance.hasNextTimeInterval()) {
+//				occupancy = occupancyValues[i];
+//				lightSum = lightValues[i];
+//				powerMatrix.set(i, 0, occupancy);
+//				for (int j = 0; j < appList.size(); j++) {
+//					Appliance a = appList.get(j);
+//					a.nextWattage(occupancy);
+//					powerMatrix.set(i, j + 3, a.getPower());
+//					powerSum += a.getPower();
+//				}
+//				powerMatrix.set(i, 1, powerSum + lightSum);
+//				powerMatrix.set(i, 2, lightSum);
+//				powerSum = 0;
+//				i++;
+//			}
+
+			
+			
 			for (int i = 1; i <= NUMBER_OF_SECOUNDS; i++) {
 				Thread.sleep(1);
 				
@@ -34,6 +64,8 @@ public class Simulator {
 				// @Todo calculations go here , the calculation should consider all the
 				// configuration and the house
 				// assign the value to loadValue 
+				
+				
 				
 				measur = new Measurement();
 				measur.setTime(i);

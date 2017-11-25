@@ -2,13 +2,11 @@ package his.loadprofile.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 
-//import javax.validation.constraints.Max;
-//import javax.validation.constraints.Min;
-//import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -26,6 +24,8 @@ public class SimConfig {
 	
 	private Date date;
 	
+	@NotNull(message = "Number Of Houses can't empty!")
+	@Min(value=1 , message = "Number Of Houses value can't be less than 0!")
 	private int numberOfHouses;
 	
 	private int minNumberOfPeople;
@@ -33,6 +33,8 @@ public class SimConfig {
 	private int maxNumberOfPeople;
 	
 	@NotNull(message = "Singles Percentage can't empty!")
+	@Max(value=100 , message = "Singles Percentage value can't be over 100!")
+	@Min(value=0 , message = "Singles Percentage value can't be less than 0!")
 	private int singlesPercentage;
 
 	public String getId() {
