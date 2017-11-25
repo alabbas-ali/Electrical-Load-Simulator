@@ -41,15 +41,22 @@ public class SimRandomChooser {
 		
 		//@Todo use simConfig to create Availabilities in Household
 		simConfig.getMaxNumberOfPeople();
+		List<Availability> availabilities = new ArrayList<Availability>();
+		Availability av = new Availability();
+		av.setName("Test_av");
+		availabilities.add(av);
 		
-		return new ArrayList<Availability>();
+		return availabilities;
 	}
 
 	private List<Appliance> getRandomAppliancesList(){
 		
 		//@Todo use simConfig to create Appliances in Household
-		
-		return new ArrayList<Appliance>();
+		List<Appliance> appliances = new ArrayList<Appliance>();
+		Appliance ap = new Appliance();
+		ap.setName("Test_ap");
+		appliances.add(ap);
+		return appliances;
 	}
 	
 }

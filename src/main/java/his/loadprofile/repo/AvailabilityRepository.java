@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import his.loadprofile.model.Availability;
 
-public interface AvailabilityRepository extends MongoRepository<Availability, Long> {
+public interface AvailabilityRepository extends MongoRepository<Availability, String> {
 	
 	Availability findFirstByName(String name);
 

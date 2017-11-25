@@ -3,9 +3,12 @@ package his.loadprofile.model;
 import java.util.Date;
 import java.util.List;
 
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import his.loadprofile.core.ApplianceType;
 
@@ -15,9 +18,10 @@ public class Appliance {
 	@Id
     private String id;
 
-    @Indexed(unique = true)
+	@NotEmpty @Indexed(unique = true)
     private String name;
     
+    @Field @NotEmpty
     private ApplianceType type;
     
     private String description;

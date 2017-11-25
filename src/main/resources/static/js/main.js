@@ -8,21 +8,21 @@ $(document).ready(function()
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		
-		var data = '';
+		var data = {};
 		prefex = '';
 		$(this).find(":input").each(function() {
 		    // The selector will match buttons; if you want to filter
 		    // them out, check `this.tagName` and `this.type`; see
 		    // below
-			data += prefex + [this.name] +"="+ $(this).val();
-			prefex = '&';
+			data[this.name] = $(this).val();
+			//prefex = '&';
 		});
 		
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
 			url : "/start-simulation",
-			data : data,
+			data : JSON.stringify(data),
 			dataType : 'json',
 			timeout : 100000,
 			success : function(response) {

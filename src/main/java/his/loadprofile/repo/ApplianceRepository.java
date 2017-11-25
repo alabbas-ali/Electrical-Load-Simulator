@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import his.loadprofile.model.Appliance;
 
-public interface ApplianceRepository extends MongoRepository<Appliance, Long> {
+public interface ApplianceRepository extends MongoRepository<Appliance, String> {
 
 	Appliance findFirstByName(String name);
 

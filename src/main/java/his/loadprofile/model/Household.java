@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import his.loadprofile.core.HouseHoldType;
 
@@ -16,11 +16,12 @@ public class Household {
 	@Id
     private String id;
 	
-	@Indexed(unique = true)
 	private String simName;
 	
+	@Field("availabilities")
 	private List<Availability> availabilities;
 	
+	@Field("appliances")
 	private List<Appliance> appliances;
 	
 	private HouseHoldType type;

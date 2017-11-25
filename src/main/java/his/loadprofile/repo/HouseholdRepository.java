@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import his.loadprofile.model.Household;
 
-public interface HouseholdRepository extends MongoRepository<Household, Long>{
+public interface HouseholdRepository extends MongoRepository<Household, String>{
 	
 	Household findFirstBySimName(String simName);
 

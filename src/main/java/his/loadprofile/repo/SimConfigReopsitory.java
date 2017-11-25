@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import his.loadprofile.model.SimConfig;
 
-public interface SimConfigReopsitory extends MongoRepository<SimConfig, Long>{
+public interface SimConfigReopsitory extends MongoRepository<SimConfig, String>{
 	
 	SimConfig findFirstByName(String name);
 

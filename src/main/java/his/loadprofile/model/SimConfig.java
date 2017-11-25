@@ -2,6 +2,10 @@ package his.loadprofile.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 //import javax.validation.constraints.Max;
 //import javax.validation.constraints.Min;
 //import javax.validation.constraints.NotNull;
@@ -16,6 +20,7 @@ public class SimConfig {
 	@Id
 	private String id;
 	
+	@NotBlank(message = "Name can't empty!")
 	@Indexed(unique = true)
 	private String name;
 	
@@ -27,6 +32,7 @@ public class SimConfig {
 	
 	private int maxNumberOfPeople;
 	
+	@NotNull(message = "Singles Percentage can't empty!")
 	private int singlesPercentage;
 
 	public String getId() {
