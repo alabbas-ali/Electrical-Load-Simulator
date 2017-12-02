@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import his.loadprofile.core.AppliancesImporter;
 import his.loadprofile.job.JsonResponseBody;
 import his.loadprofile.job.SimulationRunner;
+import his.loadprofile.model.Appliance;
 import his.loadprofile.model.SimConfig;
+import his.loadprofile.repo.ApplianceRepository;
 import his.loadprofile.repo.HouseholdRepository;
 import his.loadprofile.repo.SimConfigReopsitory;
 
@@ -31,6 +34,9 @@ public class SimulationRestController {
 
 	@Autowired
 	private SimpMessagingTemplate template;
+	
+	@Autowired
+	private ApplianceRepository  applianceRepository;
 	
 	@Autowired
 	private HouseholdRepository householdRepository;
@@ -51,8 +57,8 @@ public class SimulationRestController {
 		
 		if(validationResult.hasErrors())
 		{
-			System.out.println(this + "Is not valid");
-			System.out.println(validationResult.getAllErrors() + "errors");
+			//System.out.println(this + "Is not valid");
+			//System.out.println(validationResult.getAllErrors() + "errors");
 			response.setStatus(HttpResponceStatus.FAIL);
 			response.setResult(validationResult.getAllErrors());
 			return response;
@@ -67,6 +73,7 @@ public class SimulationRestController {
 				simConfigReopsitory
 		);
 		
+		
 		myJobList.add(simRunner);
 		taskExecutor.execute(simRunner);
 		
@@ -74,10 +81,35 @@ public class SimulationRestController {
 		return response;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="/import-appliances", method=RequestMethod.GET)
+	public JsonResponseBody importAppliances() 
+	{
+		JsonResponseBody response = new JsonResponseBody();
+		AppliancesImporter importer = new AppliancesImporter();
+		List<Appliance> appliances = importer.importData();
+		
+		if(appliances.size() > 0) {
+			for (Appliance appliance : appliances) {
+				applianceRepository.save(appliance);
+			}
+			response.setStatus(HttpResponceStatus.SUCCESS);
+			response.setResult("number of inserted appliances" + appliances.size());
+		}else {
+			response.setStatus(HttpResponceStatus.FAIL);
+			response.setResult("No appliances to import");
+		}
+		
+		return response;	
+	}
+	
+	
 	@RequestMapping(value = "/sim-status")
 	@ResponseBody
 	@SubscribeMapping("initial")
-	List<SimulationRunner> fetchStatus() {
+	List<SimulationRunner> fetchStatus() 
+	{
 		return this.myJobList;
 	}
 
