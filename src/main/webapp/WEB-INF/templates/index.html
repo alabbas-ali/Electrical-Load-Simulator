@@ -21,81 +21,83 @@
 			</section>
 
 			<!-- Main content -->
-			<section class="content">
-				
-				<h2>Please Set Your Simulation Configuration </h2>
-				
-				<form class="form-narrow form-horizontal" action="#" method="post"
-					id="simulation">
+			<section class="content"
+				th:insert="layout/main :: box( 'Please Set Your Simulation Configuration', ~{ :: .box-body})">
+				<div class="box-body">
+					<form class="form-narrow form-horizontal" action="#" method="post" id="simulation">
 
-					<div class="alert" id="error" style="display: none">
-						<!-- this will be full with Js in case of error in the request -->
+						<div class="alert" id="error" style="display: none">
+							<!-- this will be full with Js in case of error in the request -->
+						</div>
+						<fieldset>
+
+							<div class="form-group">
+								<label for="inputEmail" class="col-lg-2 control-label">Sim
+									Name</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="name"
+										placeholder="Name" name="name" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">Number
+									Of Households</label>
+								<div class="col-lg-10">
+									<input type="number" class="form-control" id="numberOfHouses"
+										placeholder="Number Of Households" name="numberOfHouses" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">Minimum
+									Number Of People</label>
+								<div class="col-lg-10">
+									<input type="number" class="form-control"
+										id="minNumberOfPeople" placeholder="Minimum Number Of People"
+										name="minNumberOfPeople" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">Maximum
+									Number Of People</label>
+								<div class="col-lg-10">
+									<input type="number" class="form-control"
+										id="maxNumberOfPeople" placeholder="Maximum Number Of People"
+										name="maxNumberOfPeople" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">Singles
+									Percentage %</label>
+								<div class="col-lg-10">
+									<input type="number" class="form-control"
+										id="singlesPercentage" placeholder="Singles Percentage %"
+										name="singlesPercentage" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-offset-2 col-lg-10">
+									<button type="submit" name="submit" value="start"
+										class="btn btn-default">Start Simulation</button>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+
+
+					<div class="starter-template">
+						<div id="tableBody" class="processbar-container"></div>
 					</div>
-					<fieldset>
-						
-						<div class="form-group">
-							<label for="inputEmail" class="col-lg-2 control-label">Sim
-								Name</label>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="name"
-									placeholder="Name" name="name" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="inputPassword" class="col-lg-2 control-label">Number
-								Of Households</label>
-							<div class="col-lg-10">
-								<input type="number" class="form-control" id="numberOfHouses"
-									placeholder="Number Of Households" name="numberOfHouses" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="inputPassword" class="col-lg-2 control-label">Minimum
-								Number Of People</label>
-							<div class="col-lg-10">
-								<input type="number" class="form-control" id="minNumberOfPeople"
-									placeholder="Minimum Number Of People" name="minNumberOfPeople" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="inputPassword" class="col-lg-2 control-label">Maximum
-								Number Of People</label>
-							<div class="col-lg-10">
-								<input type="number" class="form-control" id="maxNumberOfPeople"
-									placeholder="Maximum Number Of People" name="maxNumberOfPeople" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="inputPassword" class="col-lg-2 control-label">Singles
-								Percentage %</label>
-							<div class="col-lg-10">
-								<input type="number" class="form-control" id="singlesPercentage"
-									placeholder="Singles Percentage %" name="singlesPercentage" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-lg-offset-2 col-lg-10">
-								<button type="submit" name="submit" value="start"
-									class="btn btn-default">Start Simulation</button>
-							</div>
-						</div>
-
-					</fieldset>
-				</form>
-
-
-				<div class="starter-template">
-					<div id="tableBody" class="processbar-container"></div>
 				</div>
 			</section>
 		</div>
 		<!-- end container -->
-		
+
 		<!-- Main Footer -->
 		<div th:replace="layout/main :: footer"></div>
 	</div>

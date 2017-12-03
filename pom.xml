@@ -48,13 +48,13 @@
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring4</artifactId>
-			<version>3.0.6.RELEASE</version>
+			<version>3.0.6.RELEASE</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
-			<version>3.0.6.RELEASE</version>
+			<version>3.0.6.RELEASE</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 
 		<!-- hot swapping, disable cache for template, enable live reload -->
