@@ -31,7 +31,6 @@ public class ApplianceController {
 			@PathVariable("id") String id,
 			Map<String, Object> model 
 	) {
-		// get the Appliance by id ang pass it in model
 		// System.out.println(id);
 		Appliance appliance = applianceRepository.findOne(id);
 		model.put("appliance", appliance);

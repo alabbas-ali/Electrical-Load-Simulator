@@ -1,22 +1,36 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/main :: header(title='HIS-LPS::Example Page')"></head>
-<body>
+<head th:replace="layout/main :: head(title='HIS-LPS::Appliance Edit')"></head>
+<body class="skin-blue layout-top-nav layout-boxed">
 
-	<div th:replace="layout/main :: menu"></div>
+	<div class="wrapper">
+		<div th:replace="layout/main :: header"></div>
 
-	<!-- end container -->
-	<div class="container">
+		<!-- Full Width Column -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Top Navigation <small>Example 2.0</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#" th:href="@{/appliance}">Appliances</a></li>
+					<li class="active">Edit</li>
+				</ol>
+			</section>
 
-		<div class="starter-template">
-			
+			<!-- Main content -->
+			<section class="content">
+				
+			</section>
 		</div>
+		<!-- end container -->
 
+		<!-- Main Footer -->
+		<div th:replace="layout/main :: footer"></div>
 	</div>
-	<!-- end container -->
-	
-	<div th:replace="layout/main :: footer"></div>
+
 </body>
 </html>
-
