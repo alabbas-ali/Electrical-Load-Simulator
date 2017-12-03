@@ -1,9 +1,13 @@
 package his.loadprofile;
 
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class })
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
@@ -22,7 +26,10 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @EntityScan("his.loadprofile.model")
 @EnableAsync
 public class WebApplication extends SpringBootServletInitializer {
-
+	
+	@Autowired
+    private ThymeleafProperties properties;
+	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(WebApplication.class);
@@ -33,47 +40,23 @@ public class WebApplication extends SpringBootServletInitializer {
 	}
 
 	@Bean
-	public ServletContextTemplateResolver defaultTemplateResolver() {
-		ServletContextTemplateResolver yourTemplateResolver = new ServletContextTemplateResolver();
-		yourTemplateResolver.setPrefix("/WEB-INF/views/");
-		yourTemplateResolver.setSuffix(".html");
-		yourTemplateResolver.setTemplateMode("HTML5");
-		yourTemplateResolver.setCharacterEncoding("UTF-8");
+	public ThreadPoolTaskExecutor taskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(5);
+		executor.setMaxPoolSize(10);
+		executor.setQueueCapacity(25);
+		return executor;
+	}
 
+	@Bean
+	public ServletContextTemplateResolver defaultTemplateResolver(ServletContext servletContext) {
+		ServletContextTemplateResolver yourTemplateResolver = new ServletContextTemplateResolver(servletContext);
+		yourTemplateResolver.setCharacterEncoding("UTF-8");
+		yourTemplateResolver.setPrefix(this.properties.getPrefix());
+		yourTemplateResolver.setSuffix(this.properties.getSuffix());
+		yourTemplateResolver.setTemplateMode(this.properties.getMode());
+		yourTemplateResolver.setCacheable(this.properties.isCache());
+		
 		return yourTemplateResolver;
 	}
-	
-	@Bean
-    public ThreadPoolTaskExecutor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(5);
-        executor.setMaxPoolSize(10);
-        executor.setQueueCapacity(25);
-        return executor;
-    }
-	
 }
-
-
-
-
-
-
-
-
-//@Bean
-//public SpringTemplateEngine springTemplateEngine(TemplateResolver templateResolver) {
-//	SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
-//	springTemplateEngine.addTemplateResolver(templateResolver);
-//
-//	return springTemplateEngine;
-//}
-//
-//@Bean
-//public ThymeleafViewResolver thymeleafViewResolver(SpringTemplateEngine templateEngine) {
-//	ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
-//	thymeleafViewResolver.setTemplateEngine(templateEngine);
-//	thymeleafViewResolver.setOrder(1);
-//	thymeleafViewResolver.setViewNames(new String [] {"thymeleaf/*"});
-//	return thymeleafViewResolver;
-//}
