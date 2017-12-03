@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import his.loadprofile.model.Appliance;
 import his.loadprofile.repo.ApplianceRepository;
@@ -24,11 +26,15 @@ public class ApplianceController {
 		return "appliance/index";
 	}
 	
-	@RequestMapping("/appliance/details/{id}")
-	public String details(Map<String, Object> model) 
-	{
+	@RequestMapping(value = "/appliance/details/{id}", method = RequestMethod.GET)
+	public String details(
+			@PathVariable("id") String id,
+			Map<String, Object> model 
+	) {
 		// get the Appliance by id ang pass it in model
-		
+		// System.out.println(id);
+		Appliance appliance = applianceRepository.findOne(id);
+		model.put("appliance", appliance);
         return "appliance/details";
 	}
 	

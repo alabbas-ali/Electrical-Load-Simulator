@@ -57,8 +57,6 @@ public class SimulationRestController {
 		
 		if(validationResult.hasErrors())
 		{
-			//System.out.println(this + "Is not valid");
-			//System.out.println(validationResult.getAllErrors() + "errors");
 			response.setStatus(HttpResponceStatus.FAIL);
 			response.setResult(validationResult.getAllErrors());
 			return response;

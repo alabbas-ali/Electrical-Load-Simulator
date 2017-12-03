@@ -30,12 +30,11 @@
 						<td colspan="5">No tasks</td>
 					</tr>
 					<tr th:each="appliance : ${appliances}">
-						<td th:text="${appliance.id}">1</td>
+						<td th:text="${appliance.id}"></td>
 						<td><a href="#" th:href="@{/appliance/details/{id}(id=${appliance.id})}"
-							th:text="${appliance.name}">Title ...</a></td>
-						<td th:text="${appliance.text}">Text ...</td>
-						<td th:text="${appliance.date}">July 11, 2017
-							2:17:16 PM CDT</td>
+							th:text="${appliance.name}"></a></td>
+						<td th:text="${appliance.description}"></td>
+						<td th:text="${#calendars.format(appliance.creationDate)}"></td>
 						<td>
 							Options
 						</td>
