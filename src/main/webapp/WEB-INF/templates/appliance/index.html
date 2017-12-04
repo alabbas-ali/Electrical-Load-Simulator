@@ -5,7 +5,7 @@
 <body class="skin-blue layout-top-nav layout-boxed">
 
 	<div class="wrapper">
-		<div th:replace="layout/main :: header"></div>
+		<div th:replace="layout/main :: header('appliance')"></div>
 
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
@@ -30,10 +30,10 @@
 					<table class="table table-bordered table-hover dataTable">
 						<thead>
 							<tr role="row">
-								<td>Name</td>
-								<td>Description</td>
-								<td>Date</td>
-								<td>Options</td>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Date</th>
+								<th>Options</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -5,26 +5,33 @@
 <body class="skin-blue layout-top-nav layout-boxed">
 
 	<div class="wrapper">
-		<div th:replace="layout/main :: header"></div>
+		<div th:replace="layout/main :: header('availability')"></div>
 
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
+		
 			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>
-					Top Navigation <small>Example 2.0</small>
-				</h1>
+			<section 
+				class="content-header" 
+				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})"
+			>
 				<ol class="breadcrumb">
 					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li><a href="#" th:href="@{/availability}">Availabilities</a></li>
 					<li class="active">Edit</li>
 				</ol>
 			</section>
+			
+		
 
 			<!-- Main content -->
-			<section class="content">
-				
+			<section class="content"
+				th:insert="layout/main :: box( 'Example Page', ~{ :: .box-body})">
+				<div class="box-body">
+					Example Page Content
+				</div>
 			</section>
+			
 		</div>
 		<!-- end container -->
 

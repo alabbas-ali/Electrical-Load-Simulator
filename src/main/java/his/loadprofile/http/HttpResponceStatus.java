@@ -1,4 +1,4 @@
-package his.loadprofile.controller;
+package his.loadprofile.http;
 
 public final class HttpResponceStatus {
 	

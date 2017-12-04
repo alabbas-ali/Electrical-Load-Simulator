@@ -5,7 +5,7 @@
 <body class="skin-blue layout-top-nav layout-boxed">
 
 	<div class="wrapper">
-		<div th:replace="layout/main :: header"></div>
+		<div th:replace="layout/main :: header('simulation')"></div>
 
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
@@ -21,10 +21,10 @@
 			
 
 			<!-- Main content -->
-			<section class="content"
-				th:insert="layout/main :: box( 'Simulation ' +  + ' Result', ~{ :: .box-body})">
+			<section class="content" 
+				th:insert="layout/main :: box( 'Simulation ' + ${simConfig.name} + ' Result', ~{ :: .box-body})">
 				<div class="box-body">
-					Example Page Content
+					
 				</div>
 			</section>
 		</div>

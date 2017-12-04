@@ -1,4 +1,4 @@
-package his.loadprofile.job;
+package his.loadprofile.http;
 
 
 public class JsonResponseBody {

@@ -23,7 +23,7 @@ public class SimulationController {
 	@Autowired
 	private HouseholdRepository householdRepository;
 	
-	@RequestMapping("/simulations")
+	@RequestMapping("/simulation")
 	public String index(Map<String, Object> model) 
 	{
 		List<SimConfig> simConfigs = simConfigReopsitory.findAll();
@@ -32,7 +32,7 @@ public class SimulationController {
 	}
 	
 	
-	@RequestMapping(value = "/simulations/result/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/simulation/result/{id}", method = RequestMethod.GET)
 	public String result(
 			@PathVariable("id") String id,
 			Map<String, Object> model 

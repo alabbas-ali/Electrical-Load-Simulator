@@ -40,7 +40,7 @@
 <body>
 
 	<div class="wrapper">
-		<header class="main-header" th:fragment="header">
+		<header class="main-header" th:fragment="header(module)">
 			<nav class="navbar navbar-static-top navbar-inverse">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -61,8 +61,8 @@
 							<li th:classappend="${module == 'appliance' ? 'active' : ''}">
 								<a href="#" th:href="@{/appliance}">Appliances</a>
 							</li>
-							<li th:classappend="${module == 'sim-history' ? 'active' : ''}">
-								<a href="#" th:href="@{/sim-history}">Saved Simulations</a>
+							<li th:classappend="${module == 'simulation' ? 'active' : ''}">
+								<a href="#" th:href="@{/simulation}">Saved Simulations</a>
 							</li>
 							<li th:classappend="${module == 'about' ? 'active' : ''}"><a
 								href="#" th:href="@{/about}">About</a></li>

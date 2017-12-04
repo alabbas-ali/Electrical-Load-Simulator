@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import his.loadprofile.core.AppliancesImporter;
-import his.loadprofile.job.JsonResponseBody;
+import his.loadprofile.http.HttpResponceStatus;
+import his.loadprofile.http.JsonResponseBody;
 import his.loadprofile.job.SimulationRunner;
 import his.loadprofile.model.Appliance;
 import his.loadprofile.model.SimConfig;
