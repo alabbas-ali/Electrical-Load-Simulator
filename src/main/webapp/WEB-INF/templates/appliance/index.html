@@ -30,9 +30,8 @@
 					<table class="table table-bordered table-hover dataTable">
 						<thead>
 							<tr role="row">
-								<td>ID</td>
 								<td>Name</td>
-								<td>Text</td>
+								<td>Description</td>
 								<td>Date</td>
 								<td>Options</td>
 							</tr>
@@ -42,7 +41,6 @@
 								<td colspan="5">No tasks</td>
 							</tr>
 							<tr role="row" th:each="appliance : ${appliances}">
-								<td th:text="${appliance.id}"></td>
 								<td><a href="#"
 									th:href="@{/appliance/details/{id}(id=${appliance.id})}"
 									th:text="${appliance.name}"></a></td>

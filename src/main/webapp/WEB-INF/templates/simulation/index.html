@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/main :: head(title='HIS-LPS::Histroy')"></head>
+<body class="skin-blue layout-top-nav layout-boxed">
+
+	<div class="wrapper">
+		<div th:replace="layout/main :: header"></div>
+
+		<!-- Full Width Column -->
+		<div class="content-wrapper">
+
+			<!-- Content Header (Page header) -->
+			<section class="content-header"
+				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
+				<ol class="breadcrumb">
+					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">Simulation Histroy</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content"
+				th:insert="layout/main :: box( 'Saved Simulations', ~{ :: .box-body})">
+				<div class="box-body">
+					<table class="table table-bordered table-hover dataTable">
+						<thead>
+							<tr role="row">
+								<td>Name</td>
+								<td>Run Date</td>
+								<td>Number Of Houses</td>
+								<td>Options</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr role="row" th:if="${simConfigs.empty}">
+								<td colspan="6">No Saved Simulations</td>
+							</tr>
+							<tr role="row" th:each="simConfig : ${simConfigs}">
+								<td><a href="#"
+									th:href="@{/simulation/result/{id}(id=${simConfig.id})}"
+									th:text="${simConfig.name}"></a></td>
+								<td th:text="${#calendars.format(simConfig.date)}"></td>
+								<td th:text="${simConfig.numberOfHouses}"></td>
+								<td>Options</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+		<!-- end container -->
+
+		<!-- Main Footer -->
+		<div th:replace="layout/main :: footer"></div>
+	</div>
+
+</body>
+</html>
+
+
+

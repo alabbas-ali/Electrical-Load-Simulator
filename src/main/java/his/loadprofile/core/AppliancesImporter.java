@@ -24,7 +24,7 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 		File file = new File(classLoader.getResource(APPLIANCES_FILE_LOCATION).getFile());
 		List<Appliance> appliances = new ArrayList<Appliance>();
 		Appliance tmp;
-		List<OperationalMode> oplist = new ArrayList<OperationalMode>();
+		List<OperationalMode> oplist;
 		OperationalMode op;
 		//Random random = new Random();
 
@@ -38,6 +38,7 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 				tmp.setCreationDate(new Date());
 				tmp.setType(this.getType(getString(row, NAME_COL)));
 				
+				oplist = new ArrayList<OperationalMode>();
 				op = new OperationalMode();
 				op.setName("Op mode 1");
 				op.setDescription("This is an imported operational mode for Appliance " + tmp.getName());

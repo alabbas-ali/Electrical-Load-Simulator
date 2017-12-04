@@ -1,13 +1,10 @@
 package his.loadprofile;
 
-import javax.servlet.ServletContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
@@ -16,19 +13,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-@SpringBootApplication(exclude = { org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class })
+@SpringBootApplication
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude={org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class}) 
 @ComponentScan
 @EnableMongoRepositories(basePackages = "his.loadprofile.repo")
 @EntityScan("his.loadprofile.model")
 @EnableAsync
 public class WebApplication extends SpringBootServletInitializer {
 	
-	@Autowired
-    private ThymeleafProperties properties;
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -48,15 +42,15 @@ public class WebApplication extends SpringBootServletInitializer {
 		return executor;
 	}
 
-	@Bean
-	public ServletContextTemplateResolver defaultTemplateResolver(ServletContext servletContext) {
-		ServletContextTemplateResolver yourTemplateResolver = new ServletContextTemplateResolver(servletContext);
-		yourTemplateResolver.setCharacterEncoding("UTF-8");
-		yourTemplateResolver.setPrefix(this.properties.getPrefix());
-		yourTemplateResolver.setSuffix(this.properties.getSuffix());
-		yourTemplateResolver.setTemplateMode(this.properties.getMode());
-		yourTemplateResolver.setCacheable(this.properties.isCache());
-		
-		return yourTemplateResolver;
-	}
+//	@Bean
+//	public ServletContextTemplateResolver defaultTemplateResolver(ServletContext servletContext) {
+//		ServletContextTemplateResolver yourTemplateResolver = new ServletContextTemplateResolver(servletContext);
+//		yourTemplateResolver.setCharacterEncoding("UTF-8");
+//		yourTemplateResolver.setPrefix(this.properties.getPrefix());
+//		yourTemplateResolver.setSuffix(this.properties.getSuffix());
+//		yourTemplateResolver.setTemplateMode(this.properties.getMode());
+//		yourTemplateResolver.setCacheable(this.properties.isCache());
+//		
+//		return yourTemplateResolver;
+//	}
 }
