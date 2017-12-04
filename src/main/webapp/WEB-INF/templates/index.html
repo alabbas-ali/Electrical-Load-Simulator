@@ -26,14 +26,14 @@
 			<!-- Main content -->
 			<section class="content"
 				th:insert="layout/main :: box( 'Please Set Your Simulation Configuration', ~{ :: .box-body})">
+				
+				<div class="callout callout-danger" id="error" style="display: none">
+					<!-- this will be full with Js in case of error in the request -->
+				</div>
+				
 				<div class="box-body">
 					<form class="form-narrow form-horizontal" action="#" method="post" id="simulation">
-
-						<div class="alert" id="error" style="display: none">
-							<!-- this will be full with Js in case of error in the request -->
-						</div>
 						<fieldset>
-
 							<div class="form-group">
 								<label for="inputEmail" class="col-lg-2 control-label">Sim
 									Name</label>
@@ -91,11 +91,10 @@
 
 						</fieldset>
 					</form>
-
-
-					<div class="starter-template">
-						<div id="tableBody" class="processbar-container"></div>
-					</div>
+				</div>
+				
+				<div class="starter-template">
+					<div id="tableBody" class="processbar-container"></div>
 				</div>
 			</section>
 		</div>
@@ -107,7 +106,9 @@
 	<script src="//cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-	<script type="text/javascript" src="../../js/main.js"></script>
+	<script type="text/javascript" 
+		th:src="@{/js/main.js}">
+		src="../../js/main.js"></script>
 
 </body>
 </html>

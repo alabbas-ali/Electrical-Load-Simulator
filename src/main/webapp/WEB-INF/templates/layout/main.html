@@ -35,6 +35,10 @@
 <!-- Custom -->
 <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"
 	href="../../css/custom.css" />
+	
+<!-- Morris charts -->
+<link rel="stylesheet" type="text/css" th:href="@{/js/morris/morris.css}"
+	 href="../../js/morris/morris.css">
 
 </head>
 <body>
@@ -108,14 +112,21 @@
 			<div class="container-fluid">
 				<strong>Copyright &copy; 2017 HIS-Load Profiler Simulator </strong>
 			</div>
+			
+			<!-- jquery js -->
 			<script type="text/javascript"
 				src="webjars/jquery/1.11.1/jquery.min.js"
 				th:src="@{../../webjars/jquery/1.11.1/jquery.min.js}"></script>
+			
+			<!-- bootstrap js	 -->
 			<script type="text/javascript"
 				src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"
 				th:src="@{../../webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+			
+			<!-- AdminLTE App -->
 			<script type="text/javascript" src="../../js/main.js"
 				th:src="@{/js/app.js}"></script>
+				
 		</footer>
 	</div>
 

@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/main :: head(title='HIS-LPS::Simulation Result')"></head>
+<head
+	th:replace="layout/main :: head(title='HIS-LPS::Simulation Result')"></head>
 <body class="skin-blue layout-top-nav layout-boxed">
 
 	<div class="wrapper">
@@ -9,7 +10,7 @@
 
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
-		
+
 			<!-- Content Header (Page header) -->
 			<section class="content-header"
 				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
@@ -18,22 +19,101 @@
 					<li class="active">Simulation Result</li>
 				</ol>
 			</section>
-			
+
 
 			<!-- Main content -->
-			<section class="content" 
-				th:insert="layout/main :: box( 'Simulation ' + ${simConfig.name} + ' Result', ~{ :: .box-body})">
-				<div class="box-body">
-					
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">Simulation ${simCongig.name} Result</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+
+							<div class="box-body chart-responsive">
+								<div class="chart" id="line-chart" style="height: 300px;"></div>
+							</div>
+						</div>
+					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="box box-info">
+							<div class="box-header with-border">
+								<h3 class="box-title">Line Chart</h3>
+
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</div>
+							<div class="box-body chart-responsive">
+								<div class="chart" id="line-chart" style="height: 300px;"></div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+					</div>
+				</div>
+
+
 			</section>
+			<!-- end container -->
 		</div>
-		<!-- end container -->
+
 
 		<!-- Main Footer -->
 		<div th:replace="layout/main :: footer"></div>
+
 	</div>
 
+	<!-- Morris.js charts -->
+	<script type="text/javascript" src="../../../js/raphael/raphael.min.js"
+		th:src="@{/js/raphael/raphael.min.js}"></script>
+	<script type="text/javascript" src="../../../js/morris/morris.min.js"
+		th:src="@{/js/morris/morris.min.js}"></script>
+
+	<!-- FastClick -->
+	<script type="text/javascript"
+		src="../../../js/fastclick/lib/fastclick.js"
+		th:src="@{/js/fastclick/lib/fastclick.js}"></script>
+
+
+	<script type="text/javascript">
+		// LINE CHART
+		var line = new Morris.Line({
+			element : 'line-chart',
+			resize : true,
+			data : [ 
+				{ y : '2011 Q1', item1 : 2666 }, 
+				{ y : '2011 Q2', item1 : 2778 }, 
+				{ y : '2011 Q3', item1 : 4912 }, 
+				{ y : '2011 Q4', item1 : 3767 }, 
+			],
+			xkey : 'y',
+			ykeys : [ 'item1' ],
+			labels : [ 'Item 1' ],
+			lineColors : [ '#3c8dbc' ],
+			hideHover : 'auto'
+		});
+	</script>
 </body>
 </html>
 
