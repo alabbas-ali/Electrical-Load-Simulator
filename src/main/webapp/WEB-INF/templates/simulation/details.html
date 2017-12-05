@@ -31,7 +31,7 @@
 						<div class="small-box bg-aqua">
 							<div class="inner">
 								<h3 th:text="${#dates.format(simConfig.date, 'dd/MM/yy')}"></h3>
-								<p th:text="${#dates.format(simConfig.date, ' HH:mm') + 'oclock'}"></p>
+								<p th:text="${#dates.format(simConfig.date, ' HH:mm') + ' oclock'}"></p>
 								<p>Run Date</p>
 							</div>
 							<div class="icon">
@@ -45,9 +45,9 @@
 						<div class="small-box bg-green">
 							<div class="inner">
 								<h3>
-									<span th:text="${simConfig.singlesPercentage}"></span><sup style="font-size: 20px">%</sup>
+									<span th:text="${simConfig.singlesPercentage}"></span> <sup style="font-size: 20px"> %</sup>
 								</h3>
-								<p></p>
+								<p> &nbsp; </p>
 								<p>Singles Percentage</p>
 							</div>
 							<div class="icon">
@@ -61,8 +61,8 @@
 						<div class="small-box bg-yellow">
 							<div class="inner">
 								<h3 th:text="${simConfig.numberOfHouses}"></h3>
-								<p></p>
-								<p>Number Of Houses</p>
+								<p> &nbsp; </p>
+								<p># Houses</p>
 							</div>
 							<div class="icon">
 								<i class="fa fa-home"></i>
@@ -74,9 +74,9 @@
 						<!-- small box -->
 						<div class="small-box bg-red">
 							<div class="inner">
-								<h3>Number Of People</h3>
-								<p th:text="'Minimum' + ${simConfig.minNumberOfPeople}"></p>
-								<p th:text="'Minimum' + ${simConfig.maxNumberOfPeople}"></p>
+								<h3># People</h3>
+								<p th:text="'Minimum ' + ${simConfig.minNumberOfPeople}"></p>
+								<p th:text="'Minimum ' + ${simConfig.maxNumberOfPeople}"></p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
@@ -106,8 +106,7 @@
 							</div>
 
 							<div class="box-body chart-responsive">
-								<div class="chart" id="line-chart"
-									th:id="'line-chart-' + ${simConfig.id}" style="height: 300px;"></div>
+								<div class="chart" id="total-chart" style="height: 300px;"></div>
 							</div>
 						</div>
 					</div>
@@ -190,6 +189,26 @@
 				hideHover : 'auto'
 			});
 			/*[/]*/
+			
+			totmeasur = [];
+			
+			/*[# th:each="measure : ${houseTotal.resultLoadCurve.measurements}"]*/
+			totmeasur.push({
+				y : '[(${measure.time})]',
+				item : '[(${measure.value})]'
+			});
+			/*[/]*/
+			
+			var totChart = new Morris.Line({
+				element : 'total-chart',
+				resize : true,
+				data : totmeasur,
+				xkey : 'y',
+				ykeys : [ 'item' ],
+				labels : [ 'Item 1' ],
+				lineColors : [ '#3c8dbc' ],
+				hideHover : 'auto'
+			});
 		});
 		/*]]>*/
 	</script>

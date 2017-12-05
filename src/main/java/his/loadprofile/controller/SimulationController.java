@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import his.loadprofile.core.HouseHoldType;
 import his.loadprofile.model.Household;
 import his.loadprofile.model.SimConfig;
 import his.loadprofile.repo.HouseholdRepository;
@@ -39,6 +40,8 @@ public class SimulationController {
 	) {
 		SimConfig simConfig = simConfigReopsitory.findOne(id);
 		List<Household> houses = householdRepository.findCustomByRegExSimName(simConfig.getName());
+		Household houseTotal = householdRepository.findCustomBySimName(simConfig.getName() , HouseHoldType.HOUSEHOLD_TOTAL);
+		model.put("houseTotal", houseTotal);
 		model.put("simConfig", simConfig);
 		model.put("houses", houses);
         return "simulation/details";
