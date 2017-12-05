@@ -9,13 +9,7 @@ import his.loadprofile.model.SimConfig;
 
 public interface SimConfigReopsitory extends MongoRepository<SimConfig, String>{
 	
-	SimConfig findFirstByName(String name);
-
-	// Supports native JSON query string
-	@Query("{domain:'?0'}")
-	SimConfig findCustomByName(String name);
-
-	@Query("{domain: { $regex: ?0 } })")
+	@Query("{name: { $regex: ?0 } })")
 	List<SimConfig> findCustomByRegExName(String name);
 
 }

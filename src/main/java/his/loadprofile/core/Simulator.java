@@ -56,7 +56,7 @@ public class Simulator {
 
 			
 			
-			for (int i = 1; i <= NUMBER_OF_SECOUNDS; i++) {
+			for (int i = 1; i <= NUMBER_OF_SECOUNDS; i += 15*60) {
 				Thread.sleep(1);
 				
 				Float loadValue = (float) Math.sin(i);

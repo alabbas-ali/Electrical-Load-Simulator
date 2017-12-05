@@ -1,11 +1,9 @@
-.content>h2:first-child {
-	display: block;
-	width: 100%;
-	padding: 0;
-	margin-bottom: 20px;
-	font-size: 21px;
-	line-height: inherit;
-	color: #333;
-	border: 0;
-	border-bottom: 1px solid #e5e5e5;
+.content-error {
+	position: relative;
+	padding: 15px 15px 0 15px;
+}
+
+.content-processbar {
+	position: relative;
+	padding: 15px 15px 0 15px;
 }

@@ -12,9 +12,9 @@ public interface AvailabilityRepository extends MongoRepository<Availability, St
 	Availability findFirstByName(String name);
 
 	// Supports native JSON query string
-	@Query("{domain:'?0'}")
+	@Query("{name:'?0'}")
 	Availability findCustomByName(String name);
 
-	@Query("{domain: { $regex: ?0 } })")
+	@Query("{name: { $regex: ?0 } })")
 	List<Availability> findCustomByRegExName(String name);
 }

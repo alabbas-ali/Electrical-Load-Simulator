@@ -15,8 +15,9 @@
 			<section class="content-header"
 				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
 				<ol class="breadcrumb">
-					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Simulation Result</li>
+					<li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+					<li><a href="/simulation">Simulation</a></li>
+					<li class="active">Result</li>
 				</ol>
 			</section>
 
@@ -25,10 +26,73 @@
 			<section class="content">
 
 				<div class="row">
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-aqua">
+							<div class="inner">
+								<h3 th:text="${#dates.format(simConfig.date, 'dd/MM/yy')}"></h3>
+								<p th:text="${#dates.format(simConfig.date, ' HH:mm') + 'oclock'}"></p>
+								<p>Run Date</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-calendar"></i>
+							</div>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3>
+									<span th:text="${simConfig.singlesPercentage}"></span><sup style="font-size: 20px">%</sup>
+								</h3>
+								<p></p>
+								<p>Singles Percentage</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-pie-graph"></i>
+							</div>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<h3 th:text="${simConfig.numberOfHouses}"></h3>
+								<p></p>
+								<p>Number Of Houses</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-home"></i>
+							</div>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-red">
+							<div class="inner">
+								<h3>Number Of People</h3>
+								<p th:text="'Minimum' + ${simConfig.minNumberOfPeople}"></p>
+								<p th:text="'Minimum' + ${simConfig.maxNumberOfPeople}"></p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-pie-graph"></i>
+							</div>
+						</div>
+					</div>
+					<!-- ./col -->
+				</div>
+
+				<div class="row">
 					<div class="col-md-12">
 						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title">Simulation ${simCongig.name} Result</h3>
+								<h3 class="box-title">
+									Simulation <span th:text="${simConfig.name}"></span> Result
+								</h3>
 								<div class="box-tools pull-right">
 									<button type="button" class="btn btn-box-tool"
 										data-widget="collapse">
@@ -42,17 +106,18 @@
 							</div>
 
 							<div class="box-body chart-responsive">
-								<div class="chart" id="line-chart" style="height: 300px;"></div>
+								<div class="chart" id="line-chart"
+									th:id="'line-chart-' + ${simConfig.id}" style="height: 300px;"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-6" th:each="house : ${houses}">
 						<div class="box box-info">
 							<div class="box-header with-border">
-								<h3 class="box-title">Line Chart</h3>
+								<h3 class="box-title" th:text="${house.type}"></h3>
 
 								<div class="box-tools pull-right">
 									<button type="button" class="btn btn-box-tool"
@@ -66,7 +131,8 @@
 								</div>
 							</div>
 							<div class="box-body chart-responsive">
-								<div class="chart" id="line-chart" style="height: 300px;"></div>
+								<div class="chart" id="line-chart"
+									th:id="'line-chart-' + ${house.id}" style="height: 300px;"></div>
 							</div>
 							<!-- /.box-body -->
 						</div>
@@ -96,23 +162,36 @@
 		th:src="@{/js/fastclick/lib/fastclick.js}"></script>
 
 
-	<script type="text/javascript">
-		// LINE CHART
-		var line = new Morris.Line({
-			element : 'line-chart',
-			resize : true,
-			data : [ 
-				{ y : '2011 Q1', item1 : 2666 }, 
-				{ y : '2011 Q2', item1 : 2778 }, 
-				{ y : '2011 Q3', item1 : 4912 }, 
-				{ y : '2011 Q4', item1 : 3767 }, 
-			],
-			xkey : 'y',
-			ykeys : [ 'item1' ],
-			labels : [ 'Item 1' ],
-			lineColors : [ '#3c8dbc' ],
-			hideHover : 'auto'
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			var lines = [];
+
+			/*[# th:each="house : ${houses}"]*/
+			var houseid = "[(${house.id})]";
+			var measurement = []
+
+			/*[# th:each="measurement : ${house.resultLoadCurve.measurements}"]*/
+			measurement.push({
+				y : '[(${measurement.time})]',
+				item : '[(${measurement.value})]'
+			});
+			/*[/]*/
+
+			// LINE CHART
+			lines[houseid] = new Morris.Line({
+				element : 'line-chart-' + houseid,
+				resize : true,
+				data : measurement,
+				xkey : 'y',
+				ykeys : [ 'item' ],
+				labels : [ 'Item 1' ],
+				lineColors : [ '#3c8dbc' ],
+				hideHover : 'auto'
+			});
+			/*[/]*/
 		});
+		/*]]>*/
 	</script>
 </body>
 </html>

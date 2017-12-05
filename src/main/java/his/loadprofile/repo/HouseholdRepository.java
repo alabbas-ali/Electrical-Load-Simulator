@@ -12,9 +12,9 @@ public interface HouseholdRepository extends MongoRepository<Household, String>{
 	Household findFirstBySimName(String simName);
 
 	// Supports native JSON query string
-	@Query("{domain:'?0'}")
+	@Query("{simName:'?0'}")
 	Household findCustomBySimName(String simName);
 
-	@Query("{domain: { $regex: ?0 } })")
+	@Query("{simName: ?0})")
 	List<Household> findCustomByRegExSimName(String simName);
 }

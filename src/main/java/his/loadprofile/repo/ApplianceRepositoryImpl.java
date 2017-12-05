@@ -18,7 +18,7 @@ public class ApplianceRepositoryImpl implements ApplianceRepositoryCustom {
 
     public int update(String name) {
 
-        Query query = new Query(Criteria.where("domain").is(name));
+        Query query = new Query(Criteria.where("name").is(name));
         Update update = new Update();
         //update.set("displayAds", displayAds);
 

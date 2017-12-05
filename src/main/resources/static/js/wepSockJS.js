@@ -26,14 +26,17 @@ $(document).ready(function()
 			dataType : 'json',
 			timeout : 100000,
 			success : function(response) {
-				//console.log("SUCCESS: ", data);
-				if(response.status == 'SUCCESS'){
+				
+				if(response.status === 'SUCCESS'){
 					connect();
 				}else{
 					errorInfo = "";
+					console.log("error length: ", response.result.length);
 					for(i =0 ; i < response.result.length ; i++){
-						errorInfo += "<br>" + (i + 1) +". " + response.result[i].code;
+						errorInfo += "<br>" + (i + 1) +". " + response.result[i].defaultMessage;
 					}
+					console.log("error Info: ", errorInfo);
+					
 					$('#error').html("Please correct following errors: " + errorInfo);
 					$('#error').show('slow');
 				}

@@ -14,8 +14,8 @@
 			<section class="content-header"
 				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
 				<ol class="breadcrumb">
-					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Simulation Histroy</li>
+					<li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+					<li class="active">Simulation</li>
 				</ol>
 			</section>
 
@@ -26,10 +26,10 @@
 					<table class="table table-bordered table-hover dataTable">
 						<thead>
 							<tr role="row">
-								<td>Name</td>
-								<td>Run Date</td>
-								<td>Number Of Houses</td>
-								<td>Options</td>
+								<th>Name</th>
+								<th>Run Date</th>
+								<th>Number Of Houses</th>
+								<th>Options</th>
 							</tr>
 						</thead>
 						<tbody>
