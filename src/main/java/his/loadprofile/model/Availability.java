@@ -2,6 +2,7 @@ package his.loadprofile.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
@@ -25,6 +26,8 @@ public class Availability {
 	@NotEmpty(message = "Availability Type should be defined!")
 	private AvailabilityType type;
 	
+	private List<Activity> activities;
+
 	private Date creationDate;
 
 	public String getId() {
@@ -59,6 +62,11 @@ public class Availability {
 		this.creationDate = creationDate;
 	}
 	
-	
-	
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
 }

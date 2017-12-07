@@ -26,7 +26,6 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 		Appliance tmp;
 		List<OperationalMode> oplist;
 		OperationalMode op;
-		//Random random = new Random();
 
 		if (this.read(file)) {
 			for (int row = 0; row < this.getLineNymber(); row++) {
@@ -50,14 +49,6 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 				oplist.add(op);
 				tmp.setOperationalModes(oplist);
 				appliances.add(tmp);
-				//System.out.println("Device name = " + getString(row, NAME_COL));
-				//System.out.println("POWER_ON = " + (int) getDouble(row, POWER_ON_COL));
-				//System.out.println("POWER_OFF = " + (int) getDouble(row, POWER_OFF_COL));
-				//System.out.println("cycleTime = " + (int) getDouble(row, CYCLE_TIME_COL));
-				//System.out.println("RESTART_DELAY = " + (int) getDouble(row, RESTART_DELAY_COL));
-				//System.out.println("SCALE_FACTOR = " + getDouble(row, SCALE_FACTOR_COL));
-				//System.out.println("RESTART_DELAY = " + (int) getDouble(row, RESTART_DELAY_COL));
-				//System.out.println("POWER_ON_DEVIATION POWER_ON_DEVIATION = " + random.nextDouble());
 			}
 		}
 
