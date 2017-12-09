@@ -66,13 +66,154 @@
 							</div>
 
 							<div class="form-group">
-								
+								<label for="inputPassword" class="col-lg-2 control-label">
+								Operational Modes
+								<br/>
+								<br/>
+								</label>
+								<div class="col-lg-10">
+									<button 
+										class="btn btn-primary btn-flat"
+										data-toggle="tooltip" 
+										data-placement="top" 
+										id="addNewOp"
+										title="Add New Operational Mode">
+										<i class="fa fa-plus"></i> Add New Operational Mode
+									</button>
+									<br/>
+									<br/>
+								</div>
+								<div class="col-lg-12">
+										<table class="table table-bordered table-hover dataTable">
+											<thead>
+											<tr>
+												<th>Name</th>
+												<th>Description</th>
+												<th>Power Input On</th>
+												<th>Power Input Off</th>
+												<th>Restart Delay</th>
+												<th>Scale Factor</th>
+												<th>Duration</th>
+												<th>Left Cycle Time</th>
+												<th>Left Restart Delay</th>
+												<th>Load Curve</th>
+												<th>Options</th>
+											</tr>
+											</thead>
+											<tbody>
+												<tr th:each="operationalModes, stat : *{operationalModes}">
+													<td>
+														<input 
+															type="text" 
+															class="form-control"
+															placeholder="Name" 
+															th:field="*{operationalModes[__${stat.index}__].name}" 
+														/>
+													</td>
+													<td>
+														<textarea cols="150" rows="3"
+															class="form-control" 
+															placeholder="Description" 
+															th:field="*{operationalModes[__${stat.index}__].description}" 
+														></textarea>
+													</td>
+													<td>
+														<input 
+															type="text" 
+															class="form-control" 
+															placeholder="Power Input On" 
+															th:field="*{operationalModes[__${stat.index}__].powerInputOn}" 
+														/>
+													</td>
+													<td>
+														<input
+															type="text"
+															class="form-control"
+															placeholder="Power Input Off" 
+															th:field="*{operationalModes[__${stat.index}__].powerInputOff}" 
+														/>
+													</td>
+													<td>
+														<input 
+															type="text" 
+															class="form-control"
+															placeholder="Restart Delay" 
+															th:field="*{operationalModes[__${stat.index}__].restartDelay}" />	
+													</td>
+													<td>
+														<input 
+															type="text" 
+															class="form-control"
+															placeholder="Scale Factor" 
+															th:field="*{operationalModes[__${stat.index}__].scaleFactor}" />
+													</td>
+													<td>
+														<input 
+															type="text" 
+															class="form-control" 
+															placeholder="Duration" 
+															th:field="*{operationalModes[__${stat.index}__].duration}" />
+													</td>
+													<td>
+														<input 
+															type="text" 
+															class="form-control"
+															placeholder="Left Cycle Time" 
+															th:field="*{operationalModes[__${stat.index}__].leftCycleTime}" />
+													</td>
+													<td>
+														<input 
+															type="text" 
+															class="form-control"
+															placeholder="Left Restart Delay" 
+															th:field="*{operationalModes[__${stat.index}__].leftRestartDelay}" />
+													</td>
+													<td>
+														<a class="btn btn-info btn-sm btn-flat" 
+															data-toggle="modal" data-target="#modal-default">
+															<i class="fa fa-edit"></i>
+														</a>
+														
+														<div class="modal modal-primary fade" id="modal-primary">
+												          	<div class="modal-dialog">
+												            	<div class="modal-content">
+												              		<div class="modal-header">
+												                		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												                  		<span aria-hidden="true">×</span></button>
+												                		<h4 class="modal-title">Primary Modal</h4>
+												              		</div>
+												              		<div class="modal-body">
+												                		<p>One fine body…</p>
+												              		</div>
+												              		<div class="modal-footer">
+												                		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+												                		<button type="button" class="btn btn-outline">Save changes</button>
+												              		</div>
+												            	</div>
+												            	<!-- /.modal-content -->
+												          	</div>
+												          	<!-- /.modal-dialog -->
+												        </div>
+														
+													</td>
+													<td>
+														<button class="btn btn-danger btn-sm btn-flat"
+															data-toggle="tooltip" data-placement="top" title="delete">
+															<i class="fa fa-trash"></i>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										
+										
+								</div>
 							</div>
-
+							<hr/>
 							<div class="form-group">
-								<div class="col-lg-offset-2 col-lg-10">
+								<div class="col-lg-12">
 									<button type="submit" name="submit" value="start"
-										class="btn btn-primary btn-flat">&nbsp; Save &nbsp;</button>
+										class="btn  btn-success btn-flat"> <i class="fa fa-save"></i>&nbsp; Save &nbsp;</button>
 								</div>
 							</div>
 
@@ -86,6 +227,10 @@
 
 		<!-- Main Footer -->
 		<div th:replace="layout/main :: footer"></div>
+		
+		<script type="text/javascript" 
+		th:src="@{/js/appliance.js}"
+		src="../../js/appliance.js"></script>
 	</div>
 
 </body>
