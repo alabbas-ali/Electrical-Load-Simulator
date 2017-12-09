@@ -46,13 +46,13 @@
 
 							<div class="form-group">
 								<label for="inputPassword" class="col-lg-2 control-label">Appliance
-									Type * [[#{first.greeting}]]</label>
+									Type * </label>
 								<div class="col-lg-10">
 									<select class="form-control" th:field="*{type}">
 										<option value=""> -- Please Select -- </option>
 										<option th:each="applianceType : ${T(his.loadprofile.core.ApplianceType).values()}" 
 											th:value="${applianceType}"
-											th:text="#{applianceType}"></option>
+											th:text="${applianceType}"></option>
 									</select>
 								</div>
 							</div>
@@ -72,7 +72,7 @@
 							<div class="form-group">
 								<div class="col-lg-offset-2 col-lg-10">
 									<button type="submit" name="submit" value="start"
-										class="btn btn-default">Save</button>
+										class="btn btn-primary btn-flat">&nbsp; Save &nbsp;</button>
 								</div>
 							</div>
 

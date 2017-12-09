@@ -16,7 +16,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @SpringBootApplication
 @Configuration
-@EnableAutoConfiguration(exclude={org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class}) 
+@EnableAutoConfiguration 
 @ComponentScan
 @EnableMongoRepositories(basePackages = "his.loadprofile.repo")
 @EntityScan("his.loadprofile.model")
@@ -41,16 +41,4 @@ public class WebApplication extends SpringBootServletInitializer {
 		executor.setQueueCapacity(25);
 		return executor;
 	}
-
-//	@Bean
-//	public ServletContextTemplateResolver defaultTemplateResolver(ServletContext servletContext) {
-//		ServletContextTemplateResolver yourTemplateResolver = new ServletContextTemplateResolver(servletContext);
-//		yourTemplateResolver.setCharacterEncoding("UTF-8");
-//		yourTemplateResolver.setPrefix(this.properties.getPrefix());
-//		yourTemplateResolver.setSuffix(this.properties.getSuffix());
-//		yourTemplateResolver.setTemplateMode(this.properties.getMode());
-//		yourTemplateResolver.setCacheable(this.properties.isCache());
-//		
-//		return yourTemplateResolver;
-//	}
 }
