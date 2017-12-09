@@ -46,7 +46,4 @@ public class Activity {
 		this.type = type;
 	}
 	
-	
-	
-	
 }

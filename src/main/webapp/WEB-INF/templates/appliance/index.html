@@ -9,24 +9,32 @@
 
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
-			
+
 			<!-- Content Header (Page header) -->
-			<section 
-				class="content-header" 
-				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})"
-			>
+			<section class="content-header"
+				th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
 				<ol class="breadcrumb">
 					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Appliances</li>
 				</ol>
 			</section>
 
+			<section class="content" th:if="${msg}">
+				<div class="callout callout-info"
+					th:class="'callout callout-info '+${css}" th:text="${msg}"></div>
+			</section>
+
 			<!-- Main content -->
-			<section 
-				class="content"
-				th:insert="layout/main :: box( 'Appliances', ~{ :: .box-body})"
-			>
+			<section class="content"
+				th:insert="layout/main :: box( 'Appliances', ~{ :: .box-body})">
 				<div class="box-body">
+					<a  class="btn btn-info btn-flat" 
+						data-toggle="tooltip" data-placement="top" title="add" 
+						th:href="@{/appliance/add}"> 
+						<i class="fa fa-plus"></i> Add &nbsp;
+					</a>
+					<br/>
+					<br/>
 					<table class="table table-bordered table-hover dataTable">
 						<thead>
 							<tr role="row">
@@ -46,7 +54,15 @@
 									th:text="${appliance.name}"></a></td>
 								<td th:text="${appliance.description}"></td>
 								<td th:text="${#calendars.format(appliance.creationDate)}"></td>
-								<td>Options</td>
+								<td><a class="btn btn-primary btn-sm btn-flat"
+									th:href="@{/appliance/edit/{id}(id=${appliance.id})}"
+									data-toggle="tooltip" data-placement="top" title="edit"> <i
+										class="fa fa-edit"></i>
+								</a> <a class="btn btn-danger btn-sm btn-flat"
+									th:href="@{/appliance/delete/{id}(id=${appliance.id})}"
+									data-toggle="tooltip" data-placement="top" title="delete">
+										<i class="fa fa-trash"></i>
+								</a></td>
 							</tr>
 						</tbody>
 					</table>

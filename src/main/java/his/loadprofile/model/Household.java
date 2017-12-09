@@ -12,7 +12,6 @@ import his.loadprofile.core.HouseHoldType;
 @Document(collection = "household")
 public class Household {
 	
-	
 	@Id
     private String id;
 	

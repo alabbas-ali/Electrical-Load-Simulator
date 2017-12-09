@@ -3,7 +3,6 @@ package his.loadprofile.model;
 
 public class Measurement {
 	
-	
     private Integer time;
     
     private Float value;
@@ -24,6 +23,4 @@ public class Measurement {
 		this.value = value;
 	}
     
-    
-
 }
