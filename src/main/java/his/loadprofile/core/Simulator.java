@@ -1,69 +1,53 @@
 package his.loadprofile.core;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import his.loadprofile.job.JobRunner;
 import his.loadprofile.model.Household;
-import his.loadprofile.model.LoadCurve;
 import his.loadprofile.model.Measurement;
 
-public class Simulator {
+public class Simulator implements SimulatorInterface{
 
 	// this parameters are important to check the simulation progress
 	private static final int NUMBER_OF_SECOUNDS = 86400;
 	private JobRunner jobRunner;
 
-	public Simulator(JobRunner jobRunner) {
-		this.jobRunner = jobRunner;
-	}
-
-	public LoadCurve simulate(Household house, int currentHouseNumber) {
-		
+	public List<Measurement> simulate(Household house, int timeStep) {
+		// Send WS HOUSEBIGEN status to front end
 		jobRunner.state = "HOUSEBIGEN";
 		jobRunner.sendProgress();
 		
-		List<Measurement> measurements = new ArrayList<Measurement>();
-		Measurement measur;
-		try {			
-			for (int i = 1; i <= NUMBER_OF_SECOUNDS; i += 1*60) {
-				Thread.sleep(1);
+		List<Measurement> measurements =new ArrayList<Measurement>();
+		Measurement measur;		
+		
+		for (int i = 1; i <= NUMBER_OF_SECOUNDS; i += timeStep * 60) {
+					
+			Float loadValue = (float) Math.sin(i);
 				
-				Float loadValue = (float) Math.sin(i);
+			// @Todo calculations go here , the calculation should consider all the
+			// configuration and the house
+			// assign the value to loadValue 
 				
-				// @Todo calculations go here , the calculation should consider all the
-				// configuration and the house
-				// assign the value to loadValue 
+			measur = new Measurement();
+			measur.setTime(i);
+			measur.setValue(loadValue);
+			measurements.add(measur);
 				
-				measur = new Measurement();
-				measur.setTime(i);
-				measur.setValue(loadValue);
-				measurements.add(measur);
-				
-				// Send the status to front end
-				jobRunner.state = "HOUSESTATE";
-				jobRunner.progress.set((i*100)/NUMBER_OF_SECOUNDS);
-				jobRunner.sendProgress();
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Send WS HOUSESTATE status to front end
+			jobRunner.state = "HOUSESTATE";
+			jobRunner.progress.set((i*100)/NUMBER_OF_SECOUNDS);
+			jobRunner.sendProgress();
 		}
 		
-		LoadCurve loadCurve = new LoadCurve();
-		loadCurve.setMeasurements(measurements);
-		loadCurve.setCreationDate(new Date());
-		loadCurve.setName("Sim_" + house.getSimName() + "_" + currentHouseNumber);
-		loadCurve.setDescription("This is auto created curve for simulation " + 
-				house.getSimName() + 
-				"and household number " + 
-				currentHouseNumber
-			);
-		
+		// Send WS HOUSESTATE status to front end
 		jobRunner.state = "HOUSEFINISH";
 		jobRunner.sendProgress();
-		return loadCurve;
+		return measurements;
+	}
+	
+	public void setJobRunner(JobRunner jobRunner) {
+		this.jobRunner = jobRunner;
 	}
 	
 	

@@ -10,7 +10,7 @@ import his.loadprofile.model.Appliance;
 import his.loadprofile.model.Availability;
 import his.loadprofile.model.Household;
 
-public class RandomHouesCreator {
+public class RandomHouesCreator implements HouesCreator {
 
 	private SimConfig simConfig;
 
@@ -18,7 +18,7 @@ public class RandomHouesCreator {
 		this.simConfig = config;
 	}
 
-	public Household getRandomHousehold() {
+	public Household getHousehold() {
 		
 		Household house = new Household();
 		house.setSimName(simConfig.getName());

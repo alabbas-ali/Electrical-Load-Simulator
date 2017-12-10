@@ -36,6 +36,11 @@ public class SimConfig {
 	@Max(value=100 , message = "Singles Percentage value can't be over 100!")
 	@Min(value=0 , message = "Singles Percentage value can't be less than 0!")
 	private int singlesPercentage;
+	
+	@NotNull(message = "Time Step can't empty!")
+	@Max(value=30 , message = "Time Step value can't be over 30!")
+	@Min(value=0 , message = "Time Step value can't be less than 0!")
+	private int timeStep;
 
 	public String getId() {
 		return id;
@@ -92,6 +97,13 @@ public class SimConfig {
 	public void setSinglesPercentage(int singlesPercentage) {
 		this.singlesPercentage = singlesPercentage;
 	}
-	
+
+	public int getTimeStep() {
+		return timeStep;
+	}
+
+	public void setTimeStep(int timeStep) {
+		this.timeStep = timeStep;
+	}
 	
 }
