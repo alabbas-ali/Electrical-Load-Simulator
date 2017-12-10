@@ -81,6 +81,15 @@ public class SimulationRestController {
 	}
 	
 	
+	@RequestMapping(value = "/sim-status")
+	@ResponseBody
+	@SubscribeMapping("initial")
+	List<SimulationRunner> fetchStatus() 
+	{
+		return this.myJobList;
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/import-appliances", method=RequestMethod.GET)
 	public JsonResponseBody importAppliances() 
@@ -101,15 +110,6 @@ public class SimulationRestController {
 		}
 		
 		return response;	
-	}
-	
-	
-	@RequestMapping(value = "/sim-status")
-	@ResponseBody
-	@SubscribeMapping("initial")
-	List<SimulationRunner> fetchStatus() 
-	{
-		return this.myJobList;
 	}
 
 }

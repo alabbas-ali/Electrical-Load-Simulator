@@ -32,18 +32,18 @@ public class SimulationRunner extends JobRunner {
 		super(template);
 		this.jobName = config.getName();
 		this.config = config;
-		this.simulator = new Simulator(config.getNumberOfHouses(), this);
+		this.simulator = new Simulator(this);
 		this.randomchouser = new RandomHouesCreator(config);
 		this.householdRepository = householdRepository;
 		this.simConfigReopsitory = simConfigReopsitory;
-		sendProgress();
+		this.sendProgress();
 	}
 
 	@Override
 	public void run() {
-		System.out.println(jobName + " is running");
-		state = "RUNNING";
-		sendProgress();
+		
+		this.state = "RUNNING";
+		this.sendProgress();
 
 		Household household;
 		
@@ -73,6 +73,10 @@ public class SimulationRunner extends JobRunner {
 			}
 			
 			householdRepository.save(household);
+			
+			this.state = "STATE";
+			this.progress.set((i*100)/this.config.getNumberOfHouses());
+			this.sendProgress();
 		}
 		
 		LoadCurve resultLoadCurve = new LoadCurve();
@@ -85,9 +89,8 @@ public class SimulationRunner extends JobRunner {
 		householdRepository.save(householdtotal);
 		simConfigReopsitory.save(this.config);
 
-		state = "DONE";
-		sendProgress();
-		System.out.println(jobName + " is finished");
+		this.state = "DONE";
+		this.sendProgress();
 	}
 
 }

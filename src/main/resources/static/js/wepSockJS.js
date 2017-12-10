@@ -8,14 +8,11 @@ $(document).ready(function()
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		
+		disableForm(true);
 		var data = {};
 		prefex = '';
 		$(this).find(":input").each(function() {
-		    // The selector will match buttons; if you want to filter
-		    // them out, check `this.tagName` and `this.type`; see
-		    // below
 			data[this.name] = $(this).val();
-			//prefex = '&';
 		});
 		
 		$.ajax({
@@ -29,21 +26,20 @@ $(document).ready(function()
 				
 				if(response.status === 'SUCCESS'){
 					connect();
+					disableForm(true);
 				}else{
 					errorInfo = "";
-					console.log("error length: ", response.result.length);
 					for(i =0 ; i < response.result.length ; i++){
 						errorInfo += "<br>" + (i + 1) +". " + response.result[i].defaultMessage;
 					}
-					console.log("error Info: ", errorInfo);
-					
+					disableForm(false);
 					$('#error').html("Please correct following errors: " + errorInfo);
 					$('#error').show('slow');
 				}
 				
 			},
 			error : function(e) {
-				console.log("ERROR: ", e);
+				disableForm(false);
 				$('#error').html(e);
 				$('#error').show();
 			}
@@ -54,14 +50,22 @@ $(document).ready(function()
 });
 
 
+function disableForm(bool){
+	$("#simulation :input").prop("disabled", bool);
+	$('#contentprocessbar').show();
+}
+
+
 
 function connect(){
 	
 	//console.log("Connecting to SockJS");
     var socket = new SockJS('/sim-status');
     stompClient = Stomp.over(socket);
+    stompClient.debug = null;
     stompClient.connect({}, function(frame){
-        stompClient.subscribe('/initial', function (messageOutput){
+        
+    	stompClient.subscribe('/initial', function (messageOutput){
             //console.log("INITIAL: " + messageOutput);
             var progressList = $.parseJSON(messageOutput.body);
             $.each(progressList,function(index, element){
@@ -74,41 +78,55 @@ function connect(){
             var messageObject = $.parseJSON(messageOutput.body);
             update(messageObject);
         });
-
-
+    
     });
 }
 
 function update(newMessage)
 {
-	var rows = $('#tableBody').find('#'+newMessage.jobName);
-	if(rows.length === 0)
-	{
-		$('#tableBody').append('<div id="'+newMessage.jobName+'">' +
-				'<div>'+newMessage.jobName+'</div>'+
-				'<div class="progress">'+
-				'<div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;">0%</div>'+
-				'</div>' +
-				'</div>'+'<div class="state"></div>');
+	var rows = $('#processbarContainer').find('#'+newMessage.jobName);
+	if(rows.length === 0){
+		appendProcessbar(newMessage.jobName);
     }
 
 	//set stuffs
-    var parentDiv = $('#'+newMessage.jobName);
-    parentDiv.find('.progress-bar').html(newMessage.progress +"%");
-    parentDiv.find('.progress-bar').css('width',newMessage.progress+'%').attr("aria-valuenow",newMessage.progress);
-    parentDiv.find('.state').text(newMessage.status);
-    if(newMessage.state == "DONE")
-    {
-        parentDiv.removeClass("active info success").addClass("success");
-    }
-    else if(newMessage.state == "RUNNING")
-    {
-        parentDiv.removeClass("active info success").addClass("active");
-    }
-    else if(newMessage.state == "NEW")
-    {
-        parentDiv.removeClass("active info success").addClass("info");
-    }
+    switch (newMessage.state) {
+		case "HOUSEBIGEN":
+			break;
+		case "HOUSESTATE":
+			var rows = $('#processbarContainer').find("#hose");
+			if(rows.length === 0){
+				appendProcessbar("hose");
+		    }
+			$("#hose").removeClass("active info success").addClass("active");
+			$("#hose").find('.progress-bar').html(newMessage.progress +"%");
+			$('#hose').find('small').html(newMessage.progress +"%");
+			$("#hose").find('.progress-bar').css('width',newMessage.progress+'%').attr("aria-valuenow",newMessage.progress);
+			break;
+		case "HOUSEFINISH":
+			$("#hose").remove();
+			break;
+		case "STATE":
+			$('#'+newMessage.jobName).find('.progress-bar').html(newMessage.progress +"%");
+			$('#'+newMessage.jobName).find('small').html(newMessage.progress +"%");
+			$('#'+newMessage.jobName).find('.progress-bar').css('width',newMessage.progress+'%').attr("aria-valuenow",newMessage.progress);
+			break;
+		case "DONE":
+			$('#'+newMessage.jobName).removeClass("active info success").addClass("success");
+			break;
+	}
     //end set stuffs
+}
+
+
+function appendProcessbar(id){
+	$('#processbarContainer').append(
+			'<div id="'+ id +'">' +
+				'<div class="clearfix"> <span class="pull-left">State of ' + id +'</span> <small class="pull-right">0%</small></div>'+
+				'<div class="progress">'+
+					'<div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;">0%</div>'+
+				'</div>' +
+			'</div>'
+		);
 }
 
