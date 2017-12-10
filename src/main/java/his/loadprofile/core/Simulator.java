@@ -23,14 +23,15 @@ public class Simulator implements SimulatorInterface{
 		
 		for (int i = 1; i <= NUMBER_OF_SECOUNDS; i += timeStep * 60) {
 					
+			measur = new Measurement();
+			measur.setTime(i);
+			
 			Float loadValue = (float) Math.sin(i);
 				
 			// @Todo calculations go here , the calculation should consider all the
 			// configuration and the house
 			// assign the value to loadValue 
-				
-			measur = new Measurement();
-			measur.setTime(i);
+			
 			measur.setValue(loadValue);
 			measurements.add(measur);
 				
@@ -40,7 +41,7 @@ public class Simulator implements SimulatorInterface{
 			jobRunner.sendProgress();
 		}
 		
-		// Send WS HOUSESTATE status to front end
+		// Send WS HOUSEFINISH status to front end
 		jobRunner.state = "HOUSEFINISH";
 		jobRunner.sendProgress();
 		return measurements;
