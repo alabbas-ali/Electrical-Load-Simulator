@@ -12,7 +12,10 @@ $(document).ready(function()
 		var data = {};
 		prefex = '';
 		$(this).find(":input").each(function() {
-			data[this.name] = $(this).val();
+			if($(this).val() != "" && this.name != "")
+			{
+				data[this.name] = $(this).val();
+			}
 		});
 		
 		$.ajax({

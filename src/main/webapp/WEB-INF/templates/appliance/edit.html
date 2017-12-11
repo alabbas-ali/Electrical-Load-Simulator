@@ -21,8 +21,8 @@
 			</section>
 
 			<!-- Main content -->
-			<section class="content-error" th:if="${msg}">
-				<div class="callout callout-danger" th:text="${msg}">
+			<section class="content-error">
+				<div class="callout callout-danger" id="error" style="display: none">
 					<!-- this will be full with Js in case of error in the request -->
 				</div>
 			</section>
@@ -32,7 +32,7 @@
 				th:insert="layout/main :: box( ${title}, ~{ :: .box-body})">
 				<div class="box-body">
 					<form class="form-narrow form-horizontal" th:object="${appliance}"
-						th:action="@{/appliance/save}" method="post" id="simulation">
+						th:action="@{/appliance/save}" method="post" id="appliance-form">
 						<fieldset>
 							<input type="hidden" th:field="*{id}" />
 							<div class="form-group">
@@ -76,6 +76,7 @@
 										class="btn btn-primary btn-flat"
 										data-toggle="tooltip" 
 										data-placement="top" 
+										type="button"
 										id="addNewOp"
 										title="Add New Operational Mode">
 										<i class="fa fa-plus"></i> Add New Operational Mode
@@ -84,7 +85,7 @@
 									<br/>
 								</div>
 								<div class="col-lg-12">
-										<table class="table table-bordered table-hover dataTable">
+										<table id="opTable" class="table table-bordered table-hover dataTable">
 											<thead>
 											<tr>
 												<th>Name</th>
@@ -169,13 +170,17 @@
 															th:field="*{operationalModes[__${stat.index}__].leftRestartDelay}" />
 													</td>
 													<td>
-														<a class="btn btn-info btn-sm btn-flat" 
-															data-toggle="modal" data-target="#modal-default">
+														<button type="button" class="btn btn-info btn-sm btn-flat" 
+															data-toggle="modal" data-target="#modal-default"
+															th:attr="data-target='#modal-default' + ${stat.index}" >
 															<i class="fa fa-edit"></i>
-														</a>
+														</button>
 														
-														<div class="modal modal-primary fade" id="modal-primary">
-												          	<div class="modal-dialog">
+														<div class="modal modal-primary fade" 
+															id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+															th:id="'modal-default' + ${stat.index}"
+														>
+												          	<div class="modal-dialog" role="document">
 												            	<div class="modal-content">
 												              		<div class="modal-header">
 												                		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -183,11 +188,10 @@
 												                		<h4 class="modal-title">Primary Modal</h4>
 												              		</div>
 												              		<div class="modal-body">
-												                		<p>One fine body…</p>
+												                		<p>One fine body [[${stat.index}]]</p>
 												              		</div>
 												              		<div class="modal-footer">
-												                		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-												                		<button type="button" class="btn btn-outline">Save changes</button>
+												                		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Save & Close</button>
 												              		</div>
 												            	</div>
 												            	<!-- /.modal-content -->
@@ -197,7 +201,7 @@
 														
 													</td>
 													<td>
-														<button class="btn btn-danger btn-sm btn-flat"
+														<button type="button" class="btn btn-danger btn-sm btn-flat deleteOp"
 															data-toggle="tooltip" data-placement="top" title="delete">
 															<i class="fa fa-trash"></i>
 														</button>
@@ -229,8 +233,8 @@
 		<div th:replace="layout/main :: footer"></div>
 		
 		<script type="text/javascript" 
-		th:src="@{/js/appliance.js}"
-		src="../../js/appliance.js"></script>
+		th:src="@{/js/appliances.js}"
+		src="../../js/appliances.js"></script>
 	</div>
 
 </body>

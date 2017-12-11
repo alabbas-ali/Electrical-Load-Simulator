@@ -17,15 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import his.loadprofile.core.AppliancesImporter;
 import his.loadprofile.core.Simulator;
 import his.loadprofile.http.HttpResponceStatus;
 import his.loadprofile.http.JsonResponseBody;
 import his.loadprofile.job.RandomHouesCreator;
 import his.loadprofile.job.SimulationRunner;
-import his.loadprofile.model.Appliance;
 import his.loadprofile.model.SimConfig;
-import his.loadprofile.repo.ApplianceRepository;
 import his.loadprofile.repo.HouseholdRepository;
 import his.loadprofile.repo.SimConfigReopsitory;
 
@@ -37,9 +34,6 @@ public class SimulationRestController {
 
 	@Autowired
 	private SimpMessagingTemplate template;
-	
-	@Autowired
-	private ApplianceRepository  applianceRepository;
 	
 	@Autowired
 	private HouseholdRepository householdRepository;
@@ -90,29 +84,6 @@ public class SimulationRestController {
 	List<SimulationRunner> fetchStatus() 
 	{
 		return this.myJobList;
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="/import-appliances", method=RequestMethod.GET)
-	public JsonResponseBody importAppliances() 
-	{
-		JsonResponseBody response = new JsonResponseBody();
-		AppliancesImporter importer = new AppliancesImporter();
-		List<Appliance> appliances = importer.importData();
-		
-		if(appliances.size() > 0) {
-			for (Appliance appliance : appliances) {
-				applianceRepository.save(appliance);
-			}
-			response.setStatus(HttpResponceStatus.SUCCESS);
-			response.setResult("number of inserted appliances" + appliances.size());
-		}else {
-			response.setStatus(HttpResponceStatus.FAIL);
-			response.setResult("No appliances to import");
-		}
-		
-		return response;	
 	}
 
 }
