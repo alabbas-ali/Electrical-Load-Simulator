@@ -36,7 +36,7 @@
 						<fieldset>
 							<input type="hidden" th:field="*{id}" />
 							<div class="form-group">
-								<label for="inputEmail" class="col-lg-2 control-label">Appliance
+								<label for="name" class="col-lg-2 control-label">Appliance
 									Name *</label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="name"
@@ -45,10 +45,10 @@
 							</div>
 
 							<div class="form-group">
-								<label for="inputPassword" class="col-lg-2 control-label">Appliance
+								<label for="type" class="col-lg-2 control-label">Appliance
 									Type * </label>
 								<div class="col-lg-10">
-									<select class="form-control" th:field="*{type}">
+									<select class="form-control" id="type" th:field="*{type}">
 										<option value=""> -- Please Select -- </option>
 										<option th:each="applianceType : ${T(his.loadprofile.core.ApplianceType).values()}" 
 											th:value="${applianceType}"
@@ -58,7 +58,7 @@
 							</div>
 
 							<div class="form-group">
-								<label for="inputPassword" class="col-lg-2 control-label">Description</label>
+								<label for="description" class="col-lg-2 control-label">Description</label>
 								<div class="col-lg-10">
 									<textarea class="form-control" id="description"
 										placeholder="Description" th:field="*{description}"></textarea>
@@ -185,13 +185,92 @@
 												              		<div class="modal-header">
 												                		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												                  		<span aria-hidden="true">×</span></button>
-												                		<h4 class="modal-title">Primary Modal</h4>
+												                		<h4 class="modal-title">Edit Load Curve</h4>
 												              		</div>
 												              		<div class="modal-body">
-												                		<p>One fine body [[${stat.index}]]</p>
+												                		<div class="form-group">
+																			<label th:for="'curve-name-' + ${stat.index}" class="col-lg-2 control-label">
+																				Curve Name
+																			</label>
+																			<div class="col-lg-10">
+																				<input type="text" class="form-control" 
+																					th:id="'curve-name-' + ${stat.index}"
+																					placeholder="Curve Name" 
+																					th:field="*{operationalModes[__${stat.index}__].loadCurve.name}" 
+																				/>
+																			</div>
+																		</div>
+																		
+																		<div class="form-group">
+																			<label th:for="'curve-description-' + ${stat.index}" class="col-lg-2 control-label">
+																				Curve Description
+																			</label>
+																			<div class="col-lg-10">
+																				<textarea cols="150" rows="3"
+																					class="form-control" 
+																					th:id="'curve-description-' + ${stat.index}"
+																					placeholder="Curve Description" 
+																					th:field="*{operationalModes[__${stat.index}__].loadCurve.description}" 
+																				></textarea>
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label for="inputPassword" class="col-lg-2 control-label">
+																			Measurements
+																			<br/>
+																			<br/>
+																			</label>
+																			<div class="col-lg-10">
+																				<button 
+																					class="btn btn-primary btn-flat"
+																					data-toggle="tooltip" 
+																					data-placement="top" 
+																					type="button"
+																					id="addNewMeas"
+																					th:attr="data-target='#opTable' + ${stat.index}, data-id = ${stat.index}"
+																					title="Add New Measurements">
+																					<i class="fa fa-plus"></i> Add New Measurements
+																				</button>
+																				<br/>
+																				<br/>
+																			</div>
+																		</div>
+												                		<table th:id="'opTable' + ${stat.index}" class="table table-bordered table-hover dataTable">
+																			<thead>
+																				<tr>
+																					<th>Time</th>
+																					<th>Load Value</th>
+																					<td>Option</td>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr th:each="measurements, curvestate : *{operationalModes[__${stat.index}__].loadCurve.measurements}">
+																					<td>
+																						<input 
+																							type="number" 
+																							class="form-control"
+																							placeholder="Left Restart Delay" 
+																							th:field="*{measurements[__${curvestate.index}__].time}" />
+																					</td>
+																					<td>
+																					    <input 
+																							type="number" 
+																							class="form-control"
+																							placeholder="Left Restart Delay" 
+																							th:field="*{measurements[__${curvestate.index}__].value}" />
+																					</td>
+																					<td>
+																						<button type="button" class="btn btn-danger btn-sm btn-flat deleteOp"
+																							data-toggle="tooltip" data-placement="top" title="delete">
+																							<i class="fa fa-trash"></i>
+																						</button>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table>
 												              		</div>
 												              		<div class="modal-footer">
-												                		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Save & Close</button>
+												                		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Save And Close</button>
 												              		</div>
 												            	</div>
 												            	<!-- /.modal-content -->

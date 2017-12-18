@@ -1,5 +1,4 @@
 
-var addtionalRowIndex = 100;
 $(document).ready(function(){
 	
 	
@@ -9,31 +8,60 @@ $(document).ready(function(){
 		event.preventDefault();
 		
 		disableForm(true);
-		var data = {};
-		data['operationalModes'] = [];
-		prefex = '';
-		var i = 0;
+		var data = {}, operationalMode = {}, loadCurve = {}, measurement = {};
+		data.operationalModes = [];
 		
 		$(this).find(":input").each(function() {
 			if($(this).val() != "" && this.name != "")
 			{	
-				if(this.name.startsWith('operationalModes')){
-					var array = this.name.split(".");
-					var name = array[array.length - 1];
-					if( name === 'name'){
-						data['operationalModes'][i] = {};
+				if(this.name.startsWith('operationalModes'))
+				{
+					this.name = this.name.replace(/operationalModes\[[0-9]*\]\./, '');
+					if( this.name === 'name'){
+						operationalMode = {};
 					}
-					data['operationalModes'][i][name] = $(this).val();
-					if( name === 'leftRestartDelay'){
-						i ++;
+					
+					if(this.name.startsWith('loadCurve')){
+						this.name = this.name.replace(/loadCurve\./, '');
+						
+						if(this.name === 'name'){
+							loadCurve = {};
+							loadCurve.measurements = [];
+						}
+						
+						if(this.name.startsWith('measurements')){
+							this.name = this.name.replace(/measurements\[[0-9]*\]\./, '');
+							if(this.name === 'time'){
+								measurement = {};
+								measurement.time = $(this).val();
+							} else {
+								measurement.value = $(this).val();
+								loadCurve.measurements.push(measurement);
+							}
+						} else {
+							loadCurve[this.name] = $(this).val();
+						}
+						operationalMode.loadCurve = loadCurve;
+					} else{
+						operationalMode[this.name] = $(this).val();
+					} 
+					if(this.name === 'leftRestartDelay'){
+						data.operationalModes.push(operationalMode);
 					}
-				}else{
+				} else {
 					data[this.name] = $(this).val();
 				}
 			}
 		});
 		
 		
+		
+		console.log(data);
+		//submit(data);
+	});
+	
+	
+	function submit(data){
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
@@ -62,14 +90,14 @@ $(document).ready(function(){
 				$('#error').show();
 			}
 		});
-		
-		
-	});
+	}
 	
 	
 	function disableForm(bool){
 		$("#appliance-form :input").prop("disabled", bool);
 	}
+
+	var addtionalRowIndex = 100;
 	
 	$('#addNewOp').on('click', function(){
 		
@@ -107,26 +135,65 @@ $(document).ready(function(){
 				<i class="fa fa-edit"></i>\
 			</button>\
 			\
-			<div class="modal modal-primary fade" id="modal-default'+ addtionalRowIndex +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">\
-		      	<div class="modal-dialog" role="document">\
-		        	<div class="modal-content">\
-		          		<div class="modal-header">\
-		            		<button type="button" class="close" data-dismiss="modal" aria-label="Close">\
-		              		<span aria-hidden="true">×</span></button>\
-		            		<h4 class="modal-title">Primary Modal</h4>\
-		          		</div>\
-		          		<div class="modal-body">\
-		            		<p>One fine body '+ addtionalRowIndex +'</p>\
-		          		</div>\
-		          		<div class="modal-footer">\
-		            		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Save &amp; Close</button>\
-		          		</div>\
-		        	</div>\
-		        	<!-- /.modal-content -->\
-		      	</div>\
-		      	<!-- /.modal-dialog -->\
-		    </div>\
-			\
+			<div class="modal modal-primary fade" id="modal-default'+ addtionalRowIndex +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+	          	<div class="modal-dialog" role="document">\
+	            	<div class="modal-content">\
+	              		<div class="modal-header">\
+	                		<button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+	                  		<span aria-hidden="true">×</span></button>\
+	                		<h4 class="modal-title">Edit Load Curve</h4>\
+	              		</div>\
+	              		<div class="modal-body">\
+	                		<div class="form-group">\
+								<label for="curve-name-'+ addtionalRowIndex +'" class="col-lg-2 control-label">\
+									Curve Name\
+								</label>\
+								<div class="col-lg-10">\
+									<input type="text" class="form-control" id="curve-name-'+ addtionalRowIndex +'" placeholder="Curve Name" name="operationalModes['+ addtionalRowIndex +'].loadCurve.name" >\
+								</div>\
+							</div>\
+							\
+							<div class="form-group">\
+								<label for="curve-description-'+ addtionalRowIndex +'" class="col-lg-2 control-label">\
+									Curve Description\
+								</label>\
+								<div class="col-lg-10">\
+									<textarea cols="150" rows="3" class="form-control" id="curve-description-'+ addtionalRowIndex +'" placeholder="Curve Description" name="operationalModes['+ addtionalRowIndex +'].loadCurve.description"></textarea>\
+								</div>\
+							</div>\
+							<div class="form-group">\
+								<label for="inputPassword" class="col-lg-2 control-label">\
+								Measurements\
+								<br>\
+								<br>\
+								</label>\
+								<div class="col-lg-10">\
+									<button class="btn btn-primary btn-flat" data-toggle="tooltip" data-placement="top" data-target="#opTable'+ addtionalRowIndex +'"  data-id="'+ addtionalRowIndex +'" type="button" id="addNewMeas" title="Add New Measurements">\
+										<i class="fa fa-plus"></i> Add New Measurements\
+									</button>\
+									<br>\
+									<br>\
+								</div>\
+							</div>\
+	                		<table id="opTable'+ addtionalRowIndex +'" class="table table-bordered table-hover dataTable">\
+								<thead>\
+									<tr>\
+										<th>Time</th>\
+										<th>Load Value</th>\
+										<td>Option</td>\
+									</tr>\
+								</thead>\
+								<tbody>\
+								\
+								</tbody>\
+							</table>\
+	              		</div>\
+	              		<div class="modal-footer">\
+	                		<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Save And Close</button>\
+	              		</div>\
+	            	</div>\
+	          	</div>\
+	        </div>\
 		</td>\
 		<td>\
 			<button type="button" class="btn btn-danger btn-sm btn-flat deleteOp" data-toggle="tooltip" data-placement="top" title="delete">\
@@ -136,6 +203,38 @@ $(document).ready(function(){
 		</tr>';
 		$('#opTable').find('tbody').append(tableRow);
 		addtionalRowIndex ++;
+		
+		$('.deleteOp').on('click', function(){
+			$(this).closest('tr').remove();
+		});
+		
+		$('button[data-toggle="modal"]').on('click', function(){
+			$($(this).attr('data-target')).show();
+		});
+	});
+	
+	
+	
+	var measurementsIndex = 1000;
+	$('#addNewMeas').on('click', function(){
+		
+		var index = $(this).attr('data-id');
+		measurementsIndex ++;
+		var tableRow = '<tr>\
+							<td>\
+							<input type="number" class="form-control" placeholder="Left Restart Delay" name="operationalModes['+ index +'].loadCurve.measurements[' + measurementsIndex + '].time" />\
+						</td>\
+						<td>\
+						    <input type="number" class="form-control" placeholder="Left Restart Delay" name="operationalModes['+ index +'].loadCurve.measurements[' + measurementsIndex + '].value" />\
+						</td>\
+						<td>\
+							<button type="button" class="btn btn-danger btn-sm btn-flat deleteOp" data-toggle="tooltip" data-placement="top" title="delete">\
+								<i class="fa fa-trash"></i>\
+							</button>\
+						</td>\
+					</tr>';
+		
+		$($(this).attr('data-target')).find('tbody').append(tableRow);
 		
 		$('.deleteOp').on('click', function(){
 			$(this).closest('tr').remove();

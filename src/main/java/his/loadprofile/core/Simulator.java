@@ -23,6 +23,12 @@ public class Simulator implements SimulatorInterface{
 		
 		for (int i = 1; i <= NUMBER_OF_SECOUNDS; i += timeStep * 60) {
 					
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			measur = new Measurement();
 			measur.setTime(i);
 			
