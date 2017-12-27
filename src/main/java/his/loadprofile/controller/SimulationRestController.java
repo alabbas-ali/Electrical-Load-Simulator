@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import his.loadprofile.core.Simulator;
+import his.loadprofile.core.SimulatorInterface;
 import his.loadprofile.http.HttpResponceStatus;
 import his.loadprofile.http.JsonResponseBody;
-import his.loadprofile.job.RandomHouesCreator;
+import his.loadprofile.job.HouesCreator;
 import his.loadprofile.job.SimulationRunner;
 import his.loadprofile.model.SimConfig;
 import his.loadprofile.repo.HouseholdRepository;
@@ -41,6 +41,12 @@ public class SimulationRestController {
 	@Autowired
 	SimConfigReopsitory simConfigReopsitory;
 	
+	@Autowired
+	HouesCreator houesCreator;
+	
+	@Autowired
+	SimulatorInterface simulator;
+	
 	private List<SimulationRunner> myJobList = new ArrayList<SimulationRunner>();
 	
 	@ResponseBody
@@ -60,14 +66,14 @@ public class SimulationRestController {
 		}
 		
 		simConfig.setDate(new Date());
-		
+		houesCreator.setSimConfig(simConfig);
 		SimulationRunner simRunner = new SimulationRunner(
-				simConfig , 
-				template,
-				new Simulator(),
-				new RandomHouesCreator(simConfig),
-				householdRepository,
-				simConfigReopsitory
+			simConfig,
+			template,
+			simulator,
+			houesCreator,
+			householdRepository,
+			simConfigReopsitory
 		);
 		
 		myJobList.add(simRunner);

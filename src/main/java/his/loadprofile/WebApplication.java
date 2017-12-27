@@ -14,6 +14,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import his.loadprofile.core.Simulator;
+import his.loadprofile.core.SimulatorInterface;
+import his.loadprofile.job.HouesCreator;
+import his.loadprofile.job.RandomHouesCreator;
+
 @SpringBootApplication
 @Configuration
 @EnableAutoConfiguration 
@@ -40,5 +45,18 @@ public class WebApplication extends SpringBootServletInitializer {
 		executor.setMaxPoolSize(10);
 		executor.setQueueCapacity(25);
 		return executor;
+	}
+	
+	@Bean
+	public HouesCreator houesCreator() {
+		RandomHouesCreator rhc = new RandomHouesCreator();
+		return rhc;
+	}
+	
+	
+	@Bean
+	public SimulatorInterface simulator() {
+		Simulator s = new Simulator();
+		return s;
 	}
 }
