@@ -10,6 +10,7 @@ import his.loadprofile.model.SimConfig;
 import his.loadprofile.repo.ApplianceRepository;
 import his.loadprofile.repo.AvailabilityRepository;
 import his.loadprofile.core.ApplianceType;
+import his.loadprofile.core.AvailabilityType;
 import his.loadprofile.core.HouseHoldType;
 import his.loadprofile.model.Appliance;
 import his.loadprofile.model.Availability;
@@ -60,11 +61,14 @@ public class RandomHouesCreator implements HouesCreator {
 			int n = maximum - minimum + 1;
 			int k = r.nextInt() % n;
 			int randomNumber = minimum + k;
-			for(int i = minimum; i < randomNumber; i ++) {
-				availabilities.add(availabilityRepository.findOne("Create Find Random"));
+			availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER));
+			availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_UNWORKER));
+			for(int i = minimum; i < randomNumber; i ++) 
+			{
+				availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_CHILD));
 			}
 		} else {
-			availabilities.add(availabilityRepository.findOne("Create Find Random"));
+			availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER));
 		}
 		
 		return availabilities;
@@ -74,23 +78,11 @@ public class RandomHouesCreator implements HouesCreator {
 	{	
 		List<Appliance> appliances = new ArrayList<Appliance>();
 		for (ApplianceType apType : ApplianceType.values()) {
-			appliances.add(applianceRepository.findCustomByType(apType));
+			appliances.add(applianceRepository.findOneRandomlyByType(apType));
 		}
 		return appliances;
 	}
 	
-//	private String getSaltString() 
-//	{
-//		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-//		StringBuilder salt = new StringBuilder();
-//		Random rnd = new Random();
-//        while (salt.length() < 18) { // length of the random string.
-//            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-//            salt.append(SALTCHARS.charAt(index));
-//        }
-//        String saltStr = salt.toString();
-//        return saltStr;
-//    }
 	
 }
 

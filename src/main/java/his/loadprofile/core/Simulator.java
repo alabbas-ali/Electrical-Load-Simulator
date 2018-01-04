@@ -29,6 +29,7 @@ public class Simulator implements SimulatorInterface{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			measur = new Measurement();
 			measur.setTime(i);
 			

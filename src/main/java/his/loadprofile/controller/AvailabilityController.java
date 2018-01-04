@@ -34,22 +34,6 @@ public class AvailabilityController {
         return "availability/edit";
 	}
 	
-//  Domain obj = new Domain();
-//  obj.setDisplayAds(true);
-//  obj.setDomain("abbas.test");
-//  
-//  Domain n = domainRepository.save(obj);
-	
-//	Appliance obj = domainRepository.findOne(7L);
-//    System.out.println(obj);
-//
-//    Appliance obj2 = domainRepository.findFirstByDomain("abbas.test");
-//    System.out.println(obj2);
-//
-//    //int n = domainRepository.updateDomain("mkyong.com", true);
-//    //System.out.println("Number of records updated : " + n);
-//    
-//    model.put("message", "Load Profiler Simulator");
-//    model.put("domain", obj2);
+
 
 }
