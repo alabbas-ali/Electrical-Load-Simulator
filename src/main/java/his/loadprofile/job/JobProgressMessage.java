@@ -6,8 +6,7 @@ public class JobProgressMessage {
     private String state;
     private int progress;
 
-    public JobProgressMessage(String jobName)
-    {
+    public JobProgressMessage(String jobName) {
         this.jobName = jobName;
     }
 

@@ -13,5 +13,6 @@ public class IndexController {
 	public String index(Map<String, Object> model) {
 		return "index";
 	}
-
+	
 }
+
