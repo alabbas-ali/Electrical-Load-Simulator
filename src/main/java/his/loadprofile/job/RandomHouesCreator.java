@@ -61,14 +61,24 @@ public class RandomHouesCreator implements HouesCreator {
 			int n = maximum - minimum + 1;
 			int k = r.nextInt() % n;
 			int randomNumber = minimum + k;
-			availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER));
-			availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_UNWORKER));
+			Availability v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
+			if(v != null)
+				availabilities.add(v);
+			v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_UNWORKER);
+			if(v != null)
+				availabilities.add(v);
+			
 			for(int i = minimum; i < randomNumber; i ++) 
 			{
-				availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_CHILD));
+				v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_CHILD);
+				if(v != null)
+					availabilities.add(v);
+				
 			}
 		} else {
-			availabilities.add(availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER));
+			Availability v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
+			if(v != null)
+				availabilities.add(v);
 		}
 		
 		return availabilities;
@@ -78,7 +88,9 @@ public class RandomHouesCreator implements HouesCreator {
 	{	
 		List<Appliance> appliances = new ArrayList<Appliance>();
 		for (ApplianceType apType : ApplianceType.values()) {
-			appliances.add(applianceRepository.findOneRandomlyByType(apType));
+			Appliance a = applianceRepository.findOneRandomlyByType(apType);
+			if(a != null)
+				appliances.add(a);
 		}
 		return appliances;
 	}

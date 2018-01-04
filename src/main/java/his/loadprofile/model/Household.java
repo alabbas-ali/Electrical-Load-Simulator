@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import his.loadprofile.core.HouseHoldType;
 
@@ -17,10 +17,10 @@ public class Household {
 	
 	private String simName;
 	
-	@Field("availabilities")
+	@Reference
 	private List<Availability> availabilities;
 	
-	@Field("appliances")
+	@Reference
 	private List<Appliance> appliances;
 	
 	private HouseHoldType type;
@@ -84,7 +84,5 @@ public class Household {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-	
-	
 	
 }

@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.aggregation.AggregationOperationCon
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
+// https://stackoverflow.com/questions/39539616/picking-random-entries-from-mongodb-using-spring-data
+// 
 public class CustomSampleOperation implements AggregationOperation {
 	private int size;
 	
