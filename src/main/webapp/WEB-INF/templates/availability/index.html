@@ -18,13 +18,26 @@
 					<li class="active">Availabilities</li>
 				</ol>
 			</section>
+			
+			
+			<section class="content" th:if="${msg}">
+				<div class="callout callout-info"
+					th:class="'callout callout-info '+${css}" th:text="${msg}"></div>
+			</section>
 
 
 			<!-- Main content -->
 			<section class="content"
 				th:insert="layout/main :: box( 'Availabilities And Usabilities', ~{ :: .box-body})">
 				<div class="box-body">
-
+					
+					<a  class="btn btn-info btn-flat" 
+						data-toggle="tooltip" data-placement="top" title="add" 
+						th:href="@{/availability/add}"> 
+						<i class="fa fa-plus"></i> Add &nbsp;
+					</a>
+					<br/>
+					<br/>
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr role="row">
@@ -41,11 +54,21 @@
 							<tr role="row" th:each="availability : ${availabilities}">
 								<td><a href="#"
 									th:href="@{/availability/details/{id}(id=${availability.id})}"
-									th:text="${availability.title}">Title ...</a></td>
-								<td th:text="${availability.text}">Text ...</td>
-								<td th:text="${#calendars.format(availability.date)}">July
-									11, 2017 2:17:16 PM CDT</td>
-								<td>Options</td>
+									th:text="${availability.title}"></a>
+								</td>
+								<td th:text="${availability.text}"></td>
+								<td th:text="${#calendars.format(availability.date)}"></td>
+								<td>
+								<a class="btn btn-primary btn-sm btn-flat"
+									th:href="@{/availability/edit/{id}(id=${availability.id})}"
+									data-toggle="tooltip" data-placement="top" title="edit"> <i
+										class="fa fa-edit"></i>
+								</a> <a class="btn btn-danger btn-sm btn-flat"
+									th:href="@{/availability/delete/{id}(id=${availability.id})}"
+									data-toggle="tooltip" data-placement="top" title="delete">
+										<i class="fa fa-trash"></i>
+								</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
