@@ -23,6 +23,7 @@ import his.loadprofile.model.Appliance;
 import his.loadprofile.model.OperationalMode;
 import his.loadprofile.repo.ApplianceRepository;
 
+//developer: sreshtha
 @Controller
 public class ApplianceController {
 	
