@@ -21,10 +21,12 @@ public class RandomHouesCreator implements HouesCreator {
 	private SimConfig simConfig;
 	
 	@Autowired
-	ApplianceRepository applianceRepository;
+	private ApplianceRepository applianceRepository;
 	
 	@Autowired
-	AvailabilityRepository availabilityRepository;
+	private AvailabilityRepository availabilityRepository;
+	
+	private Household house;
 
 	public void setSimConfig(SimConfig config) {
 		this.simConfig = config;
@@ -32,11 +34,11 @@ public class RandomHouesCreator implements HouesCreator {
 
 	public Household getHousehold() 
 	{	
-		Household house = new Household();
+		house = new Household();
 		house.setSimName(simConfig.getName());
 		house.setType(this.gerRandomHouseHoldType());
-		house.setAppliances(this.getRandomAppliancesList());
 		house.setAvailabilities(this.gerRandomAvailabilitiesList(house.getType()));
+		house.setAppliances(this.getRandomAppliancesList());
 		return house;
 	}
 	
@@ -93,6 +95,33 @@ public class RandomHouesCreator implements HouesCreator {
 				appliances.add(a);
 		}
 		return appliances;
+		
+		/**
+		 *  The new implementation :
+		 *  
+		 *  use the private house variable to reach the Availabilities->Activities list 
+		 *  
+		 *  note : each Activity has type
+		 *  
+		 *  for each Activity-Type chose the applicable Appliance-Type list , according to the table in the paper 
+		 *  
+		 *    chose one Appliance-Type from Appliance-Type list randomly with random probability according to the frequency table in the paper
+		 *    
+		 *    now we have one Appliance-Type (apType) , so use 
+		 *    
+		 *    Appliance a = applianceRepository.findOneRandomlyByType(apType);
+		 *    
+		 *    to get Appliance from database 
+		 *    
+		 *    use 
+		 *    
+		 *    if(a != null)
+		 *    	appliances.add(a);
+		 *    
+		 *    to add it to the list 
+		 *    
+		 *    return the list 
+		 */
 	}
 	
 	

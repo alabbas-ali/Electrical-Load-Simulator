@@ -30,7 +30,7 @@ import his.loadprofile.repo.SimConfigReopsitory;
 public class SimulationRestController {
 	
 	@Autowired
-	ThreadPoolTaskExecutor taskExecutor;
+	private ThreadPoolTaskExecutor taskExecutor;
 
 	@Autowired
 	private SimpMessagingTemplate template;
@@ -39,13 +39,13 @@ public class SimulationRestController {
 	private HouseholdRepository householdRepository;
 	
 	@Autowired
-	SimConfigReopsitory simConfigReopsitory;
+	private SimConfigReopsitory simConfigReopsitory;
 	
 	@Autowired
-	HouesCreator houesCreator;
+	private HouesCreator houesCreator;
 	
 	@Autowired
-	SimulatorInterface simulator;
+	private SimulatorInterface simulator;
 	
 	private List<SimulationRunner> myJobList = new ArrayList<SimulationRunner>();
 	

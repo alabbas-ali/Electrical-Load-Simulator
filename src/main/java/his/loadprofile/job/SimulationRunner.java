@@ -60,7 +60,12 @@ public class SimulationRunner extends JobRunner {
 			
 			// simulate the Load Curve for the HousHold
 			loadCurve = new LoadCurve();
-			loadCurve.setMeasurements(simulator.simulate(household, config.getTimeStep()));
+			loadCurve.setMeasurements(
+					simulator.simulate(
+							household, 
+							config.getTimeStep()
+					)
+				);
 			loadCurve.setCreationDate(new Date());
 			loadCurve.setName("Sim_" + config.getName() + "_" + i);
 			loadCurve.setDescription("This is auto created curve for simulation " + 
