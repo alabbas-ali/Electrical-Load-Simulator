@@ -22,6 +22,7 @@ public class SimulationRunner extends JobRunner {
 	private HouesCreator houesCreator;
 	private HouseholdRepository householdRepository;
 	private SimConfigReopsitory simConfigReopsitory;
+	private ActivitiesTimeShifter activitiesTimeShifter;
 
 	public SimulationRunner(
 			SimConfig config, 
@@ -29,7 +30,8 @@ public class SimulationRunner extends JobRunner {
 			SimulatorInterface simulator,
 			HouesCreator houesCreator,
 			HouseholdRepository householdRepository,
-			SimConfigReopsitory simConfigReopsitory
+			SimConfigReopsitory simConfigReopsitory,
+			ActivitiesTimeShifter activitiesTimeShifter
 	) {
 		super(template);
 		this.jobName = config.getName();
@@ -39,6 +41,7 @@ public class SimulationRunner extends JobRunner {
 		this.houesCreator = houesCreator;
 		this.householdRepository = householdRepository;
 		this.simConfigReopsitory = simConfigReopsitory;
+		this.activitiesTimeShifter = activitiesTimeShifter;
 		this.sendProgress();
 	}
 
@@ -57,6 +60,13 @@ public class SimulationRunner extends JobRunner {
 			
 			// create Random HousHold
 			household = houesCreator.getHousehold();
+			
+			// time shift for Availabilities activities
+			household.setAvailabilities(
+					activitiesTimeShifter.shift(
+							household.getAvailabilities()
+							)
+					);
 			
 			// simulate the Load Curve for the HousHold
 			loadCurve = new LoadCurve();
