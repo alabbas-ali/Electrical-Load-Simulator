@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import his.loadprofile.core.SimulatorInterface;
 import his.loadprofile.http.HttpResponceStatus;
 import his.loadprofile.http.JsonResponseBody;
+import his.loadprofile.job.ActivitiesTimeShifter;
 import his.loadprofile.job.HouesCreator;
 import his.loadprofile.job.SimulationRunner;
 import his.loadprofile.model.SimConfig;
@@ -43,6 +44,9 @@ public class SimulationRestController {
 	
 	@Autowired
 	private HouesCreator houesCreator;
+	
+	@Autowired
+	private ActivitiesTimeShifter activitiesTimeShifter;
 	
 	@Autowired
 	private SimulatorInterface simulator;
@@ -73,7 +77,8 @@ public class SimulationRestController {
 			simulator,
 			houesCreator,
 			householdRepository,
-			simConfigReopsitory
+			simConfigReopsitory,
+			activitiesTimeShifter
 		);
 		
 		myJobList.add(simRunner);
