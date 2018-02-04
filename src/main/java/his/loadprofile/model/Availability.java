@@ -4,11 +4,11 @@ package his.loadprofile.model;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import his.loadprofile.core.AvailabilityType;
 
@@ -18,12 +18,12 @@ public class Availability {
 	@Id
     private String id;
 	
-	@NotEmpty(message = "Name can't empty!")
+	@NotNull(message = "Name can't empty!")
 	@Indexed(unique = true)
 	private String name;
 	
-	@Field 
-	@NotEmpty(message = "Availability Type should be defined!")
+ 
+	@NotNull(message = "Availability Type should be defined!")
 	private AvailabilityType type;
 	
 	private List<Activity> activities;

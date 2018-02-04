@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import his.loadprofile.http.HttpResponceStatus;
 import his.loadprofile.http.JsonResponseBody;
-import his.loadprofile.model.Activity;
 import his.loadprofile.model.Availability;
 import his.loadprofile.repo.AvailabilityRepository;
 
@@ -92,18 +91,6 @@ public class AvailabilityController {
 			return response;
 		}
 		
-		System.out.println(availability);
-		System.out.println(availability.getName());
-		System.out.println(availability.getType());
-		//System.out.println(availability.getDescription());
-		
-		for (Activity activity : availability.getActivities()) {
-			System.out.println("" + activity.getName());
-			System.out.println("" + activity.getType());
-			System.out.println("" + activity.getStart());
-			System.out.println("" + activity.getEnd());
-		}
-		
 		availability.setCreationDate(new Date());
 		availabilityRepository.save(availability);
 		
@@ -111,6 +98,4 @@ public class AvailabilityController {
 		return response;
 	}
 	
-
-
 }

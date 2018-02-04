@@ -9,17 +9,16 @@ $(document).ready(function(){
 		var data = {}, activity = {};
 		data.activities = [];
 			
-		$(this).find(":input").each(function() {
+		$(this).find("input, select").each(function() {
 			
 			if($(this).val() != "" && this.name != ""){	
 				
 				if(this.name.startsWith('activities')){
-					this.name = this.name.replace(/activities\[[0-9]*\]\./, '');
 					
-					//console.log(this.name);
+					this.name = this.name.replace(/activities\[[0-9]*\]\./, '');
+					this.name = this.name.replace(/activities[0-9]*\./, '');
 					
 					activity[this.name] = $(this).val();
-					
 					if( this.name === 'type'){
 						data.activities.push(activity);
 						activity = {};
@@ -31,12 +30,18 @@ $(document).ready(function(){
 			
 		});
 			
+		//console.log(data);
 		submit(data);
 	});
 			
 			
 	var addtionalRowIndex = 100;	
 	$('#addNewActi').on('click', function(){
+		
+			var typeSelectEl = $('#typeSelect').clone();
+			typeSelectEl.attr('name','activities'+ addtionalRowIndex +'.type');
+			typeSelectEl.attr('id','activities'+ addtionalRowIndex +'.type');
+			typeSelectEl.attr('style', '');
 			
 			var tableRow = '<tr>\
 			<td>\
@@ -56,9 +61,8 @@ $(document).ready(function(){
 					<div class="input-group-addon"><i class="fa fa-clock-o"></i></div></div>\
 				</div>\
 			</td>\
-			<td>\
-				<input type="text" class="form-control" placeholder="Type" id="activities'+ addtionalRowIndex +'.type" name="activities['+ addtionalRowIndex +'].type">\
-			</td>\
+			<td>' + typeSelectEl.prop('outerHTML') +
+			'</td>\
 			<td>\
 				<button type="button" class="btn btn-danger btn-sm btn-flat deleteOp" data-toggle="tooltip" data-placement="top" title="delete">\
 					<i class="fa fa-trash"></i>\

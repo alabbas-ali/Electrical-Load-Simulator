@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import his.loadprofile.core.ActivityType;
@@ -15,10 +17,12 @@ public class Activity {
 	private String name;
 	
 	@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
+	@DateTimeFormat(pattern="h:mm a") 
 	@NotNull(message="Please enter a start time")
 	private Date start;
 	
 	@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
+	@DateTimeFormat(pattern="h:mm a") 
 	@NotNull(message="Please enter a end time")
 	private Date end;
 	

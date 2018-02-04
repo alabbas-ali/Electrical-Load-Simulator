@@ -41,9 +41,9 @@
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr role="row">
-								<th>Title</th>
-								<th>Text</th>
-								<th>Data Of</th>
+								<th>Name</th>
+								<th>Creation Data</th>
+								<th>Type</th>
 								<th>Options</th>
 							</tr>
 						</thead>
@@ -54,10 +54,10 @@
 							<tr role="row" th:each="availability : ${availabilities}">
 								<td><a href="#"
 									th:href="@{/availability/details/{id}(id=${availability.id})}"
-									th:text="${availability.title}"></a>
+									th:text="${availability.name}"></a>
 								</td>
-								<td th:text="${availability.text}"></td>
-								<td th:text="${#calendars.format(availability.date)}"></td>
+								<td th:text="${#calendars.format(availability.creationDate)}"></td>
+								<td th:text="${availability.type}"></td>
 								<td>
 								<a class="btn btn-primary btn-sm btn-flat"
 									th:href="@{/availability/edit/{id}(id=${availability.id})}"

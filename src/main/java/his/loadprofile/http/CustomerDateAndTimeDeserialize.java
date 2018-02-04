@@ -12,18 +12,15 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 public class CustomerDateAndTimeDeserialize extends JsonDeserializer<Date> {
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm ");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a");
 
-    @SuppressWarnings("deprecation")
 	@Override
     public Date deserialize(JsonParser paramJsonParser,
             DeserializationContext paramDeserializationContext)
             throws IOException, JsonProcessingException {
         String str = paramJsonParser.getText().trim();
         try {
-        	Date t = dateFormat.parse(str);
-        	System.out.println(t.toGMTString());
-            return t;
+            return dateFormat.parse(str);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
