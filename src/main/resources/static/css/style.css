@@ -3170,10 +3170,12 @@ table.text-center th {
   margin-bottom: 5px;
   font-size: 25px;
   font-weight: 300;
+  color:#fff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 .widget-user .widget-user-desc {
   margin-top: 0;
+  color:#fff;
 }
 .widget-user .widget-user-image {
   position: absolute;
