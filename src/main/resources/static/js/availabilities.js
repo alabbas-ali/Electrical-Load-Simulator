@@ -31,8 +31,7 @@ $(document).ready(function(){
 			
 		});
 			
-		console.log(data);
-		//submit(data);
+		submit(data);
 	});
 			
 			
@@ -44,13 +43,21 @@ $(document).ready(function(){
 				<input type="text" class="form-control" placeholder="Name" id="activities'+ addtionalRowIndex +'.name" name="activities['+ addtionalRowIndex +'].name">\
 			</td>\
 			<td>\
-				<input type="text" class="form-control" placeholder="Description" id="activities'+ addtionalRowIndex +'.description" name="activities['+ addtionalRowIndex +'].start">\
+				<div class="bootstrap-timepicker">\
+					<div class="input-group">\
+					<input type="text" class="form-control timepicker" placeholder="Start" id="activities'+ addtionalRowIndex +'.start" name="activities['+ addtionalRowIndex +'].start">\
+					<div class="input-group-addon"><i class="fa fa-clock-o"></i></div></div>\
+				</div>\
 			</td>\
 			<td>\
-				<input type="text" class="form-control" placeholder="Power Input On" id="activities'+ addtionalRowIndex +'.powerInputOn" name="activities['+ addtionalRowIndex +'].end">\
+				<div class="bootstrap-timepicker">\
+					<div class="input-group">\
+					<input type="text" class="form-control timepicker" placeholder="End" id="activities'+ addtionalRowIndex +'.end" name="activities['+ addtionalRowIndex +'].end">\
+					<div class="input-group-addon"><i class="fa fa-clock-o"></i></div></div>\
+				</div>\
 			</td>\
 			<td>\
-				<input type="text" class="form-control" placeholder="Power Input Off" id="activities'+ addtionalRowIndex +'.powerInputOff" name="activities['+ addtionalRowIndex +'].type">\
+				<input type="text" class="form-control" placeholder="Type" id="activities'+ addtionalRowIndex +'.type" name="activities['+ addtionalRowIndex +'].type">\
 			</td>\
 			<td>\
 				<button type="button" class="btn btn-danger btn-sm btn-flat deleteOp" data-toggle="tooltip" data-placement="top" title="delete">\
@@ -66,6 +73,10 @@ $(document).ready(function(){
 				$(this).closest('tr').remove();
 			});
 			
+			//Timepicker
+		    $('.timepicker').timepicker({
+		      showInputs: false
+		    });
 	});
 	
 	
@@ -105,6 +116,12 @@ $(document).ready(function(){
 	function disableForm(bool){
 		$("#availability-form :input").prop("disabled", bool);
 	}
+	
+	
+	//Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    });
 	
 	
 });

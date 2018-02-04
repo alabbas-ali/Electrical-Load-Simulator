@@ -94,20 +94,32 @@
 														/>
 													</td>
 													<td>
-														<input 
-															type="text"
-															class="form-control" 
-															placeholder="Start" 
-															th:field="*{activities[__${stat.index}__].start}" 
-														/>
+														<div class="bootstrap-timepicker">
+															<div class="input-group">
+																<input 
+																	type="text"
+																	class="form-control timepicker" 
+																	placeholder="Start" 
+																	th:field="*{activities[__${stat.index}__].start}" 
+																/>
+																<div class="input-group-addon"><i class="fa fa-clock-o"></i>
+																</div>
+															</div>
+														</div>
 													</td>
 													<td>
-														<input 
-															type="text" 
-															class="form-control" 
-															placeholder="End" 
-															th:field="*{activities[__${stat.index}__].end}" 
-														/>
+														<div class="bootstrap-timepicker">
+															<div class="input-group">
+																<input 
+																	type="text" 
+																	class="form-control timepicker" 
+																	placeholder="End" 
+																	th:field="*{activities[__${stat.index}__].end}" 
+																/>
+																<div class="input-group-addon"><i class="fa fa-clock-o"></i>
+																</div>
+															</div>
+														</div>
 													</td>
 													<td>
 														<input
@@ -148,8 +160,8 @@
 		<div th:replace="layout/main :: footer"></div>
 		
 		<script type="text/javascript" 
-		th:src="@{/js/availabilities.js}"
-		src="../../js/availabilities.js"></script>
+			th:src="@{/js/availabilities.js}"
+			src="../../js/availabilities.js"></script>
 	</div>
 
 </body>

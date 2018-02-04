@@ -2,16 +2,27 @@ package his.loadprofile.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import his.loadprofile.core.ActivityType;
+import his.loadprofile.http.CustomerDateAndTimeDeserialize;
 
 public class Activity {
 	
+	@NotNull(message="Please enter a activity name")
 	private String name;
 	
+	@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
+	@NotNull(message="Please enter a start time")
 	private Date start;
 	
+	@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
+	@NotNull(message="Please enter a end time")
 	private Date end;
 	
+	@NotNull(message="Please enter a Activity Type")
 	private ActivityType type;
 
 	public String getName() {
