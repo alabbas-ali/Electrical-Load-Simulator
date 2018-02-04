@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import his.loadprofile.core.AppliancesImporter;
+import his.loadprofile.core.Importers.AppliancesImporter;
 import his.loadprofile.http.HttpResponceStatus;
 import his.loadprofile.http.JsonResponseBody;
 import his.loadprofile.model.Appliance;

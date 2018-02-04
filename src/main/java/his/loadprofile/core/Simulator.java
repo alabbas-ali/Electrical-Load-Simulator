@@ -47,8 +47,7 @@ public class Simulator implements SimulatorInterface{
 			jobRunner.progress.set((i*100)/NUMBER_OF_SECOUNDS);
 			jobRunner.sendProgress();
 		}
-		
-		// Send WS HOUSEFINISH status to front end
+				// Send WS HOUSEFINISH status to front end
 		jobRunner.state = "HOUSEFINISH";
 		jobRunner.sendProgress();
 		return measurements;

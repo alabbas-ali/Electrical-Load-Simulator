@@ -1,11 +1,11 @@
-package his.loadprofile.core;
+package his.loadprofile.core.Importers;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import his.loadprofile.core.csv.CSVReader;
+import his.loadprofile.core.ApplianceType;
 import his.loadprofile.model.Appliance;
 import his.loadprofile.model.OperationalMode;
 

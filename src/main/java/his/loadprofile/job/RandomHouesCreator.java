@@ -12,6 +12,7 @@ import his.loadprofile.repo.AvailabilityRepository;
 import his.loadprofile.core.ApplianceType;
 import his.loadprofile.core.AvailabilityType;
 import his.loadprofile.core.HouseHoldType;
+import his.loadprofile.model.Activity;
 import his.loadprofile.model.Appliance;
 import his.loadprofile.model.Availability;
 import his.loadprofile.model.Household;
@@ -89,39 +90,22 @@ public class RandomHouesCreator implements HouesCreator {
 	private List<Appliance> getRandomAppliancesList()
 	{	
 		List<Appliance> appliances = new ArrayList<Appliance>();
-		for (ApplianceType apType : ApplianceType.values()) {
-			Appliance a = applianceRepository.findOneRandomlyByType(apType);
-			if(a != null)
-				appliances.add(a);
+		
+		for (Availability availability : this.house.getAvailabilities()) 
+		{
+			for (Activity activity : availability.getActivities()) 
+			{
+				for (ApplianceType apType : activity.getType().asApplianceType()) 
+				{
+					Appliance a = applianceRepository.findOneRandomlyByType(apType);
+					if(a != null)
+						appliances.add(a);
+				}
+			}
+			
 		}
 		return appliances;
 		
-		/**
-		 *  The new implementation :
-		 *  
-		 *  use the private house variable to reach the Availabilities->Activities list 
-		 *  
-		 *  note : each Activity has type
-		 *  
-		 *  for each Activity-Type chose the applicable Appliance-Type list , according to the table in the paper 
-		 *  
-		 *    chose one Appliance-Type from Appliance-Type list randomly with random probability according to the frequency table in the paper
-		 *    
-		 *    now we have one Appliance-Type (apType) , so use 
-		 *    
-		 *    Appliance a = applianceRepository.findOneRandomlyByType(apType);
-		 *    
-		 *    to get Appliance from database 
-		 *    
-		 *    use 
-		 *    
-		 *    if(a != null)
-		 *    	appliances.add(a);
-		 *    
-		 *    to add it to the list 
-		 *    
-		 *    return the list 
-		 */
 	}
 	
 	

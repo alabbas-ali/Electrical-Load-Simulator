@@ -34,6 +34,7 @@ public enum ApplianceType {
 	APPLIANCE_E_INST,
 	APPLIANCE_OTHER_HEATER,
 	APPLIANCE_OTHER,
+	APPLIANCE_STOVE,
 	
 	
 	/* please add all this list  https://en.wikipedia.org/wiki/List_of_home_appliances 
