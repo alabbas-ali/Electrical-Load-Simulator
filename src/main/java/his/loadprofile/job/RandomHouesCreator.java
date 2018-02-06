@@ -67,7 +67,7 @@ public class RandomHouesCreator implements HouesCreator {
 			Availability v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
 			if(v != null)
 				availabilities.add(v);
-			v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_UNWORKER);
+			v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_NON_WORKER);
 			if(v != null)
 				availabilities.add(v);
 			

@@ -53,7 +53,7 @@ public class RandomActivitiesTimeShifter implements ActivitiesTimeShifter{
 		return availabilitiesList;
 	}
 	
-	private void getActivityMeanValue( ActivityType type) {
+	private void getActivityMeanValue(ActivityType type) {
 		
 		switch (type) {
 			case ACTIVITY_WAKUP:
@@ -67,22 +67,18 @@ public class RandomActivitiesTimeShifter implements ActivitiesTimeShifter{
 			case ACTIVITY_BACK:
 				this.mean = 15;
 				this.standDev = 0.5;
-
 				break;
 			case ACTIVITY_GOOUT:
 				this.mean = 15;
 				this.standDev = 0.5;
-
 				break;
 			case ACTIVITY_SLEEP:
 				this.mean = 15;
 				this.standDev = 0.5;
-
 				break;
 			case ACTIVITY_WACHCLOTHES:
 				this.mean = 15;
 				this.standDev = 0.5;
-
 				break;
 			default:
 				break;
