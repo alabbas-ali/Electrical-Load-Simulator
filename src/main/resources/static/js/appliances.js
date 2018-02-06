@@ -57,7 +57,7 @@ $(document).ready(function(){
 		
 		
 		console.log(data);
-		//submit(data);
+		submit(data);
 	});
 	
 	

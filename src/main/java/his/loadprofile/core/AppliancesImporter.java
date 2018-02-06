@@ -63,7 +63,7 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 		case "Fridge freezer":
 			return ApplianceType.APPLIANCE_FRIDGE_FREEZER;
 		case "Refrigerator":
-			return ApplianceType.APPLIANCE_FREADGE;
+			return ApplianceType.APPLIANCE_FRIDGE;
 		case "Answer machine":
 			return ApplianceType.APPLIANCE_ANSWER_MACHEN;
 		case "Cassette / CD Player":
