@@ -58,18 +58,10 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 	private ApplianceType getType(String name) {
 
 		switch (name) {
-		case "Chest freezer":
-		case "Upright freezer":
-		case "Fridge freezer":
-			return ApplianceType.APPLIANCE_FRIDGE_FREEZER;
 		case "Refrigerator":
-			return ApplianceType.APPLIANCE_FREADGE;
-		case "Answer machine":
-			return ApplianceType.APPLIANCE_ANSWER_MACHEN;
+			return ApplianceType.APPLIANCE_FRIDGE;
 		case "Cassette / CD Player":
 			return ApplianceType.APPLIANCE_CD_PLAYER;
-		case "Clock":
-			return ApplianceType.APPLIANCE_CLOCK;
 		case "Cordless telephone":
 			return ApplianceType.APPLIANCE_TELEPHONE;
 		case "Hi-Fi":
@@ -77,9 +69,7 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 		case "Iron":
 			return ApplianceType.APPLIANCE_IRON;
 		case "Vacuum":
-			return ApplianceType.APPLIANCE_VACUUM;
-		case "Fax":
-			return ApplianceType.APPLIANCE_FAX;
+			return ApplianceType.APPLIANCE_VACCUM_CLEANER;
 		case "Personal computer":
 			return ApplianceType.APPLIANCE_COMPUTER;
 		case "Printer":
@@ -92,8 +82,6 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 			return ApplianceType.APPLIANCE_DVD_PLAYER;
 		case "TV Receiver box":
 			return ApplianceType.APPLIANCE_TV_RECEIVER;
-		case "Hob":
-			return ApplianceType.APPLIANCE_HOB;
 		case "Oven":
 			return ApplianceType.APPLIANCE_OVEN;
 		case "Microwave":
@@ -104,22 +92,14 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 			return ApplianceType.APPLIANCE_OTHER;
 		case "Dish washer":
 			return ApplianceType.APPLIANCE_DISH_WASHER;
-		case "Tumble dryer":
-			return ApplianceType.APPLIANCE_TUMBLE_DRYER;
 		case "Washing machine":
 			return ApplianceType.APPLIANCE_WASHING_MACHINE;
 		case "Washer dryer":
-			return ApplianceType.APPLIANCE_WASHER_DRYER;
-		case "DESWH":
-			return ApplianceType.APPLIANCE_DESWH;
-		case "E-INST":
-			return ApplianceType.APPLIANCE_E_INST;
+			return ApplianceType.APPLIANCE_CLOTHES_DRYER;
 		case "Electric shower":
 			return ApplianceType.APPLIANCE_ELECTRIC_SHOWER;
 		case "Storage heaters":
 			return ApplianceType.APPLIANCE_STORAGE_HEATER;
-		case "Other electric space heating":
-			return ApplianceType.APPLIANCE_OTHER_HEATER;
 		default:
 			break;
 		}

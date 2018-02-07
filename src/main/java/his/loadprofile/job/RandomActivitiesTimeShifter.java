@@ -60,11 +60,11 @@ public class RandomActivitiesTimeShifter implements ActivitiesTimeShifter{
 				this.mean = 15;
 				this.standDev = 0.5;
 				break;
-			case ACTIVITY_PREACKFAST:
+			case ACTIVITY_COOKING:
 				this.mean = 15;
 				this.standDev = 0.5;
 				break;
-			case ACTIVITY_BACK:
+			case ACTIVITY_BACK_HOME:
 				this.mean = 15;
 				this.standDev = 0.5;
 
@@ -79,7 +79,7 @@ public class RandomActivitiesTimeShifter implements ActivitiesTimeShifter{
 				this.standDev = 0.5;
 
 				break;
-			case ACTIVITY_WACHCLOTHES:
+			case ACTIVITY_WASHCLOTHES:
 				this.mean = 15;
 				this.standDev = 0.5;
 
