@@ -6,7 +6,9 @@ import java.util.List;
 public enum ActivityType {
 	
 	ACTIVITY_WAKUP,
-<<<<<<< HEAD
+	ACTIVITY_SLEEP,
+	ACTIVITY_GOOUT,
+	ACTIVITY_BACK_HOME,
 	ACTIVITY_MORNING_COURSE{
     	@Override
     	public List<ApplianceType> asApplianceType() {
@@ -33,12 +35,6 @@ public enum ActivityType {
         }
     },
 	ACTIVITY_WASHCLOTHES {
-=======
-	ACTIVITY_SLEEP,
-	ACTIVITY_GOOUT,
-	ACTIVITY_BACK,
-	ACTIVITY_WACHCLOTHES {
->>>>>>> aec15450ac7702ec55a2e02a9b437114bb89d01a
         @Override
         public List<ApplianceType> asApplianceType() {
         	List<ApplianceType> applianceTypes = new ArrayList<ApplianceType>();
@@ -48,13 +44,7 @@ public enum ActivityType {
             return applianceTypes;
         }
     },
-<<<<<<< HEAD
-	ACTIVITY_GOOUT,
-	ACTIVITY_BACK_HOME,
 	ACTIVITY_ENTERTAINMENT{
-=======
-	ACTIVITY_PREACKFAST{
->>>>>>> aec15450ac7702ec55a2e02a9b437114bb89d01a
     	@Override
         public List<ApplianceType> asApplianceType() {
         	List<ApplianceType> applianceTypes = new ArrayList<ApplianceType>();
@@ -87,9 +77,7 @@ public enum ActivityType {
         	applianceTypes.add(ApplianceType.APPLIANCE_MOBILE_CHARGER); 
             return applianceTypes;
         }
-    },
-
-	ACTIVITY_SLEEP;	
+    };	
 	
 	//@TODO list the rest of possible activities 
 	
