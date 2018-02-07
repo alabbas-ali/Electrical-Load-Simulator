@@ -7,6 +7,8 @@ public enum ActivityType {
 	
 	ACTIVITY_WAKUP,
 	ACTIVITY_SLEEP,
+	ACTIVITY_GOOUT,
+	ACTIVITY_BACK,
 	ACTIVITY_WACHCLOTHES {
         @Override
         public List<ApplianceType> asApplianceType() {
@@ -16,8 +18,6 @@ public enum ActivityType {
             return applianceTypes;
         }
     },
-	ACTIVITY_GOOUT,
-	ACTIVITY_BACK,
 	ACTIVITY_PREACKFAST{
     	@Override
     	public List<ApplianceType> asApplianceType() {
