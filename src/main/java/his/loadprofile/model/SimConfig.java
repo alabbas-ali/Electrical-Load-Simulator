@@ -41,6 +41,12 @@ public class SimConfig {
 	@Max(value=30 , message = "Time Step value can't be over 30!")
 	@Min(value=0 , message = "Time Step value can't be less than 0!")
 	private int timeStep;
+	
+	@NotNull(message = "Please Select the season (Winter/Summer)!")
+	private boolean summer;
+	
+	@NotNull(message = "Please Select the day Type (Week day/Week End)!")
+	private boolean weekEnd;
 
 	public String getId() {
 		return id;

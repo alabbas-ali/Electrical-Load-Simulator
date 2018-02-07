@@ -17,12 +17,37 @@ public class CSVReader {
 	private ArrayList<String[]> lines;
 
 	/**
-	 * Creates a new CSVReader.
+	 * Reads the data from CSV files.
+	 * @return false, if the reading failed, otherwise true.
 	 */
-	public CSVReader() {
+	public boolean read(File filename) {
+		
 		lines = new ArrayList<String[]>();
-	}
+		boolean result = false;
+		BufferedReader bufferedReader = null;
+		String currentLine;
+		
+		try {
+			bufferedReader = new BufferedReader(new FileReader(filename));
+			while ((currentLine = bufferedReader.readLine()) != null) {
+				lines.add(currentLine.split(INPUT_FILE_SEPARATOR));
+			}
+			result = true;
+			if (bufferedReader != null)
+				bufferedReader.close();
 
+		} catch (IOException e) {
+			System.err.println("File \"" + filename + "\" not found.");
+			System.exit(0);
+		}
+
+		return result;
+	}
+	
+	public int getLineNymber() {
+		return lines.size();
+	}
+	
 	/**
 	 * Returns a specific value from the CSV file data at given row and column.
 	 * 
@@ -45,38 +70,6 @@ public class CSVReader {
 		return lines.get(row)[col];
 	}
 	
-	public int getLineNymber() {
-		return lines.size();
-	}
-
-	/**
-	 * Reads the data from CSV files.
-	 * @return false, if the reading failed, otherwise true.
-	 */
-	public boolean read(File filename) {
-
-		lines.clear();
-		boolean result = false;
-		BufferedReader bufferedReader = null;
-
-		String currentLine;
-
-		try {
-			bufferedReader = new BufferedReader(new FileReader(filename));
-			while ((currentLine = bufferedReader.readLine()) != null) {
-				lines.add(currentLine.split(INPUT_FILE_SEPARATOR));
-			}
-			result = true;
-			if (bufferedReader != null)
-				bufferedReader.close();
-
-		} catch (IOException e) {
-			System.err.println("File \"" + filename + "\" not found.");
-			System.exit(0);
-		}
-
-		return result;
-	}
 
 	/**
 	 * @param input					the string to be parsed to a double

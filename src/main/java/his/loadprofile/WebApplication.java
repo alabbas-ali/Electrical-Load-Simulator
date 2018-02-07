@@ -16,6 +16,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import his.loadprofile.core.Simulator;
 import his.loadprofile.core.SimulatorInterface;
+import his.loadprofile.core.Importers.LightingImporter;
 import his.loadprofile.job.ActivitiesTimeShifter;
 import his.loadprofile.job.HouesCreator;
 import his.loadprofile.job.RandomActivitiesTimeShifter;
@@ -55,10 +56,10 @@ public class WebApplication extends SpringBootServletInitializer {
 		return rhc;
 	}
 	
-	
 	@Bean
 	public SimulatorInterface simulator() {
-		Simulator s = new Simulator();
+		LightingImporter l = new LightingImporter();
+		Simulator s = new Simulator(l);
 		return s;
 	}
 	
