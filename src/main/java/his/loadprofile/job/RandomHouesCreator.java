@@ -67,7 +67,7 @@ public class RandomHouesCreator implements HouesCreator {
 			Availability v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
 			if(v != null)
 				availabilities.add(v);
-			v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_UNWORKER);
+			v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_NON_WORKER);
 			if(v != null)
 				availabilities.add(v);
 			
@@ -76,7 +76,6 @@ public class RandomHouesCreator implements HouesCreator {
 				v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_CHILD);
 				if(v != null)
 					availabilities.add(v);
-				
 			}
 		} else {
 			Availability v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
@@ -90,6 +89,7 @@ public class RandomHouesCreator implements HouesCreator {
 	private List<Appliance> getRandomAppliancesList()
 	{	
 		List<Appliance> appliances = new ArrayList<Appliance>();
+		Appliance a;
 		
 		for (Availability availability : this.house.getAvailabilities()) 
 		{
@@ -97,17 +97,37 @@ public class RandomHouesCreator implements HouesCreator {
 			{
 				for (ApplianceType apType : activity.getType().asApplianceType()) 
 				{
-					Appliance a = applianceRepository.findOneRandomlyByType(apType);
+					a = applianceRepository.findOneRandomlyByType(apType);
 					if(a != null)
 						appliances.add(a);
 				}
 			}
 			
 		}
-		return appliances;
 		
+		// the static list of Appliances which always work in the Household
+		a = applianceRepository.findOneRandomlyByType(ApplianceType.APPLIANCE_FRIDGE);
+		if(a != null)
+			appliances.add(a);
+		
+		a = applianceRepository.findOneRandomlyByType(ApplianceType.APPLIANCE_HEATING);
+		if(a != null)
+			appliances.add(a);
+		
+		Random r = new Random();
+		if(r.nextInt(100) < 5) {
+			a = applianceRepository.findOneRandomlyByType(ApplianceType.APPLIANCE_FRIDGE_FREEZER);
+			if(a != null)
+				appliances.add(a);
+		}
+		
+		if(r.nextInt(100) < 5) {
+			a = applianceRepository.findOneRandomlyByType(ApplianceType.APPLIANCE_CHEST_FREEZER);
+			if(a != null)
+				appliances.add(a);
+		}
+		
+		return appliances;
 	}
 	
-	
 }
-

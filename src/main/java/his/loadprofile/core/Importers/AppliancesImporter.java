@@ -60,6 +60,11 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 		switch (name) {
 		case "Refrigerator":
 			return ApplianceType.APPLIANCE_FRIDGE;
+<<<<<<< HEAD
+=======
+		case "Answer machine":
+			return ApplianceType.APPLIANCE_ANSWER_MACHEN;
+>>>>>>> aec15450ac7702ec55a2e02a9b437114bb89d01a
 		case "Cassette / CD Player":
 			return ApplianceType.APPLIANCE_CD_PLAYER;
 		case "Cordless telephone":
