@@ -156,8 +156,8 @@
 	</div>
 
 	<!-- Morris.js charts -->
-	<script type="text/javascript" src="../../../js/chart/Chart.min.js"
-		th:src="@{/js/chart/Chart.min.js}"></script>
+	<script type="text/javascript" src="../../../js/chart/dist/Chart.min.js"
+		th:src="@{/js/chart/dist/Chart.min.js}"></script>
 
 	<!-- FastClick -->
 	<script type="text/javascript"
@@ -194,13 +194,13 @@
 			//Boolean - Whether grid lines are shown across the chart
 			scaleShowGridLines : false,
 			//String - Colour of the grid lines
-			scaleGridLineColor : 'rgba(0,0,0,.05)',
+			scaleGridLineColor : 'rgba(3, 2, 2, 0.73)',
 			//Number - Width of the grid lines
 			scaleGridLineWidth : 2,
 			//Boolean - Whether to show horizontal lines (except X axis)
 			scaleShowHorizontalLines : true,
 			//Boolean - Whether to show vertical lines (except Y axis)
-			scaleShowVerticalLines : true,
+			scaleShowVerticalLines : false,
 			//Boolean - Whether the line is curved between points
 			bezierCurve : true,
 			//Number - Tension of the bezier curve between points
@@ -235,59 +235,85 @@
 					/*[# th:each="house : ${houses}"]*/
 					var houseid = "[(${house.id})]";
 					var labels = [];
-					var data = [];
+					var loaddata = [];
+					var lightingdata = [];
+					var tot = 0;
+					var tot2 = 0;
 
 					/*[# th:each="measurement : ${house.resultLoadCurve.measurements}"]*/
-					labels.push('[(${measurement.time})]'.toHHMMSS());
-					data.push('[(${measurement.value})]');
+						labels.push('[(${measurement.time})]'.toHHMMSS());
+						loaddata.push('[(${measurement.value})]');
+						tot = tot + parseInt('[(${measurement.value})]');
+						lightingdata.push('[(${measurement.lightingValue})]');
+						tot2 = tot2 + parseInt('[(${measurement.lightingValue})]');
 					/*[/]*/
 
 					var lineChartData = {
 						labels : labels,
 						datasets : [ {
-							label : 'Electronics',
-							fillColor : 'rgba(210, 214, 222, 1)',
-							strokeColor : 'rgba(210, 214, 222, 1)',
-							pointColor : 'rgba(210, 214, 222, 1)',
-							pointStrokeColor : '#c1c7d1',
-							pointHighlightFill : '#fff',
-							pointHighlightStroke : 'rgba(220,220,220,1)',
-							data : data
-						} ]
-
+							label : 'Load Curve, Total : ' + tot,
+							backgroundColor: '#65ecf1',
+			                borderColor: '#65ecf1',
+			                fill: false,
+							data : loaddata
+						},{
+							label : 'Lighting Load, Total : ' + tot2,
+							backgroundColor: '#f1de65',
+			                borderColor: '#f1de65',
+			                fill: false,
+							data : lightingdata
+						}]
 					}
 
 					var ctx = document.getElementById('line-chart-' + houseid)
 							.getContext("2d");
-					lines[houseid] = new Chart(ctx).Line(lineChartData, areaChartOptions);
+					console.log(areaChartOptions);
+					lines[houseid] = new Chart(ctx,  {
+					    type: 'line',
+					    data: lineChartData, 
+					    options : areaChartOptions
+					    });
 					/*[/]*/
 
 					var labels = [];
-					var data = [];
+					var loaddata = [];
+					var lightingdata = [];
+					tot = 0;
+					tot2 = 0;
 
 					/*[# th:each="measure : ${houseTotal.resultLoadCurve.measurements}"]*/
-					labels.push('[(${measure.time})]'.toHHMMSS());
-					data.push('[(${measure.value})]');
+						labels.push('[(${measure.time})]'.toHHMMSS());
+						loaddata.push('[(${measure.value})]');
+						tot = tot + parseInt('[(${measure.value})]');
+						lightingdata.push('[(${measure.lightingValue})]');
+						tot2 = tot2 + parseInt('[(${measure.lightingValue})]');
 					/*[/]*/
 
 					var lineChartData = {
 						labels : labels,
 						datasets : [ {
-							label : 'Digital Goods',
-							fillColor : 'rgba(60,141,188,0.9)',
-							strokeColor : 'rgba(60,141,188,0.8)',
-							pointColor : '#3b8bba',
-							pointStrokeColor : 'rgba(60,141,188,1)',
-							pointHighlightFill : '#fff',
-							pointHighlightStroke : 'rgba(60,141,188,1)',
-							data : data
+							label : 'Total Load Curve, Total : ' + tot,
+							backgroundColor: '#1114b6',
+			                borderColor: '#1114b6',
+			                fill: false,
+							data : loaddata
+						},{
+							label : 'Total Lighting Load, Total : ' + tot2,
+							backgroundColor: '#f1de65',
+			                borderColor: '#f1de65',
+			                fill: false,
+							data : lightingdata
 						} ]
 
 					}
 
 					var ctx = document.getElementById('total-chart')
 							.getContext("2d");
-					var totChart = new Chart(ctx).Line(lineChartData, areaChartOptions);
+					var totChart = new Chart(ctx , {
+					    type: 'line',
+					    data: lineChartData, 
+					    options : areaChartOptions
+					    });
 				});
 		/*]]>*/
 	</script>

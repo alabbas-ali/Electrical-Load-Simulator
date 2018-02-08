@@ -3,6 +3,7 @@ package his.loadprofile.repo;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,15 @@ public class AvailabilityRepositoryImpl implements AvailabilityRepositoryCustom{
 				match(Criteria.where("type").is(type))
 				);
 
+		List<Availability> result = new ArrayList<Availability>();
+		int t = 0;
 		//Convert the aggregation result into a List
-		AggregationResults<Availability> groupResults
+		while(result.size() == 0 && t < 20) {
+			AggregationResults<Availability> groupResults
 				= mongoTemplate.aggregate(agg, Availability.class, Availability.class);
-		List<Availability> result = groupResults.getMappedResults();
-
+			result = groupResults.getMappedResults();
+			t ++;
+		}
 		if(result.size()>0) {
 			return result.get(0);
 		}

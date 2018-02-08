@@ -70,7 +70,7 @@ public class RandomHouesCreator implements HouesCreator {
 				v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
 			}
 			availabilities.add(v);
-			// add Mother availabilities
+			// add children availabilities
 			v = null;
 			while (v == null) {
 				v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_NON_WORKER);
@@ -100,7 +100,7 @@ public class RandomHouesCreator implements HouesCreator {
 		List<Appliance> appliances = new ArrayList<Appliance>();
 		Appliance a;
 		List<ApplianceType> typeList;
-		int t = 0;
+		
 		for (Availability availability : this.house.getAvailabilities()) 
 		{
 			for (Activity activity : availability.getActivities()) 
@@ -109,13 +109,9 @@ public class RandomHouesCreator implements HouesCreator {
 				if(typeList != null) {
 					for (ApplianceType apType : typeList) 
 					{
-						a = null;
-						while(a == null && t <= 5) {
-							a = applianceRepository.findOneRandomlyByType(apType);
-							t ++;
-						}
-						t = 0;
-						appliances.add(a);
+						a = applianceRepository.findOneRandomlyByType(apType);
+						if(a != null)
+							appliances.add(a);
 					}
 				}
 			}

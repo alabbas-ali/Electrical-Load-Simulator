@@ -3,6 +3,7 @@ package his.loadprofile.repo;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,18 @@ public class ApplianceRepositoryImpl implements ApplianceRepositoryCustom{
 				new CustomSampleOperation(1),
 				match(Criteria.where("type").is(type))
 			);
-
-		//Convert the aggregation result into a List
-		AggregationResults<Appliance> groupResults
-				= mongoTemplate.aggregate(agg, Appliance.class, Appliance.class);
-		List<Appliance> result = groupResults.getMappedResults();
 		
-		if(result.size()>0) {
+		List<Appliance> result = new ArrayList<Appliance>();
+		int t = 0;
+		//Convert the aggregation result into a List
+		while(result.size() == 0 && t < 20) {
+			AggregationResults<Appliance> groupResults
+				= mongoTemplate.aggregate(agg, Appliance.class, Appliance.class);
+			result = groupResults.getMappedResults();
+			t ++;
+		}
+		
+		if( result.size() > 0 ) {
 			return result.get(0);
 		}
 		return null;
