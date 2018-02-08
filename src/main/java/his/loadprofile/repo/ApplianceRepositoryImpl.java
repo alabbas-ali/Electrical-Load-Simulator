@@ -24,7 +24,7 @@ public class ApplianceRepositoryImpl implements ApplianceRepositoryCustom{
 		
 		Aggregation agg = newAggregation(
 				new CustomSampleOperation(1),
-				match(Criteria.where("type").gte(type))
+				match(Criteria.where("type").is(type))
 			);
 
 		//Convert the aggregation result into a List

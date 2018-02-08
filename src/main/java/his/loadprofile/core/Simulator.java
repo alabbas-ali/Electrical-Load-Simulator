@@ -88,6 +88,7 @@ public class Simulator implements SimulatorInterface{
 						
 						// add activity appliances load
 						if(
+							applianceTypeList != null &&
 							applianceTypeList.contains(appliance.getType()) &&
 							activity_start <= i && activity_end > i
 						) {
