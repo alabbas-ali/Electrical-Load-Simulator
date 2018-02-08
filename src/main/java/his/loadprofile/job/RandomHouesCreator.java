@@ -90,16 +90,20 @@ public class RandomHouesCreator implements HouesCreator {
 	{	
 		List<Appliance> appliances = new ArrayList<Appliance>();
 		Appliance a;
+		List<ApplianceType> typeList;
 		
 		for (Availability availability : this.house.getAvailabilities()) 
 		{
 			for (Activity activity : availability.getActivities()) 
 			{
-				for (ApplianceType apType : activity.getType().asApplianceType()) 
-				{
-					a = applianceRepository.findOneRandomlyByType(apType);
-					if(a != null)
-						appliances.add(a);
+				typeList = activity.getType().asApplianceType();
+				if(typeList != null) {
+					for (ApplianceType apType : typeList) 
+					{
+						a = applianceRepository.findOneRandomlyByType(apType);
+						if(a != null)
+							appliances.add(a);
+					}
 				}
 			}
 			

@@ -6,6 +6,8 @@ public class Measurement {
     private Integer time;
     
     private Float value;
+    
+    private int lightingValue;
 
 	public Integer getTime() {
 		return time;
@@ -22,5 +24,15 @@ public class Measurement {
 	public void setValue(Float value) {
 		this.value = value;
 	}
+
+	public int getLightingValue() {
+		return lightingValue;
+	}
+
+	public void setLightingValue(int lightingValue) {
+		this.lightingValue = lightingValue;
+	}
+	
+	
     
 }
