@@ -3,11 +3,15 @@ package his.loadprofile.model;
 
 public class Measurement {
 	
-    private Integer time;
+    private int time;
     
-    private Float value;
+    private float value;
     
     private int lightingValue;
+    
+    private int activeOccupancy;
+    
+    private int occupancy;
 
 	public Integer getTime() {
 		return time;
@@ -31,6 +35,22 @@ public class Measurement {
 
 	public void setLightingValue(int lightingValue) {
 		this.lightingValue = lightingValue;
+	}
+
+	public int getActiveOccupancy() {
+		return activeOccupancy;
+	}
+
+	public void setActiveOccupancy(int activeOccupancy) {
+		this.activeOccupancy = activeOccupancy;
+	}
+
+	public int getOccupancy() {
+		return occupancy;
+	}
+
+	public void setOccupancy(int occupancy) {
+		this.occupancy = occupancy;
 	}
 	
 	

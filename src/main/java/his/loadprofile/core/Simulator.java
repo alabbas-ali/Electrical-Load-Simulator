@@ -37,6 +37,7 @@ public class Simulator implements SimulatorInterface{
 	
 	//Active Occupancy "the number of people in Household which are not asleep"
 	private int[] activeOccupancy;
+	private int[] occupancy;
 	
 	//
 	private int fridgeWorkDuration = 0;
@@ -59,7 +60,8 @@ public class Simulator implements SimulatorInterface{
 		
 		//full the activeOccupancy array
 		activeOccupancy = new int[NUMBER_OF_MINUTES];
-		creatActiveOccupancyArray(house);
+		occupancy = new int[NUMBER_OF_MINUTES];
+		creatOccupancyArrays(house);
 		
 		List<Measurement> measurements = new ArrayList<Measurement>();
 		Measurement measur;
@@ -127,6 +129,8 @@ public class Simulator implements SimulatorInterface{
 			
 			measur.setValue(loadValue);
 			measur.setLightingValue(lightingValue);
+			measur.setActiveOccupancy(activeOccupancy[i]);
+			measur.setOccupancy(occupancy[i]);
 			measurements.add(measur);
 			
 			// Send WS HOUSESTATE status to front end
@@ -211,7 +215,7 @@ public class Simulator implements SimulatorInterface{
 	}
 	
 	
-	private void creatActiveOccupancyArray(Household house) 
+	private void creatOccupancyArrays(Household house) 
 	{
 		for (Availability availability : house.getAvailabilities()) 
 		{
@@ -265,6 +269,10 @@ public class Simulator implements SimulatorInterface{
 					athome
 				) {
 					activeOccupancy[i] ++;
+				}
+				
+				if(athome) {
+					occupancy[i] ++;
 				}
 			}
 		}

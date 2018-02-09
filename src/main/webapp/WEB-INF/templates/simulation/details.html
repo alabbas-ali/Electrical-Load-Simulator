@@ -196,6 +196,8 @@
 					var labels = [];
 					var loaddata = [];
 					var lightingdata = [];
+					var occupancy = [];
+					var activeOccupancy = [];
 					var tot = 0;
 					var tot2 = 0;
 
@@ -205,6 +207,8 @@
 						tot = tot + parseInt('[(${measurement.value})]');
 						lightingdata.push('[(${measurement.lightingValue})]');
 						tot2 = tot2 + parseInt('[(${measurement.lightingValue})]');
+						occupancy.push('[(${measurement.occupancy})]');
+						activeOccupancy.push('[(${measurement.activeOccupancy})]');
 					/*[/]*/
 
 					var lineChartData = {
@@ -221,8 +225,20 @@
 			                borderColor: '#f1de65',
 			                fill: false,
 							data : lightingdata
+						},{
+							label : 'Occupancy',
+							backgroundColor: '#d964f0',
+			                borderColor: '#d964f0',
+			                fill: false,
+							data : occupancy
+						},{
+							label : 'Active Occupancy',
+							backgroundColor: '#f4294b',
+			                borderColor: '#f4294b',
+			                fill: false,
+							data : activeOccupancy
 						}]
-					}
+					};
 
 					var ctx = document.getElementById('line-chart-' + houseid)
 							.getContext("2d");
@@ -251,6 +267,8 @@
 					var labels = [];
 					var loaddata = [];
 					var lightingdata = [];
+					var occupancy = [];
+					var activeOccupancy = [];
 					tot = 0;
 					tot2 = 0;
 
@@ -260,6 +278,8 @@
 						tot = tot + parseInt('[(${measure.value})]');
 						lightingdata.push('[(${measure.lightingValue})]');
 						tot2 = tot2 + parseInt('[(${measure.lightingValue})]');
+						occupancy.push('[(${measure.occupancy})]');
+						activeOccupancy.push('[(${measure.activeOccupancy})]');
 					/*[/]*/
 
 					var lineChartData = {
@@ -276,9 +296,20 @@
 			                borderColor: '#f1de65',
 			                fill: false,
 							data : lightingdata
-						} ]
-
-					}
+						},{
+							label : 'Occupancy',
+							backgroundColor: '#d964f0',
+			                borderColor: '#d964f0',
+			                fill: false,
+							data : occupancy
+						},{
+							label : 'Active Occupancy',
+							backgroundColor: '#f4294b',
+			                borderColor: '#f4294b',
+			                fill: false,
+							data : activeOccupancy
+						}]
+					};
 
 					var ctx = document.getElementById('total-chart')
 							.getContext("2d");

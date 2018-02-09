@@ -88,14 +88,26 @@ public class SimulationRunner extends JobRunner {
 			// calculate the total load Curve for all HousHolds
 			List<Measurement>  measurements = household.getResultLoadCurve().getMeasurements();
 			for (int k = 0; k < measurements.size(); k++) {
-				Float value = measurements.get(k).getValue();
+				float value = measurements.get(k).getValue();
+				int lightingValue = measurements.get(k).getLightingValue();
+				int activeOccupancy = measurements.get(k).getActiveOccupancy();
+				int occupancy = measurements.get(k).getOccupancy();
 				if(totalMeasurements.size() > k) {
 					value += totalMeasurements.get(k).getValue();
+					lightingValue += totalMeasurements.get(k).getLightingValue();
+					activeOccupancy += totalMeasurements.get(k).getActiveOccupancy();
+					occupancy += totalMeasurements.get(k).getOccupancy();
 					totalMeasurements.get(k).setValue(value);
+					totalMeasurements.get(k).setLightingValue(lightingValue);
+					totalMeasurements.get(k).setActiveOccupancy(activeOccupancy);
+					totalMeasurements.get(k).setOccupancy(occupancy);
 				} else {
 					Measurement m = new Measurement();
 					m.setTime(measurements.get(k).getTime());
 					m.setValue(value);
+					m.setLightingValue(lightingValue);
+					m.setActiveOccupancy(activeOccupancy);
+					m.setOccupancy(occupancy);
 					totalMeasurements.add(m);
 				}
 			}
