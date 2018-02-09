@@ -38,6 +38,14 @@ public class Simulator implements SimulatorInterface{
 	//Active Occupancy "the number of people in Household which are not asleep"
 	private int[] activeOccupancy;
 	
+	//
+	private int fridgeWorkDuration = 0;
+	private boolean fridgeOn = true;
+	private int fridgeFreezerWorkDuration = 0;
+	private boolean fridgeFreezerOn = true;
+	private int chestFreezerWorkDuration = 0;
+	private boolean chestFreezerOn = true;
+	
 	public Simulator(LightingImporter lightingImporter) {
 		// this is for lighting Simulation
 		bulbArray = lightingImporter.getBulbs(rand.nextInt(HOUSE_COUNT));
@@ -55,91 +63,62 @@ public class Simulator implements SimulatorInterface{
 		
 		List<Measurement> measurements = new ArrayList<Measurement>();
 		Measurement measur;
+		int lightingValue = 0;
+		float loadValue = 0;
 		OperationalMode op;
 		
-		int lightingValue = 0;
-		int fridgeWorkDuration = 0;
-		boolean fridgeOn = true;
-		int fridgeFreezerWorkDuration = 0;
-		boolean fridgeFreezerOn = true;
-		int chestFreezerWorkDuration = 0;
-		boolean chestFreezerOn = true;
-		
-		for (int i = 0; i < NUMBER_OF_MINUTES; i += timeStep) {
-			
+		for (int i = 0; i < NUMBER_OF_MINUTES; i += timeStep) 
+		{
 			measur = new Measurement();
 			measur.setTime(i);
-			Float loadValue = (float) 0.00;
-		    
-			for (Availability availability : house.getAvailabilities()) 
-			{
-				for (Activity activity : availability.getActivities()) 
-				{
-					List<ApplianceType> applianceTypeList = activity.getType().asApplianceType();
-					calendar.setTime(activity.getStart());
-					int activity_start = (calendar.get(Calendar.HOUR_OF_DAY)*60) + calendar.get(Calendar.MINUTE);
-					calendar.setTime(activity.getEnd());
-					int activity_end = (calendar.get(Calendar.HOUR_OF_DAY)*60) + calendar.get(Calendar.MINUTE);
-					
-					for (Appliance appliance : house.getAppliances()) 
-					{
-						
-						op = this.getApplianceChaosenOP(appliance);
-						
-						// add activity appliances load
-						if(
-							applianceTypeList != null &&
-							applianceTypeList.contains(appliance.getType()) &&
-							activity_start <= i && activity_end > i
-						) {
-							// other calculation in case the op has Load Curve should be done here
-							// foe now we will suppose that all the appliance OP has no Load Curve
+			
+			// add activity appliances load
+			loadValue = activityAppliancesLoad(house , i);
+			
+			// add special appliances load
+			for (Appliance appliance : house.getAppliances()) {
+				
+				op = this.getApplianceChaosenOP(appliance);
+				switch (appliance.getType()) {
+					case APPLIANCE_FRIDGE:
+						if(fridgeWorkDuration > op.getDuration()) {
+							fridgeWorkDuration = 0;
+						}
+						if(fridgeOn) {
 							loadValue += op.getPowerInputOn();
+						}else {
+							loadValue += op.getPowerInputOff();
 						}
-						
-						// add special appliances load
-						switch (appliance.getType()) {
-							case APPLIANCE_FRIDGE:
-								if(fridgeWorkDuration > op.getDuration()) {
-									fridgeWorkDuration = 0;
-								}
-								if(fridgeOn) {
-									loadValue += op.getPowerInputOn();
-								}else {
-									loadValue += op.getPowerInputOff();
-								}
-								fridgeWorkDuration ++;
-								break;
-							case APPLIANCE_FRIDGE_FREEZER:
-								if(fridgeFreezerWorkDuration > op.getDuration()) {
-									fridgeFreezerWorkDuration = 0;
-								}
-								if(fridgeFreezerOn) {
-									loadValue += op.getPowerInputOn();
-								}else {
-									loadValue += op.getPowerInputOff();
-								}
-								fridgeFreezerWorkDuration ++;
-								break;
-							case APPLIANCE_CHEST_FREEZER:
-								if(chestFreezerWorkDuration > op.getDuration()) {
-									chestFreezerWorkDuration = 0;
-								}
-								if(chestFreezerOn) {
-									loadValue += op.getPowerInputOn();
-								}else {
-									loadValue += op.getPowerInputOff();
-								}
-								chestFreezerWorkDuration ++;
-								break;
-							case APPLIANCE_HEATING:
-								chestFreezerWorkDuration ++;
-								loadValue += op.getPowerInputOn();
-								break;
-							default:
-								break;
+						fridgeWorkDuration ++;
+						break;
+					case APPLIANCE_FRIDGE_FREEZER:
+						if(fridgeFreezerWorkDuration > op.getDuration()) {
+							fridgeFreezerWorkDuration = 0;
 						}
-					}
+						if(fridgeFreezerOn) {
+							loadValue += op.getPowerInputOn();
+						}else {
+							loadValue += op.getPowerInputOff();
+						}
+						fridgeFreezerWorkDuration ++;
+						break;
+					case APPLIANCE_CHEST_FREEZER:
+						if(chestFreezerWorkDuration > op.getDuration()) {
+							chestFreezerWorkDuration = 0;
+						}
+						if(chestFreezerOn) {
+							loadValue += op.getPowerInputOn();
+						}else {
+							loadValue += op.getPowerInputOff();
+						}
+						chestFreezerWorkDuration ++;
+						break;
+					case APPLIANCE_HEATING:
+						chestFreezerWorkDuration ++;
+						loadValue += op.getPowerInputOn();
+						break;
+					default:
+						break;
 				}
 			}
 			
@@ -289,6 +268,39 @@ public class Simulator implements SimulatorInterface{
 				}
 			}
 		}
+	}
+	
+	
+	private float activityAppliancesLoad(Household house, int time) {
+		
+		OperationalMode op;
+		float loadValue = 0;
+		
+		for (Availability availability : house.getAvailabilities()) {
+			for (Activity activity : availability.getActivities()) {
+				List<ApplianceType> applianceTypeList = activity.getType().asApplianceType();
+				calendar.setTime(activity.getStart());
+				int activity_start = (calendar.get(Calendar.HOUR_OF_DAY)*60) + calendar.get(Calendar.MINUTE);
+				calendar.setTime(activity.getEnd());
+				int activity_end = (calendar.get(Calendar.HOUR_OF_DAY)*60) + calendar.get(Calendar.MINUTE);
+				
+				for (Appliance appliance : house.getAppliances()) {
+					op = this.getApplianceChaosenOP(appliance);
+					
+					if(
+						applianceTypeList != null &&
+						applianceTypeList.contains(appliance.getType()) &&
+						activity_start <= time && activity_end > time
+					) {
+						// other calculation in case the op has Load Curve should be done here
+						// foe now we will suppose that all the appliance OP has no Load Curve
+						loadValue += op.getPowerInputOn();
+					}
+				}
+			}
+		}
+		
+		return loadValue;
 	}
 
 }
