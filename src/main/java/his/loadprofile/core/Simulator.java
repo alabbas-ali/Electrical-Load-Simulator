@@ -29,14 +29,6 @@ public class Simulator implements SimulatorInterface{
 	
 	private LightingSimulator lightingSimulator;
 	
-	//
-	private int fridgeWorkDuration = 0;
-	private boolean fridgeOn = true;
-	private int fridgeFreezerWorkDuration = 0;
-	private boolean fridgeFreezerOn = true;
-	private int chestFreezerWorkDuration = 0;
-	private boolean chestFreezerOn = true;
-	
 	public Simulator(LightingSimulator lightingSimulator) {
 		// this is for lighting Simulation
 		this.lightingSimulator = lightingSimulator;
@@ -57,6 +49,14 @@ public class Simulator implements SimulatorInterface{
 		Measurement measur;
 		float loadValue = 0;
 		OperationalMode op;
+		
+		//
+		int fridgeWorkDuration = 0;
+		boolean fridgeOn = true;
+		int fridgeFreezerWorkDuration = 0;
+		boolean fridgeFreezerOn = true;
+		int chestFreezerWorkDuration = 0;
+		boolean chestFreezerOn = true;
 		
 		for (int i = 0; i < NUMBER_OF_MINUTES; i += timeStep) 
 		{
@@ -157,11 +157,6 @@ public class Simulator implements SimulatorInterface{
 		this.activeOccupancy = new int[NUMBER_OF_MINUTES];
 		this.occupancy = new int[NUMBER_OF_MINUTES];
 		
-		for(int i = 0; i < activeOccupancy.length; i++) {
-			this.activeOccupancy[i] = 0;
-			this.occupancy[i] = 0;
-		}
-		
 		Calendar calendar = Calendar.getInstance();
 		for (Availability availability : house.getAvailabilities()) 
 		{
@@ -198,35 +193,28 @@ public class Simulator implements SimulatorInterface{
 				}
 			}
 
-			for (int i = 0; i < NUMBER_OF_MINUTES; i ++) {
-				activeOccupancy[i] = 0;
+			for (int time = 0; time < NUMBER_OF_MINUTES; time ++) {
 				boolean athome = true;
 				for(int j=0; j < availability_Out_times.length; j++ ) {
 					if(
-						(availability_Out_times[j] != -1 && availability_Out_times[j] < i ) && 
-						(availability_back_times[j] != -1  && i < availability_back_times[j])
+						(availability_Out_times[j] != -1 && availability_Out_times[j] < time ) && 
+						(availability_back_times[j] != -1  && time < availability_back_times[j])
 					) {
 						athome = false;
 					}
 				}
 
 				if(
-					availability_Wakup_time != -1 && availability_Wakup_time < i && 
-					availability_Sleep_time != -1 && i < availability_Sleep_time &&
+					availability_Wakup_time != -1 && availability_Wakup_time < time && 
+					availability_Sleep_time != -1 && time < availability_Sleep_time &&
 					athome
 				) {
-					
-					activeOccupancy[i] ++;
+					this.activeOccupancy[time] = this.activeOccupancy[time] + 1;
 				}
 				
 				if(athome) {
-					occupancy[i] ++;
+					this.occupancy[time] ++;
 				}
-			}
-			
-			System.out.println("Availability " + availability.getType());
-			for(int i = 0; i < activeOccupancy.length; i++) {
-				System.out.print(activeOccupancy[i] + " ,");
 			}
 		}
 	}
