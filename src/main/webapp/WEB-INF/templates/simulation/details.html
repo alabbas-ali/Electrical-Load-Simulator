@@ -134,6 +134,50 @@
 								</div>
 							</div>
 							<div class="box-body">
+								<h3> Household Availabilities </h3>
+								<div class="row">
+									<div th:classappend="'col-md-'+ 12/${house.availabilities.size()}" th:each="availability : ${house.availabilities}">
+										<table class="table table-bordered table-striped" >
+											<thead>
+												<tr>
+													<th>Activity</th>
+													<th>Start</th>
+													<th>End</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="activity : ${availability.activities}">
+													<td th:text="${activity.name}"></td>
+													<td th:text="${#calendars.format(activity.start, 'h:mm a')}"></td>
+													<td th:text="${#calendars.format(activity.end, 'h:mm a')}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<h3> Household Appliances </h3>
+								<div class="row">
+									<div class="col-md-12">
+										<table class="table table-bordered table-striped" >
+											<thead>
+												<tr>
+													<th>Type</th>
+													<th>Power Input On</th>
+													<th>Power Input Off</th>
+													<th>Duration</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="appliance : ${house.appliances}">
+													<td th:text="${appliance.type}"></td>
+													<td th:text="${appliance.operationalModes.get(0).powerInputOn}"></td>
+													<td th:text="${appliance.operationalModes.get(0).powerInputOff}"></td>
+													<td th:text="${appliance.operationalModes.get(0).duration}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 								<div class="chart">
 									<canvas id="line-chart"
 									th:id="'line-chart-' + ${house.id}" width="510" height="250"></canvas>

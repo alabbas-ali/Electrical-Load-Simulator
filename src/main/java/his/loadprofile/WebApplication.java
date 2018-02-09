@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import his.loadprofile.core.LightingSimulator;
 import his.loadprofile.core.Simulator;
 import his.loadprofile.core.SimulatorInterface;
 import his.loadprofile.core.Importers.LightingImporter;
@@ -59,7 +60,8 @@ public class WebApplication extends SpringBootServletInitializer {
 	@Bean
 	public SimulatorInterface simulator() {
 		LightingImporter l = new LightingImporter();
-		Simulator s = new Simulator(l);
+		LightingSimulator ls = new LightingSimulator(l);
+		Simulator s = new Simulator(ls);
 		return s;
 	}
 	
