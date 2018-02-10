@@ -62,9 +62,7 @@ public class RandomHouesCreator implements HouesCreator {
 		if(hType == HouseHoldType.HOUSEHOLD_FAMILE) {
 			int minimum = simConfig.getMinNumberOfPeople();
 			int maximum = simConfig.getMaxNumberOfPeople();
-			int n = maximum - minimum + 1;
-			int k = r.nextInt() % n;
-			int randomNumber = minimum + k;
+			int randomNumber = minimum + r.nextInt(maximum - minimum);
 			// add Father availabilities
 			while (v == null) {
 				v = availabilityRepository.findOneRandomlyByType(AvailabilityType.AVAILABILITY_WORKER);
@@ -77,7 +75,7 @@ public class RandomHouesCreator implements HouesCreator {
 			}
 			availabilities.add(v);
 			// add children availabilities
-			for(int i = minimum; i < randomNumber; i ++) 
+			for(int i = minimum; i < randomNumber - 2; i ++) 
 			{
 				v = null;
 				while (v == null) {

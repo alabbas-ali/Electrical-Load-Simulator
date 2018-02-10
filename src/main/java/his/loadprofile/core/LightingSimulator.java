@@ -9,9 +9,9 @@ public class LightingSimulator {
 	private static final int NUMBER_OF_MINUTES = 1440;
 	
 	// this static parameters for Lighting calculation  
-	private static final double CALIBRATION_SCALAR = 0.00815369;
+	private static final double CALIBRATION_SCALAR = 0.00515369;
 	private static final double IRRADIANCE_IRRELEVANT_PROBABILITY = 0.5;
-	private static final double[] EFFECTIVE_OCCUPANCY = { 0, 1, 1.528, 1.694, 1.983, 2.094 };
+	private static final double[] EFFECTIVE_OCCUPANCY = { 0, 1, 1.528, 1.694, 1.983, 2.094, 2.094, 2.094 };
 	private static final int[] LOWER_DURATION = { 1, 2, 3, 5, 9, 17, 28, 50, 92 };
 	private static final int[] UPPER_DURATION = { 1, 2, 4, 8, 16, 27, 49, 91, 259 };
 	private static final int HOUSE_COUNT = 100;
@@ -19,10 +19,10 @@ public class LightingSimulator {
 	private int[] irradiance;
 	
 	private Random rand = new Random();
+	private LightingImporter lightingImporter;
 	
 	public LightingSimulator(LightingImporter lightingImporter) {
-		bulbArray = lightingImporter.getBulbs(rand.nextInt(HOUSE_COUNT));
-		irradiance = lightingImporter.getIrradiance();
+		this.lightingImporter = lightingImporter;
 	}
 	
 	
@@ -40,6 +40,9 @@ public class LightingSimulator {
 	 */
 	public int[] simulateLightingLoad(int[] activeOccupancy) {
 		
+		bulbArray = lightingImporter.getBulbs(rand.nextInt(HOUSE_COUNT));
+		irradiance = lightingImporter.getIrradiance();
+		
 		int[] result = new int[NUMBER_OF_MINUTES];
 		int irradianceTreshold = 60;
 
@@ -51,8 +54,10 @@ public class LightingSimulator {
 				boolean lowIrradiance = ((irradiance[time] < irradianceTreshold)
 						|| (rand.nextDouble() < IRRADIANCE_IRRELEVANT_PROBABILITY));
 				double effectiveOccupancy = EFFECTIVE_OCCUPANCY[activeOccupancy[time]];
-				double relativeUseWeighting = -CALIBRATION_SCALAR * Math.log(rand.nextDouble());
-				if (lowIrradiance && (rand.nextDouble() < (effectiveOccupancy * relativeUseWeighting))) {
+				double relativeUseWeighting = - CALIBRATION_SCALAR * Math.log(rand.nextDouble());
+				double mull = effectiveOccupancy * relativeUseWeighting;
+				double nextRand = rand.nextDouble();
+				if (lowIrradiance && (nextRand < mull)) {
 
 					int lightDuration = determineDuration();
 
@@ -83,8 +88,8 @@ public class LightingSimulator {
 		for (int j = 1; j <= 9; j++) {
 			cumulative = j / 9;
 			if (random1 < cumulative)
-				return  (int) rand.nextDouble() * (UPPER_DURATION[j - 1] - LOWER_DURATION[j - 1]);
+				return  LOWER_DURATION[j - 1] + rand.nextInt(UPPER_DURATION[j - 1] - LOWER_DURATION[j - 1]);
 		}
-		return (int) rand.nextDouble() *(UPPER_DURATION[0] - LOWER_DURATION[0]);
+		return LOWER_DURATION[0] + rand.nextInt(UPPER_DURATION[0] - LOWER_DURATION[0]);
 	}
 }

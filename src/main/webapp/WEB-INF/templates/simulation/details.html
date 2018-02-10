@@ -302,6 +302,11 @@
 				                yAxes: [{
 				                    display: true,
 				                    type: 'logarithmic',
+				                    ticks: {
+				            			userCallback: function(tick) {
+				            				return tick.toString();
+				            			}
+				            		},
 				                }]
 				            }
 			        		}
@@ -373,6 +378,11 @@
 				                yAxes: [{
 				                    display: true,
 				                    type: 'logarithmic',
+				                    ticks: {
+				            			userCallback: function(tick) {
+				            				return tick.toString();
+				            			}
+				            		},
 				                }]
 				            }
 			        		}
