@@ -58,8 +58,13 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 	private ApplianceType getType(String name) {
 
 		switch (name) {
-		case "Refrigerator":
+		case "Refrigerator": 
 			return ApplianceType.APPLIANCE_FRIDGE;
+		case "Upright freezer":
+		case "Fridge freezer":
+			return ApplianceType.APPLIANCE_FRIDGE_FREEZER;
+		case "Chest freezer":
+			return ApplianceType.APPLIANCE_CHEST_FREEZER;
 		case "Answer machine":
 			return ApplianceType.APPLIANCE_ANSWER_MACHEN;
 		case "Cassette / CD Player":
@@ -102,6 +107,8 @@ public class AppliancesImporter extends CSVReader implements AppliancesImporterI
 			return ApplianceType.APPLIANCE_ELECTRIC_SHOWER;
 		case "Storage heaters":
 			return ApplianceType.APPLIANCE_STORAGE_HEATER;
+		case "Other electric space heating":
+			return ApplianceType.APPLIANCE_HEATING;
 		default:
 			break;
 		}

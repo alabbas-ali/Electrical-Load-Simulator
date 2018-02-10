@@ -3179,12 +3179,12 @@ table.text-center th {
 }
 .widget-user .widget-user-image {
   position: absolute;
-  top: 65px;
-  left: 50%;
+  top: 10px;
+  left: 72%;
   margin-left: -45px;
 }
 .widget-user .widget-user-image > img {
-  width: 90px;
+  width: 125px;
   height: auto;
   border: 3px solid #fff;
 }

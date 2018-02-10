@@ -11,6 +11,7 @@ public class LightingImporter extends CSVReader{
 	private static final String IRRADIANCE_FILE_LOCATION = "input/lighting/irradianceInt.csv";
 	private static final int MAX_TIME_INTERVAL_COUNT = 1440;
 	private static final int HOUSE_COUNT = 100;
+	private static final int MONTH = 5;
 	private ArrayList<int[]> bulbArrays;
 	int[] irradiance;
 	
@@ -57,7 +58,7 @@ public class LightingImporter extends CSVReader{
 		int[] result = new int[MAX_TIME_INTERVAL_COUNT];
 		if(this.read(file)) {
 			for (int i = 0; i < MAX_TIME_INTERVAL_COUNT; i++)
-				result[i] = Integer.parseInt(this.getString(5, i));
+				result[i] = Integer.parseInt(this.getString(i, MONTH));
 		}
 		return result;
 	}
