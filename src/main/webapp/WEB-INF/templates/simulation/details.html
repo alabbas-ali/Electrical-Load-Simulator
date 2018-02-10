@@ -261,24 +261,28 @@
 							label : 'Load Curve, Total : ' + tot,
 							backgroundColor: '#65ecf1',
 			                borderColor: '#65ecf1',
+			                yAxisID: "y-axis-0",
 			                fill: false,
 							data : loaddata
 						},{
 							label : 'Lighting Load, Total : ' + tot2,
 							backgroundColor: '#f1de65',
 			                borderColor: '#f1de65',
+			                yAxisID: "y-axis-0",
 			                fill: false,
 							data : lightingdata
 						},{
 							label : 'Occupancy',
 							backgroundColor: '#d964f0',
 			                borderColor: '#d964f0',
+			                yAxisID: "y-axis-1",
 			                fill: false,
 							data : occupancy
 						},{
 							label : 'Active Occupancy',
 							backgroundColor: '#f4294b',
 			                borderColor: '#f4294b',
+			                yAxisID: "y-axis-1",
 			                fill: false,
 							data : activeOccupancy
 						}]
@@ -302,6 +306,18 @@
 				                yAxes: [{
 				                    display: true,
 				                    type: 'logarithmic',
+				                    position: "left",
+				                    id: "y-axis-0",
+				                    ticks: {
+				            			userCallback: function(tick) {
+				            				return tick.toString();
+				            			}
+				            		},
+				                },{
+				                    display: true,
+				                    type: 'logarithmic',
+				                    position: "right",
+				                    id: "y-axis-1",
 				                    ticks: {
 				            			userCallback: function(tick) {
 				            				return tick.toString();
@@ -337,24 +353,28 @@
 							label : 'Total Load Curve, Total : ' + tot,
 							backgroundColor: '#1114b6',
 			                borderColor: '#1114b6',
+			                yAxisID: "y-axis-0",
 			                fill: false,
 							data : loaddata
 						},{
 							label : 'Total Lighting Load, Total : ' + tot2,
 							backgroundColor: '#f1de65',
 			                borderColor: '#f1de65',
+			                yAxisID: "y-axis-0",
 			                fill: false,
 							data : lightingdata
 						},{
 							label : 'Occupancy',
 							backgroundColor: '#d964f0',
 			                borderColor: '#d964f0',
+			                yAxisID: "y-axis-1",
 			                fill: false,
 							data : occupancy
 						},{
 							label : 'Active Occupancy',
 							backgroundColor: '#f4294b',
 			                borderColor: '#f4294b',
+			                yAxisID: "y-axis-1",
 			                fill: false,
 							data : activeOccupancy
 						}]
@@ -378,6 +398,18 @@
 				                yAxes: [{
 				                    display: true,
 				                    type: 'logarithmic',
+				                    position: "left",
+				                    id: "y-axis-0",
+				                    ticks: {
+				            			userCallback: function(tick) {
+				            				return tick.toString();
+				            			}
+				            		},
+				                },{
+				                    display: true,
+				                    type: 'logarithmic',
+				                    position: "right",
+				                    id: "y-axis-1",
 				                    ticks: {
 				            			userCallback: function(tick) {
 				            				return tick.toString();
