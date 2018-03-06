@@ -70,7 +70,7 @@ $(document).ready(function(){
 			</td>\
 			</tr>';
 			
-			$('#activityTable').find('tbody').append(tableRow);
+			$('#activityTable > tbody').append(tableRow);
 			addtionalRowIndex ++;
 			
 			$('.deleteOp').on('click', function(){
