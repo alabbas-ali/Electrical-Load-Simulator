@@ -55,84 +55,84 @@ public class RandomActivitiesTimeShifter implements ActivitiesTimeShifter {
 
 		switch (type) {
 		case ACTIVITY_WAKUP:
-			this.mean = 7;
+			this.mean = 15;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_SLEEP:
-			this.mean = 23.30;
-			this.standDev = 0.25;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_GOOUT:
-			this.mean = 8;
+			this.mean = 45;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_BACK_HOME:
-			this.mean = 18;
+			this.mean = 15;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_MORNING_COURSE:
-			this.mean = 7.15;
+			this.mean = 10;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_GETTING_READY:
-			this.mean = 7.45;
+			this.mean = 15;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_CLEANING_HOME:
-			this.mean = 11.30;
-			this.standDev = 0.25;
+			this.mean = 45;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_COOKING:
-			this.mean = 19.30;
+			this.mean = 30;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_COFFEE_MAKING:
-			this.mean = 7.30;
+			this.mean = 10;
 			this.standDev = 0.5;
 			break;
 		case ACTIVITY_TOASTING_BREAD:
-			this.mean = 7.30;
-			this.standDev = 0.75;
+			this.mean = 10;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_WASHING_DISHES:
-			this.mean = 19.30;
-			this.standDev = 1.5;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_WASHCLOTHES:
-			this.mean = 19.45;
-			this.standDev = 1.5;
+			this.mean = 60;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_IRONING:
-			this.mean = 20.30;
-			this.standDev = 0.75;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_WATCHING_TV:
-			this.mean = 20;
-			this.standDev = 0.75;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_WATCHING_MOVIE:
-			this.mean = 20;
-			this.standDev = 0.75;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_COMPUTING:
-			this.mean = 19.30;
-			this.standDev = 0.75;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_PRINTING:
-			this.mean = 20.30;
-			this.standDev = 2.5;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_TELEPHONING:
-			this.mean = 21.30;
-			this.standDev = 1.5;
+			this.mean = 30;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_HEATING_VENTILATION:
-			this.mean = 21.45;
-			this.standDev = 1.5;
+			this.mean = 45;
+			this.standDev = 0.5;
 			break;
 		case ACTIVITY_OTHERS:
-			this.mean = 20.45;
-			this.standDev = 1.5;
+			this.mean = 15;
+			this.standDev = 0.5;
 			break;
 		}
 
