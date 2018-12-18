@@ -72,6 +72,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Optional, test for static content, bootstrap CSS -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
+
 		<!-- Mongodb dependency -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -81,20 +88,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
-		
-		<!-- Optional, test for static content, bootstrap CSS -->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
-		<dependency>
-		    <groupId>org.webjars</groupId>
-		    <artifactId>font-awesome</artifactId>
-		    <version>5.5.0</version>
 		</dependency>
 		
 	</dependencies>
