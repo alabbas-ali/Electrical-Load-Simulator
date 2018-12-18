@@ -10,15 +10,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" type="text/css"
-	href="./../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+	th:href="@{../../webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" type="text/css"
-	href="./../../webjars/font-awesome/5.5.0/css/fontawesome.min.css" />
+	th:href="@{.../../webjars/font-awesome/5.5.0/css/fontawesome.min.css}"
+	href=".../../webjars/font-awesome/5.5.0/css/fontawesome.min.css" />
 
 <!-- Ionicons -->
 <link rel="stylesheet" type="text/css"
-	href="./../../fonts/ionicons/css/ionicons.min.css" />
+	th:href="@{/fonts/ionicons/css/ionicons.min.css}"
+	href="../../fonts/ionicons/css/ionicons.min.css" />
 
 <!-- Theme style https://cdnjs.com/libraries/admin-lte -->
 <link rel="stylesheet" type="text/css" 
@@ -29,16 +32,17 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/css/skins/skin-blue.min.css" />
 
 <!-- Custom -->
-<link rel="stylesheet" type="text/css" 
-	href="./../../css/custom.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}"
+	href="../../css/custom.css" />
 
 <!-- bootstrap datepicker -->
-<link rel="stylesheet" type="text/css"
-	href="./../../webjars/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}"
+	href="../../js/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   
-<!-- Bootstrap time Picker 
-<link rel="stylesheet" type="text/css"
-	href="./../../webjars/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" /> -->
+<!-- Bootstrap time Picker -->
+<link rel="stylesheet" type="text/css" th:href="@{/js/timepicker/bootstrap-timepicker.min.css}"
+	href="../../js/timepicker/bootstrap-timepicker.min.css">
+  
   
 </head>
 <body>
@@ -115,33 +119,27 @@
 			
 			<!-- jquery js -->
 			<script type="text/javascript"
-				src="./../../webjars/jquery/1.11.1/jquery.min.js"
-			></script>
+				src="webjars/jquery/1.11.1/jquery.min.js"
+				th:src="@{../../webjars/jquery/1.11.1/jquery.min.js}"></script>
 			
 			<!-- bootstrap js	 -->
 			<script type="text/javascript"
-				src="./../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"
-			></script>
+				src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"
+				th:src="@{../../webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 			
 			<!-- AdminLTE App -->
 			<script type="text/javascript"
-				src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/js/adminlte.min.js"
-			></script>
+				src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.8/js/adminlte.min.js"></script>
 				
 			<script type="text/javascript" 
-				src="./../../webjars/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"
-			></script>
+				src="../../js/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+				th:src="@{/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"
+				></script>
 				
 			<script type="text/javascript" 
-				src="./../../webjars/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js"
-			></script>
-
-			<script type="text/javascript">
-        		$(document).ready(function () {
-					$('.timepicker1').timepicker()
-				});
-			</script>
-
+				src="../../js/timepicker/bootstrap-timepicker.min.js"
+				th:src="@{/js/timepicker/bootstrap-timepicker.min.js}"
+				></script>
 		</footer>
 	</div>
 
