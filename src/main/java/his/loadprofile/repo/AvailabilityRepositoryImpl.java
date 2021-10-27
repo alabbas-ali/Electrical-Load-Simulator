@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 import his.loadprofile.core.AvailabilityType;
@@ -24,10 +25,12 @@ public class AvailabilityRepositoryImpl implements AvailabilityRepositoryCustom{
 	@Override
 	public Availability findOneRandomlyByType(AvailabilityType type) {
 		
+		SampleOperation matchStage = Aggregation.sample(1);
+
 		Aggregation agg = newAggregation(
-				new CustomSampleOperation(1),
+				matchStage,
 				match(Criteria.where("type").is(type))
-				);
+			);
 
 		List<Availability> result = new ArrayList<Availability>();
 		int t = 0;

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/main :: head(title='HIS-LPS::Appliance Edit')"></head>
+
+<body class="skin-blue layout-top-nav layout-boxed">
+
+	<div class="wrapper">
+		<div th:replace="layout/main :: header('availability')"></div>
+
+		<!-- Full Width Column -->
+		<div class="content-wrapper">
+
+			<!-- Content Header (Page header) -->
+			<section class="content-header" th:insert="layout/main :: breadcrumb(~{ :: .breadcrumb})">
+				<ol class="breadcrumb">
+					<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#" th:href="@{/availability}">Availabilities</a></li>
+					<li class="active">Edit</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content" th:insert="layout/main :: box( ${title}, ~{ :: .box-body})">
+				<div class="box-body">
+					<form class="form-narrow form-horizontal" th:object="${availability}"
+						th:action="@{/availability/save}" method="post" id="availability-form">
+						<fieldset>
+							<input type="hidden" th:field="*{id}" />
+
+							<div class="form-group">
+								<label for="name" class="col-lg-2 control-label">Availability
+									Name *</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="name" placeholder="Name"
+										th:field="*{name}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="type" class="col-lg-2 control-label">Availability
+									Type * </label>
+								<div class="col-lg-10">
+									<select class="form-control" id="type" th:field="*{type}">
+										<option value=""> -- Please Select -- </option>
+										<option
+											th:each="availabilityType : ${T(his.loadprofile.core.AvailabilityType).values()}"
+											th:value="${availabilityType}" th:text="${availabilityType}"></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">
+									Activity List
+									<br />
+									<br />
+								</label>
+								<div class="col-lg-10">
+									<button class="btn btn-primary btn-flat" data-toggle="tooltip" data-placement="top"
+										type="button" id="addNewActi" title="Add New Activity">
+										<i class="fa fa-plus"></i> Add New Activity
+									</button>
+									<br />
+									<br />
+								</div>
+								<div class="col-lg-12">
+									<table id="activityTable" class="table table-bordered table-hover dataTable">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Start</th>
+												<th>End</th>
+												<th>Type</th>
+												<th>Options</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="activities, stat : *{activities}">
+												<td>
+													<input type="text" class="form-control" placeholder="Name"
+														th:field="*{activities[__${stat.index}__].name}" />
+												</td>
+												<td>
+													<div class="bootstrap-timepicker">
+
+														<div class="input-group">
+															<input type="text" class="form-control timepicker"
+																placeholder="Start"
+																th:field="*{activities[__${stat.index}__].start}"
+																th:value="*{#dates.format(activities[__${stat.index}__].start, 'h:mm a')}" />
+															<div class="input-group-addon"><i class="fa fa-clock-o"></i>
+															</div>
+														</div>
+													</div>
+												</td>
+												<td>
+													<div class="bootstrap-timepicker">
+														<div class="input-group">
+															<input type="text" class="form-control timepicker"
+																placeholder="End"
+																th:field="*{activities[__${stat.index}__].end}"
+																th:value="*{#dates.format(activities[__${stat.index}__].start, 'h:mm a')}" />
+															<div class="input-group-addon"><i class="fa fa-clock-o"></i>
+															</div>
+														</div>
+													</div>
+												</td>
+												<td>
+													<select class="form-control"
+														th:field="*{activities[__${stat.index}__].type}">
+														<option value=""> -- Please Select -- </option>
+														<option
+															th:each="activityType : ${T(his.loadprofile.core.ActivityType).values()}"
+															th:value="${activityType}" th:text="${activityType}">
+														</option>
+													</select>
+												</td>
+												<td>
+													<button type="button"
+														class="btn btn-danger btn-sm btn-flat deleteOp"
+														data-toggle="tooltip" data-placement="top" title="delete">
+														<i class="fa fa-trash"></i>
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-12">
+									<button type="submit" name="submit" value="start" class="btn  btn-success btn-flat">
+										<i class="fa fa-save"></i>&nbsp; Save &nbsp;</button>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+				</div>
+			</section>
+
+		</div>
+		<!-- end container -->
+
+		<!-- Main Footer -->
+		<div th:replace="layout/main :: footer"></div>
+
+		<script type="text/javascript" th:src="@{/js/availabilities.js}" src="../../js/availabilities.js"></script>
+
+		<select class="form-control" style="display: none" id="typeSelect">
+			<option value=""> -- Please Select -- </option>
+			<option th:each="activityType : ${T(his.loadprofile.core.ActivityType).values()}" th:value="${activityType}"
+				th:text="${activityType}">
+			</option>
+		</select>
+	</div>
+
+</body>
+
+</html>

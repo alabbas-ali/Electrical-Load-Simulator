@@ -38,7 +38,7 @@ public class SimulationController {
 			@PathVariable("id") String id,
 			Map<String, Object> model 
 	) {
-		SimConfig simConfig = simConfigReopsitory.findOne(id);
+		SimConfig simConfig = simConfigReopsitory.findById(id).get();
 		List<Household> houses = householdRepository.findCustomByRegExSimName(simConfig.getName());
 		Household houseTotal = householdRepository.findCustomBySimName(simConfig.getName() , HouseHoldType.HOUSEHOLD_TOTAL);
 		model.put("houseTotal", houseTotal);
