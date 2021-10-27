@@ -92,11 +92,11 @@
 		</dependency>
 
 		<!-- hibernate-validator -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>7.0.1.Final</version>
-		</dependency>
+			<version>6.1.1.Final</version>
+		</dependency> -->
 
 	</dependencies>
 

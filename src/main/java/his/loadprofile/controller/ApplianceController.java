@@ -93,18 +93,6 @@ public class ApplianceController {
 			return response;
 		}
 		
-		System.out.println(appliance);
-		System.out.println(appliance.getName());
-		System.out.println(appliance.getType());
-		System.out.println(appliance.getDescription());
-		
-		for (OperationalMode mode : appliance.getOperationalModes()) {
-			System.out.println("" + mode.getName());
-			System.out.println("" + mode.getDescription());
-			System.out.println("" + mode.getDuration());
-			System.out.println("" + mode.getLeftCycleTime());
-		}
-		
 		appliance.setCreationDate(new Date());
 		applianceRepository.save(appliance);
 		
