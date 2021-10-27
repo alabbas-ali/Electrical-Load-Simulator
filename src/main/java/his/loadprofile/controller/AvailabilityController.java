@@ -40,7 +40,7 @@ public class AvailabilityController {
 			@PathVariable("id") String id,
 			Map<String, Object> model 
 	) {
-		Availability availability = availabilityRepository.findOne(id);
+		Availability availability = availabilityRepository.findById(id).get();
 		model.put("availability", availability);
         return "availability/details";
 	}
@@ -50,7 +50,7 @@ public class AvailabilityController {
 			@PathVariable("id") String id,
 			Map<String, Object> model
 	) {
-		Availability availability = availabilityRepository.findOne(id);
+		Availability availability = availabilityRepository.findById(id).get();
 		model.put("availability", availability);
 		model.put("title", "Edit the Appliance: " + availability.getName());
         return "availability/edit";
@@ -61,7 +61,7 @@ public class AvailabilityController {
 			@PathVariable("id") String id,
 			final RedirectAttributes redirectAttributes
 	) {
-		availabilityRepository.delete(id);
+		availabilityRepository.deleteById(id);
 		redirectAttributes.addFlashAttribute("msg", "Appliance is deleted!");
         return "redirect:/availability";
 	}

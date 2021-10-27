@@ -42,7 +42,7 @@ public class ApplianceController {
 			@PathVariable("id") String id,
 			Map<String, Object> model 
 	) {
-		Appliance appliance = applianceRepository.findOne(id);
+		Appliance appliance = applianceRepository.findById(id).get();
 		model.put("appliance", appliance);
         return "appliance/details";
 	}
@@ -52,7 +52,7 @@ public class ApplianceController {
 			@PathVariable("id") String id,
 			Map<String, Object> model
 	) {
-		Appliance appliance = applianceRepository.findOne(id);
+		Appliance appliance = applianceRepository.findById(id).get();
 		model.put("appliance", appliance);
 		model.put("title", "Edit the Appliance: " + appliance.getName());
         return "appliance/edit";
@@ -63,7 +63,7 @@ public class ApplianceController {
 			@PathVariable("id") String id,
 			final RedirectAttributes redirectAttributes
 	) {
-		applianceRepository.delete(id);
+		applianceRepository.deleteById(id);
 		redirectAttributes.addFlashAttribute("msg", "Appliance is deleted!");
         return "redirect:/appliance";
 	}
@@ -91,18 +91,6 @@ public class ApplianceController {
 			response.setStatus(HttpResponceStatus.FAIL);
 			response.setResult(validationResult.getAllErrors());
 			return response;
-		}
-		
-		System.out.println(appliance);
-		System.out.println(appliance.getName());
-		System.out.println(appliance.getType());
-		System.out.println(appliance.getDescription());
-		
-		for (OperationalMode mode : appliance.getOperationalModes()) {
-			System.out.println("" + mode.getName());
-			System.out.println("" + mode.getDescription());
-			System.out.println("" + mode.getDuration());
-			System.out.println("" + mode.getLeftCycleTime());
 		}
 		
 		appliance.setCreationDate(new Date());
